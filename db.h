@@ -2,6 +2,7 @@
 #include<stdlib.h>
 #include<string.h>
 TESTANDO MODIFICAÇÃO
+
 void setRecordInt(char *fileName, char *key, int val, int append){
 
     FILE *file;
