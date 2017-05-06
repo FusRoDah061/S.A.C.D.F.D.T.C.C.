@@ -27,7 +27,7 @@ void setRecordFloat(char *fileName, char *key, float val, int append){
         file = fopen(fileName, "a");
     }
     else{
-        file = fopen(fileName, "w");
+        file = fopen, "w");
     }
 
     fprintf(file, "%s %f\n", key, val);
