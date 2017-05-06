@@ -1,5 +1,5 @@
 
-void setRecordInt(char *fileName, char *key, int val, int append){
+
 
     FILE *file;
 
