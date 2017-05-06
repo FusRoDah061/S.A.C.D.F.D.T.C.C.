@@ -1,6 +1,4 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
+
 
 void setRecordInt(char *fileName, char *key, int val, int append){
 
