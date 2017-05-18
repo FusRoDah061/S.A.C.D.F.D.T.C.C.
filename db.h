@@ -2,23 +2,24 @@
 #include<stdlib.h>
 #include<string.h>
 #include<wchar.h>
+#include"parse.h"
 
 #define MAX_RECORD_SIZE 102
 #define MAX_ITEM_SIZE 51
 
 /**
  * Biblioteca para adicionar, remover, atualizar, e apagar registros em um arquivo de texto simples.
- * Os registros s√£o armazenados como "chave valor"
+ * Os registros s„o armazenados como "chave valor"
  */
 
 /*
- * Obt√©m a quantidade de linhas em um arquivo
+ * ObtÈm a quantidade de linhas em um arquivo
  *
- * Par√¢metros:
- * file: arquivo do qual as linhas ser√£o contadas
+ * Par‚metros:
+ * file: arquivo do qual as linhas ser„o contadas
  *
  * Retorna:
- * (int) n√∫mero de linhas no arquivo
+ * (int) n˙mero de linhas no arquivo
  * (int) 0: erro
  */
 int get_file_line_count(FILE *file){
@@ -30,7 +31,7 @@ int get_file_line_count(FILE *file){
 	if(file){
 
 		do{
-			//L√™ um caracter do arquivo
+			//LÍ um caracter do arquivo
 			ch = fgetc(file);
 
 			//Verifica se chegou no final da linha (\n) e incrementa +1 no contador de linhas
@@ -45,11 +46,8 @@ int get_file_line_count(FILE *file){
 		return line_count;
 
 	}
-	else{
 
-		return 0;
-
-	}
+	return 0;
 
 }
 
@@ -57,8 +55,8 @@ int get_file_line_count(FILE *file){
 /*
  * Atualiza um registro no arquivo
  *
- * Par√¢metros:
- * file_name: Diret√≥rio + nome do arquivo onde o regitro est√°
+ * Par‚metros:
+ * file_name: DiretÛrio + nome do arquivo onde o regitro est·
  * key: chave do registro a ser buscado
  * new_val: novo valor para a chave
  *
@@ -70,15 +68,17 @@ int update_record(char *file_name, char *key, char *new_val){
 
 	FILE *file = fopen(file_name, "r");
 
-	char in_key[MAX_ITEM_SIZE], content[MAX_RECORD_SIZE], in_val[MAX_ITEM_SIZE];
+	char *in_key = malloc(sizeof(char *)),
+		 *content = malloc(sizeof(char *)),
+		 *in_val = malloc(sizeof(char *));
 
 	if(file){
 
 		int total_lines = get_file_line_count(file),
 			i = 0;
 
-		//Vetor que ir√° manter o conte√∫do do arquivo salvo
-		char conteudo[total_lines][MAX_RECORD_SIZE];
+		//Vetor que ir· manter o conte˙do do arquivo salvo
+		char **conteudo = malloc(sizeof(char *) * total_lines);
 
 		rewind(file);
 
@@ -86,15 +86,15 @@ int update_record(char *file_name, char *key, char *new_val){
 
 		for(i = 0; i < total_lines; i++){
 
-			//L√™ a chave
+			//LÍ a chave
 			fscanf(file, "%s", in_key);
 
-			//L√™ o valor da chave
+			//LÍ o valor da chave
 			fscanf(file, "%s", in_val);
 
 			//Compara a chave lida com a chave em busca
 			if(strcmp(in_key, key) == 0){
-				//Se as chaves forem iguais, salva o novo valor, ao inv√©s do valor atual
+				//Se as chaves forem iguais, salva o novo valor, ao invÈs do valor atual
 
 				strcat(content, in_key);
 				strcat(content, " ");
@@ -108,7 +108,7 @@ int update_record(char *file_name, char *key, char *new_val){
 			}
 			else{
 
-				//Se as chaves forem diferentes, n√£o modifica nada
+				//Se as chaves forem diferentes, n„o modifica nada
 				strcat(content, in_key);
 				strcat(content, " ");
 				strcat(content, in_val);
@@ -123,22 +123,32 @@ int update_record(char *file_name, char *key, char *new_val){
 
 		file = fopen(file_name, "w");
 
-		//Reescreve o conte√∫do no arquivo, agora com o valor atualizado
+		//Reescreve o conte˙do no arquivo, agora com o valor atualizado
 		for(i = 0; i < total_lines; i++){
 
 			fprintf(file, "%s\n", conteudo[i]);
+			free(conteudo[i]);
 		}
 
 		fclose(file);
 
+		free(key);
+		free(file_name);
+		free(in_key);
+		free(in_val);
+		free(content);
+
 		return 1;
 
 	}
-	else{
 
-		return 0;
+	free(key);
+	free(file_name);
+	free(in_key);
+	free(in_val);
+	free(content);
 
-	}
+	return 0;
 
 }
 
@@ -146,7 +156,7 @@ int update_record(char *file_name, char *key, char *new_val){
 /*
  * Remove um registro
  *
- * Par√¢metros:
+ * Par‚metros:
  * file_name: arquivo com o registro
  * key: chave do registro
  *
@@ -163,10 +173,12 @@ int delete_record(char *file_name, char *key){
 		int total_lines = get_file_line_count(file),
 			i = 0;
 
-        char in_key[MAX_ITEM_SIZE], content[MAX_RECORD_SIZE], in_val[MAX_ITEM_SIZE];
+        char *in_key = malloc(sizeof(char *)),
+        	 *content = malloc(sizeof(char *)),
+			  *in_val = malloc(sizeof(char *));
 
-		//Vetor que ir√° manter o conte√∫do do arquivo salvo
-		char conteudo[total_lines][MAX_RECORD_SIZE];
+		//Vetor que ir· manter o conte˙do do arquivo salvo
+        char **conteudo = malloc(sizeof(char*) * total_lines);
 
 		rewind(file);
 
@@ -174,17 +186,17 @@ int delete_record(char *file_name, char *key){
 
 		do{
 
-			//L√™ a chave
+			//LÍ a chave
 			fscanf(file, "%s", in_key);
 
-			//L√™ o valor da chave
+			//LÍ o valor da chave
 			fscanf(file, "%s", in_val);
 
 			//Compara a chave lida com a chave em busca
 			if(strcmp(in_key, key) != 0){
 
-				//Se as chaves forem diferentes, salva em mem√≥ria
-				//Isso √© o mesmo que remover a chave do arquivo
+				//Se as chaves forem diferentes, salva em memÛria
+				//Isso È o mesmo que remover a chave do arquivo
 				strcat(content, in_key);
 				strcat(content, " ");
 				strcat(content, in_val);
@@ -200,10 +212,11 @@ int delete_record(char *file_name, char *key){
 
 		file = fopen(file_name, "w");
 
-		//Reescreve o conte√∫do no arquivo, agora com o registro apagado
+		//Reescreve o conte˙do no arquivo, agora com o registro apagado
 		for(i = 0; i < total_lines; i++){
 
             fprintf(file, "%s\n", conteudo[i]);
+            free(conteudo[i]);
 
 		}
 
@@ -211,17 +224,26 @@ int delete_record(char *file_name, char *key){
 
 		return 1;
 
+		free(key);
+		free(file_name);
+		free(in_key);
+
 	}
 	else{
 		return 0;
+
+		free(key);
+		free(file_name);
 	}
+
+	return 0;
 }
 
 /*
  * Adiciona um registro do tipo texto.
  *
- * Par√¢metros:
- * file_name: Diret√≥rio + nome do arquivo onde o regitro ser√° inserido
+ * Par‚metros:
+ * file_name: DiretÛrio + nome do arquivo onde o regitro ser· inserido
  * key: nome da chave para o registro
  * val: valor do registro
  * append: valor inteiro 1 para adicionar o registro ao final do arquivo ou 0 para apagar todo o arquivo e inserir o registro
@@ -233,25 +255,31 @@ int delete_record(char *file_name, char *key){
  */
 int set_record(char *file_name, char *key, char *val){
 
-	//Abre o arquivo em modo de leitura, escrita e cria o arquivo se necess√°rio
+	//Abre o arquivo em modo de leitura, escrita e cria o arquivo se necess·rio
 	FILE *file = fopen(file_name, "a+");
 
-	char in_key[MAX_ITEM_SIZE];
+	char *in_key = malloc(sizeof(char *));
 
 	if(file){
 
-		//Percorre o arquivo para verificar se a chave j√° existe
+		//Percorre o arquivo para verificar se a chave j· existe
 		do{
 
-			//L√™ a chave atual
+			//LÍ a chave atual
 			fscanf(file, "%s", in_key);
 
-			//E compara a chave com a chave que ser√° inserida
+			//E compara a chave com a chave que ser· inserida
 			if(strcmp(in_key, key) == 0){
 
 				update_record(file_name, key, val);
 
+				free(key);
+				free(file_name);
+				free(in_key);
+				free(val);
+
 				return 2;
+
 			}
 			else{
 
@@ -270,65 +298,80 @@ int set_record(char *file_name, char *key, char *val){
 
 		fclose(file);
 
+		free(key);
+		free(file_name);
+		free(in_key);
+		free(val);
+
 		return 1;
 
 	}
-	else{
-		return 0;
-	}
 
+	free(key);
+	free(file_name);
+	free(in_key);
+	free(val);
+
+	return 0;
 
 }
 
 
 /*
- * L√™ um registro do arquivo
+ * LÍ um registro do arquivo
  *
- * Par√¢metros:
- * file_name: Diret√≥rio + nome do arquivo onde o regitro est√°
+ * Par‚metros:
+ * file_name: DiretÛrio + nome do arquivo onde o regitro est·
  * key: chave do registro a ser buscado
  *  *
  * Retorna:
- * (char *) o valor da chave ou nada se a chave n√£o existir
+ * (char *) o valor da chave ou nada se a chave n„o existir
  */
 char * get_record(char *file_name, char *key){
 
     FILE *file = fopen(file_name, "r");
 
-    char in_key[MAX_ITEM_SIZE], val[MAX_ITEM_SIZE];
+    char *in_key = malloc(sizeof(char *)),
+		 *val = malloc(sizeof(char *));
 
     //Verifica se o arquivo existe
     if(file){
-    	//L√™ o arquivo at√© o fim
+    	//LÍ o arquivo atÈ o fim
 		do{
 
-			//L√™ o valor da chave
+			//LÍ o valor da chave
 			fscanf(file, "%s", in_key);
 
 			//Compara a chave lida com a chave em busca
 			if(strcmp(in_key, key) == 0){
-				//Caso sejam iguais, l√™ o valor dessa chave
+				//Caso sejam iguais, lÍ o valor dessa chave
 
 				fscanf(file, "%s", val);
 
 				//fecha o arquivo
 				fclose(file);
 
+				free(key);
+				free(file_name);
+				free(in_key);
+
 				//Retorna o valor da chave
 				return val;
 
 			}
 			else{
-				//Caso n√£o seja, l√™ o valor da chave, para que na pr√≥xima itera√ß√£o a pr√≥xima chave seja lida
+				//Caso n„o seja, lÍ o valor da chave, para que na prÛxima iteraÁ„o a prÛxima chave seja lida
 				fscanf(file, "%s", val);
 
 			}
 
 		}while(!feof(file));
 
-		//Caso n√£o encontre nada, fecha o arquivo e retorna nulo
-		fclose(file);
     }
+
+	fclose(file);
+	free(key);
+	free(file_name);
 
     return "";
 

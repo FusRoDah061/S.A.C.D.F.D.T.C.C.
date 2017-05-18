@@ -11,11 +11,13 @@
  */
 char *float_to_char(float n)
 {
-	 char *s = malloc(sizeof(char));
+	 char *s = malloc(sizeof(char*));
 
 	 sprintf(s, "%f", n);
 
      return s;
+
+     free(s);
 }
 
 /*Converte um inteiro para pointeiro char
@@ -28,9 +30,11 @@ char *float_to_char(float n)
  */
  char *int_to_char(int n)
  {
-	 char *s = malloc(sizeof(char) * sizeof(int));
+	 char *s = malloc(sizeof(char*));
 
      sprintf(s, "%d", n);
 
      return s;
+
+     free(s);
  }
