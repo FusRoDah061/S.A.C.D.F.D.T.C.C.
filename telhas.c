@@ -5,6 +5,18 @@
 #include<windows.h>
 #include"headers/db.h"
 
+
+/*
+ * Calcula a área do telhado, onde ficarão as telhas, considerando a inclinação
+ *
+ * Parâmetros:
+ * inclinacao: Inclinação do telhado (altura da cumeeira)
+ * largura_base: largura da base do telhado (largura da laje)
+ * comprimento_base: comprimento da base do telhado (comprimento da laje)
+ *
+ * Retorna:
+ * A área do telhado
+ */
 float corrigir_area(int inclinacao, float largura_base, float comprimento_base){
 
 	float altura_cumeeira = (inclinacao / 100) * (largura_base / 2);
@@ -15,6 +27,16 @@ float corrigir_area(int inclinacao, float largura_base, float comprimento_base){
 
 }
 
+/*
+ * Calcula quantidade de telhas baseado na área do telhado(corrigida) e a quantidade de telhas por m²
+ *
+ * Parâmetros:
+ * area_telhado: área do telhado
+ * telhas_metro_quad: quantidade de uma telha que ocupa 1 m²
+ *
+ * Retorna:
+ * A quantidade de telhas no total
+ */
 int calcula_qtd_telhas(float area_telhado, float telhas_metro_quad){
 
 	int qtd_telhas = 0;
@@ -26,8 +48,17 @@ int calcula_qtd_telhas(float area_telhado, float telhas_metro_quad){
 
 }
 
+/*
+ * Calcula o preço das telhas
+ *
+ * Parâmetros:
+ * qtd: quantidade de telhas calculadas
+ * preco_unit: preço unitário da telha
+ *
+ * Retorna:
+ * O preço das telhas no total
+ */
 float calcula_preco(int qtd, float preco_unit){
-
 
 	return qtd * preco_unit;
 }
@@ -36,16 +67,17 @@ int main(void){
 
     setlocale(LC_ALL, "");
 
-    int usr_opt = 0,
-    	inclinacao = 0,
-		qtd_telhas = 0;
+    int usr_opt = 0, //Usada para receber as escolhas do usuário quando forem apresentadas opções
+    	inclinacao = 0,//Inclinação do telhado
+		qtd_telhas = 0;//Quantidade de telhas no total
 
-    float largura_base = 0,
-    	  comprimento_base = 0,
-		  area_telhado_corrigida = 0,
-		  custo_total = 0,
-		  preco_unit = 0;
+    float largura_base = 0,//Largura da base do telhado (laje)
+    	  comprimento_base = 0,//Comprimento da base do telhado (laje)
+		  area_telhado_corrigida = 0,//Área do telhado corrigida já incluindo a inclinação do teclado
+		  custo_total = 0,//Custo total das telhas no final
+		  preco_unit = 0;//Preço unitário de cada telha
 
+    //Armazena o tipo de telha para ser salvo no arquivo
     char *tipo_telha = malloc(sizeof(char *));
 
     do{
@@ -53,6 +85,7 @@ int main(void){
 
     	do{
 
+    		//Lê a largura e comprimento da base do telhado (laje)
 			printf("Digite a largura da base do telhado(m): ");
 			scanf("%f", &largura_base);
 
@@ -61,15 +94,20 @@ int main(void){
 
 			do{
 
+				//Lê a inclinação desejada para o telhado em porcentagem.
+				//Com essa inclinação será calculada a altura do centro do telhado (cumeerira, onde os "lados" do telhado se dividem (/|\)).
+				//Essa porcentagem é calculada em cima da metade da largura da laje.
 				printf("\nInforme a inclinação desejada (deve ser maior que 30%%): ");
 				scanf("%d", &inclinacao);
 
+				//Inclinação abaixo de 30% não é normatizada
 				if(inclinacao < 30){
 					printf("\nInclinação inválida. Deve ser maior que 30%%.");
 				}
 
 			}while(inclinacao < 30);
 
+			//Exibe a área da laje e a inclinação calculados
 			printf("Área calculada: %.2f", largura_base * comprimento_base);
 			printf("\nInclinação: %d%%", inclinacao);
 
@@ -118,14 +156,18 @@ int main(void){
 					printf("\n------\n");
 					printf("Cerâmica Americana\n");
 
+					//Verifica a inclinação recomendada
 					if(inclinacao < 38){
 						printf("Inclinação mínima recomendada: 38%%\n");
 					}
 
+					//Calcula a área do telhado considerando a inclinação
 					area_telhado_corrigida = corrigir_area(inclinacao, largura_base, comprimento_base);
 
+					//Calcula a quantidade de telha
 					qtd_telhas = calcula_qtd_telhas(area_telhado_corrigida, 12);
 
+					//Salva o tipo de telha escolhido
 					tipo_telha = "Cerâmica_Americana";
 
 					break;
@@ -139,14 +181,18 @@ int main(void){
 					printf("\n------\n");
 					printf("Cerâmica Colonial Paulista\n");
 
+					//Verifica a inclinação recomendada
 					if(inclinacao < 25){
 						printf("Inclinação mínima recomendada: 25%%\n");
 					}
 
+					//Calcula a área do telhado considerando a inclinação
 					area_telhado_corrigida = corrigir_area(inclinacao, largura_base, comprimento_base);
 
+					//Calcula a quantidade de telha
 					qtd_telhas = calcula_qtd_telhas(area_telhado_corrigida, 26);
 
+					//Salva o tipo de telha escolhido
 					tipo_telha = "Cerâmica_Colonial_Paulista";
 
 					break;
@@ -160,14 +206,18 @@ int main(void){
 					printf("\n------\n");
 					printf("Cerâmica Colonial Paulista (com trava)\n");
 
+					//Verifica a inclinação recomendada
 					if(inclinacao < 30){
 						printf("Inclinação aproximada mínima recomendada: 30%%\n");
 					}
 
+					//Calcula a área do telhado considerando a inclinação
 					area_telhado_corrigida = corrigir_area(inclinacao, largura_base, comprimento_base);
 
+					//Calcula a quantidade de telha
 					qtd_telhas = calcula_qtd_telhas(area_telhado_corrigida, 22);
 
+					//Salva o tipo de telha escolhido
 					tipo_telha = "Cerâmica_Colonial_Paulista_(com_trava)";
 
 					break;
@@ -181,14 +231,18 @@ int main(void){
 					printf("\n------\n");
 					printf("Cerâmica Colonial Paulista (grande)\n");
 
+					//Verifica a inclinação recomendada
 					if(inclinacao < 25){
 						printf("Inclinação mínima recomendada: 25%%\n");
 					}
 
+					//Calcula a área do telhado considerando a inclinação
 					area_telhado_corrigida = corrigir_area(inclinacao, largura_base, comprimento_base);
 
+					//Calcula a quantidade de telha
 					qtd_telhas = calcula_qtd_telhas(area_telhado_corrigida, 17);
 
+					//Salva o tipo de telha escolhido
 					tipo_telha = "Cerâmica_Colonial_Paulista_(grande)";
 
 					break;
@@ -202,14 +256,18 @@ int main(void){
 					printf("\n------\n");
 					printf("Cerâmica Italiana\n");
 
+					//Verifica a inclinação recomendada
 					if(inclinacao < 30){
 						printf("Inclinação mínima recomendada: 30%%\n");
 					}
 
+					//Calcula a área do telhado considerando a inclinação
 					area_telhado_corrigida = corrigir_area(inclinacao, largura_base, comprimento_base);
 
+					//Calcula a quantidade de telha
 					qtd_telhas = calcula_qtd_telhas(area_telhado_corrigida, 14);
 
+					//Salva o tipo de telha escolhido
 					tipo_telha = "Cerâmica_Italiana";
 
 					break;
@@ -223,14 +281,18 @@ int main(void){
 					printf("\n------\n");
 					printf("Cerâmica Romana\n");
 
+					//Verifica a inclinação recomendada
 					if(inclinacao < 26){
 						printf("Inclinação mínima recomendada: 26%%\n");
 					}
 
+					//Calcula a área do telhado considerando a inclinação
 					area_telhado_corrigida = corrigir_area(inclinacao, largura_base, comprimento_base);
 
+					//Calcula a quantidade de telha
 					qtd_telhas = calcula_qtd_telhas(area_telhado_corrigida, 16);
 
+					//Salva o tipo de telha escolhido
 					tipo_telha = "Cerâmica_Romana";
 
 					break;
@@ -244,14 +306,18 @@ int main(void){
 					printf("\n------\n");
 					printf("Cerâmica Romana Plan\n");
 
+					//Verifica a inclinação recomendada
 					if(inclinacao < 26){
 						printf("Inclinação mínima recomendada: 26%%\n");
 					}
 
+					//Calcula a área do telhado considerando a inclinação
 					area_telhado_corrigida = corrigir_area(inclinacao, largura_base, comprimento_base);
 
+					//Calcula a quantidade de telha
 					qtd_telhas = calcula_qtd_telhas(area_telhado_corrigida, 16);
 
+					//Salva o tipo de telha escolhido
 					tipo_telha = "Cerâmica_Romana_Plan";
 
 					break;
@@ -265,14 +331,18 @@ int main(void){
 					printf("\n------\n");
 					printf("Cerâmica Portuguesa\n");
 
+					//Verifica a inclinação recomendada
 					if(inclinacao < 30){
 						printf("Inclinação mínima recomendada: 30%%\n");
 					}
 
+					//Calcula a área do telhado considerando a inclinação
 					area_telhado_corrigida = corrigir_area(inclinacao, largura_base, comprimento_base);
 
+					//Calcula a quantidade de telha
 					qtd_telhas = calcula_qtd_telhas(area_telhado_corrigida, 16);
 
+					//Salva o tipo de telha escolhido
 					tipo_telha = "Cerâmica_Portuguesa";
 
 					break;
@@ -286,14 +356,18 @@ int main(void){
 					printf("\n------\n");
 					printf("Cerâmica Francesa\n");
 
+					//Verifica a inclinação recomendada
 					if(inclinacao < 36){
 						printf("Inclinação mínima recomendada: 36%%\n");
 					}
 
+					//Calcula a área do telhado considerando a inclinação
 					area_telhado_corrigida = corrigir_area(inclinacao, largura_base, comprimento_base);
 
+					//Calcula a quantidade de telha
 					qtd_telhas = calcula_qtd_telhas(area_telhado_corrigida, 17);
 
+					//Salva o tipo de telha escolhido
 					tipo_telha = "Cerâmica_Francesa";
 
 					break;
@@ -307,14 +381,18 @@ int main(void){
 					printf("\n------\n");
 					printf("Cerâmica Germânica\n");
 
+					//Verifica a inclinação recomendada
 					if(inclinacao < 45){
 						printf("Inclinação mínima recomendada: 45%%\n");
 					}
 
+					//Calcula a área do telhado considerando a inclinação
 					area_telhado_corrigida = corrigir_area(inclinacao, largura_base, comprimento_base);
 
+					//Calcula a quantidade de telha
 					qtd_telhas = calcula_qtd_telhas(area_telhado_corrigida, 32);
 
+					//Salva o tipo de telha escolhido
 					tipo_telha = "Cerâmica_Germânica";
 
 					break;
@@ -328,14 +406,18 @@ int main(void){
 					printf("\n------\n");
 					printf("Cerâmica Uruguaia\n");
 
+					//Verifica a inclinação recomendada
 					if(inclinacao < 45){
 						printf("Inclinação mínima recomendada: 45%%\n");
 					}
 
+					//Calcula a área do telhado considerando a inclinação
 					area_telhado_corrigida = corrigir_area(inclinacao, largura_base, comprimento_base);
 
+					//Calcula a quantidade de telha
 					qtd_telhas = calcula_qtd_telhas(area_telhado_corrigida, 30);
 
+					//Salva o tipo de telha escolhido
 					tipo_telha = "Cerâmica_Uruguaia";
 
 					break;
@@ -349,14 +431,18 @@ int main(void){
 					printf("\n------\n");
 					printf("Cerâmica Plan\n");
 
+					//Verifica a inclinação recomendada
 					if(inclinacao < 27){
 						printf("Inclinação mínima recomendada: 27%%\n");
 					}
 
+					//Calcula a área do telhado considerando a inclinação
 					area_telhado_corrigida = corrigir_area(inclinacao, largura_base, comprimento_base);
 
+					//Calcula a quantidade de telha
 					qtd_telhas = calcula_qtd_telhas(area_telhado_corrigida, 27);
 
+					//Salva o tipo de telha escolhido
 					tipo_telha = "Cerâmica_Plan";
 
 					break;
@@ -370,14 +456,18 @@ int main(void){
 					printf("\n------\n");
 					printf("Telha Plana\n");
 
+					//Verifica a inclinação recomendada
 					if(inclinacao < 36){
 						printf("Inclinação mínima recomendada: 36%%\n");
 					}
 
+					//Calcula a área do telhado considerando a inclinação
 					area_telhado_corrigida = corrigir_area(inclinacao, largura_base, comprimento_base);
 
+					//Calcula a quantidade de telha
 					qtd_telhas = calcula_qtd_telhas(area_telhado_corrigida, 35);
 
+					//Salva o tipo de telha escolhido
 					tipo_telha = "Telha_Plana";
 
 					break;
@@ -392,22 +482,28 @@ int main(void){
 
 					float a_largura, a_comprimento, area_telha;
 
+					//Verifica a inclinação recomendada
 					if(inclinacao < 15){
 						printf("Inclinação mínima recomendada: 15%%\n");
 					}
 
+					//Para telhas de amianto ou alumínio as dimensões podem variar, por isso o usuário é quem entra com essas dimensões
 					printf("Digite a largura da telha (cm): ");
 					scanf("%f", &a_largura);
 
 					printf("Digite a comprimento da telha  (cm): ");
 					scanf("%f", &a_comprimento);
 
+					//Calcula a área da telha
 					area_telha = a_largura/100 * a_comprimento/100;
 
+					//Calcula a área do telhado considerando a inclinação
 					area_telhado_corrigida = corrigir_area(inclinacao, largura_base, comprimento_base);
 
-					qtd_telhas = calcula_qtd_telhas(area_telhado_corrigida, 1 / area_telha);
+					//Calcula a quantidade de telha
+					qtd_telhas = calcula_qtd_telhas(area_telhado_corrigida, 1 / area_telha);// 1/area_telha calcula quantas telhas cabem em 1m²
 
+					//Salva o tipo de telha escolhido
 					tipo_telha = "Amianto/Alumínio";
 
 					break;
@@ -427,7 +523,8 @@ int main(void){
 			printf("Informe o preco unitário do tipo de telha escolhido: ");
 			scanf("%f", &preco_unit);
 
-			custo_total = preco_unit * qtd_telhas;
+
+			custo_total = calcula_preco(qtd_telhas, preco_unit);
 
 			printf("Custo total das telhas: R$ %.2f\n\n", custo_total);
 
@@ -435,11 +532,13 @@ int main(void){
 
 			int opt = 0;
 
+			//Reseta o buffer pois por algum motivo o próximo scanf não estava sendo executado
 			setbuf(stdin, NULL);
 
 			printf("Salvar os resultados obtidos?\n1 - Sim\n2 - Não\n\nSua escolha: ");
 			scanf("%d", &opt);
 
+			//Salva os resultados obtidos
 			if(opt == 1){
 
 				printf("\n------\n\n");
@@ -447,6 +546,7 @@ int main(void){
 
 				int status = 0;
 
+				//Salva o tipo de telha
 				status = set_record("telhas.orc", "t_telha", tipo_telha);
 
 				if(status == 0){
@@ -459,6 +559,7 @@ int main(void){
 					printf(" Tipo de telha atualizado...\n");
 				}
 
+				//Salva a quantidade de telhas
 				status = set_record("telhas.orc", "q_telha", int_to_char(qtd_telhas));
 
 				if(status == 0){
@@ -471,6 +572,7 @@ int main(void){
 					printf(" Quantidade de telhas atualizada...\n");
 				}
 
+				//Salva o custo total das telhas
 				status = set_record("telhas.orc", "c_telha", float_to_char(custo_total));
 
 				if(status == 0){
@@ -483,6 +585,7 @@ int main(void){
 					printf(" Custo total das telhas atualizado...\n");
 				}
 
+				//Salva o preço unitário
 				status = set_record("telhas.orc", "p_telha", float_to_char(preco_unit));
 
 				if(status == 0){
@@ -495,6 +598,7 @@ int main(void){
 					printf(" Preço unitário das telhas atualizado...\n");
 				}
 
+				//Salva a inclinação do telhado
 				status = set_record("telhas.orc", "inclinacao", int_to_char(inclinacao));
 
 				if(status == 0){
@@ -507,6 +611,7 @@ int main(void){
 					printf(" Inclinacao do telhado atualizada...\n");
 				}
 
+				//Salva a largura da base
 				status = set_record("telhas.orc", "l_base", float_to_char(largura_base));
 
 				if(status == 0){
@@ -519,6 +624,7 @@ int main(void){
 					printf(" Largura da base do telhado atualizada...\n");
 				}
 
+				//Salva o comprimento da base
 				status = set_record("telhas.orc", "c_base", float_to_char(comprimento_base));
 
 				if(status == 0){
@@ -531,6 +637,7 @@ int main(void){
 					printf(" Comprimento da base do telhado atualizado...\n");
 				}
 
+				//Salva área do telhado corrigida
 				status = set_record("telhas.orc", "ac_base", float_to_char(area_telhado_corrigida));
 
 				if(status == 0){
