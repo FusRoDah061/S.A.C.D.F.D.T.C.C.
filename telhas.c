@@ -2,33 +2,43 @@
 #include<locale.h>
 #include<math.h>
 #include<stdlib.h>
-#include<windows.h>
-#include"headers/db.h"
 
-//Constantes correspondentes as chaves que ser„o salvas no arquivo
+//Constantes correspondentes as chaves que ser√£o salvas no arquivo
 //Telhas
-#define C_TELHA_TIPO "t_telha"
-#define C_TELHA_QTD "q_telha"
-#define C_TELHA_CUSTO_TOTAL "c_telha"
-#define C_TELHA_PRECO_UNIT "p_telha"
+#define C_TELHA_TIPO "tipo_telha"
+#define C_TELHA_QTD "qtd_telha"
+#define C_TELHA_CUSTO_TOTAL "custo_telha"
+#define C_TELHA_PRECO_UNIT "preco_unit_telha"
 //Telhado
 #define C_TELHADO_INCLINACAO "inclinacao"
-#define C_TELHADO_LARGURA_BASE "l_base"
-#define C_TELHADO_COMPRIMENTO_BASE "c_base"
-#define C_TELHADO_AREA_CORRIGIDA "ac_base"
+#define C_TELHADO_LARGURA_BASE "larg_base"
+#define C_TELHADO_COMPRIMENTO_BASE "compr_base"
+#define C_TELHADO_AREA_CORRIGIDA "area_corr_base"
+//Madeiramento
+#define C_MADEIRA_QTD_TERCA "qtd_terca"
+#define C_MADEIRA_QTD_CAIBRO "qtd_caibro"
+#define C_MADEIRA_QTD_RIPAS "qtd_ripa"
+#define C_MADEIRA_METROS_PONTALETES "metros_pontalete"
+#define C_MADEIRA_METROS_CAIBROS "metros_caibro"
+#define C_MADEIRA_METROS_RIPAS "metros_ripas"
+#define C_MADEIRA_METROS_TERCAS "metros_tercas"
+#define C_ESPACAMENTO_TERCAS "espacamento_terca"
+#define C_COMRPRIMENTO_GARGA "compr_garga"
 
+#define C_QTD_DADOS 16
 /*
- * Calcula a ·rea do telhado, onde ficar„o as telhas, considerando a inclinaÁ„o
+ * Calcula a √°rea do telhado, onde ficar√£o as telhas, considerando a inclina√ß√£o
  *
- * Par‚metros:
- * inclinacao: InclinaÁ„o do telhado (altura da cumeeira)
+ * Par√¢metros:
+ * inclinacao: Inclina√ß√£o do telhado (altura da cumeeira)
  * largura_base: largura da base do telhado (largura da laje)
  * comprimento_base: comprimento da base do telhado (comprimento da laje)
  *
  * Retorna:
- * A ·rea do telhado
+ * A √°rea do telhado
  */
-float corrigir_area(int inclinacao, float largura_base, float comprimento_base){
+float corrigir_area(int inclinacao, float largura_base, float comprimento_base)
+{
 
 	float altura_cumeeira = (inclinacao / 100) * (largura_base / 2);
 
@@ -39,16 +49,17 @@ float corrigir_area(int inclinacao, float largura_base, float comprimento_base){
 }
 
 /*
- * Calcula quantidade de telhas baseado na ·rea do telhado(corrigida) e a quantidade de telhas por m≤
+ * Calcula quantidade de telhas baseado na √°rea do telhado(corrigida) e a quantidade de telhas por m¬≤
  *
- * Par‚metros:
- * area_telhado: ·rea do telhado
- * telhas_metro_quad: quantidade de uma telha que ocupa 1 m≤
+ * Par√¢metros:
+ * area_telhado: √°rea do telhado
+ * telhas_metro_quad: quantidade de uma telha que ocupa 1 m¬≤
  *
  * Retorna:
  * A quantidade de telhas no total
  */
-int calcula_qtd_telhas(float area_telhado, float telhas_metro_quad){
+int calcula_qtd_telhas(float area_telhado, float telhas_metro_quad)
+{
 
 	int qtd_telhas = 0;
 
@@ -60,16 +71,17 @@ int calcula_qtd_telhas(float area_telhado, float telhas_metro_quad){
 }
 
 /*
- * Calcula o preÁo das telhas
+ * Calcula o pre√ßo das telhas
  *
- * Par‚metros:
+ * Par√¢metros:
  * qtd: quantidade de telhas calculadas
- * preco_unit: preÁo unit·rio da telha
+ * preco_unit: pre√ßo unit√°rio da telha
  *
  * Retorna:
- * O preÁo das telhas no total
+ * O pre√ßo das telhas no total
  */
-float calcula_preco(int qtd, float preco_unit){
+float calcula_preco(int qtd, float preco_unit)
+{
 
 	return qtd * preco_unit;
 }
@@ -77,959 +89,248 @@ float calcula_preco(int qtd, float preco_unit){
 /*
  * Retorna a quantidade de telhas por metro quadrado de um modelo de telha
  *
- * Par‚metros:
- * (int) modelo: modelo da telha selecionado pelo usu·rio. Varia de 1 a 14.
- * (int) print: controla quando mostrar algo na tela (1 = mostrar, 0 = n„o mostrar).
- *
  * Retorna:
  * (float) quantidade de telha por metro quadrado do modelo de telha escolhido
- * (float) 0 caso o modelo n„o exista
  */
-float get_telhas_metro_quad(int modelo, int print){
-
-	switch(modelo){
-
-		case 1:
-			/*
-			Americana:
-			InclinaÁ„o mÌnima: 38%
-			Consumo mÈdio: 12 unidades / m≤
-			*/
-
-			if(print == 1){
-				printf("\n------\n\n");
-				printf("Cer‚mica Americana\n");
-				printf("InclinaÁ„o mÌnima recomendada: 38%%\n");
-			}
-
-			return 12;
-
-			break;
-
-		case 2:
-			/*
-			Colonial Paulista:
-			InclinaÁ„o mÌnima: 25%
-			Consumo mÈdio: 26 unidades / m≤
-			*/
-
-			if(print == 1){
-				printf("\n------\n\n");
-				printf("Cer‚mica Colonial Paulista\n");
-				printf("InclinaÁ„o mÌnima recomendada: 25%%\n");
-			}
-
-			return 26;
-
-			break;
-
-		case 3:
-			/*
-			Colonial Paulista com trava:
-			InclinaÁ„o mÌnima: 30%
-			Consumo mÈdio: 22 unidades / m≤
-			*/
-
-			if(print == 1){
-				printf("\n------\n\n");
-				printf("Cer‚mica Colonial Paulista (com trava)\n");
-				printf("InclinaÁ„o aproximada mÌnima recomendada: 30%%\n");
-			}
-
-			return 22;
-
-			break;
-
-		case 4:
-			/*
-			Colonial Paulista grande:
-			InclinaÁ„o mÌnima: 25%
-			Consumo mÈdio: 17 unidades / m≤
-			*/
-
-			if(print == 1){
-				printf("\n------\n\n");
-				printf("Cer‚mica Colonial Paulista (grande)\n");
-				printf("InclinaÁ„o mÌnima recomendada: 25%%\n");
-			}
-
-			return 17;
-
-			break;
-
-		case 5:
-			/*
-			Italiana:
-			InclinaÁ„o mÌnima: 30%
-			Consumo mÈdio: 14 unidades / m≤
-			*/
-
-			if(print == 1){
-				printf("\n------\n\n");
-				printf("Cer‚mica Italiana\n");
-				printf("InclinaÁ„o mÌnima recomendada: 30%%\n");
-			}
-
-			return 14;
-
-			break;
-
-		case 6:
-			/*
-			Romana:
-			InclinaÁ„o mÌnima: 26%
-			Consumo mÈdio: 16 unidades / m≤
-			*/
-
-			if(print == 1){
-				printf("\n------\n\n");
-				printf("Cer‚mica Romana\n");
-				printf("InclinaÁ„o mÌnima recomendada: 26%%\n");
-			}
-
-			return 16;
-
-			break;
-
-		case 7:
-			/*
-			Romana plan:
-			InclinaÁ„o mÌnima: 26%
-			Consumo mÈdio: 16 unidades / m≤
-			*/
-
-			if(print == 1){
-				printf("\n------\n\n");
-				printf("Cer‚mica Romana Plan\n");
-				printf("InclinaÁ„o mÌnima recomendada: 26%%\n");
-			}
-
-			return 16;
-
-			break;
-
-		case 8:
-			/*
-			Portuguesa:
-			InclinaÁ„o mÌnima: 30%
-			Consumo mÈdio: 16 unidades / m≤
-			*/
-
-			if(print == 1){
-				printf("\n------\n\n");
-				printf("Cer‚mica Portuguesa\n");
-				printf("InclinaÁ„o mÌnima recomendada: 30%%\n");
-			}
-
-			return 16;
-
-			break;
-
-		case 9:
-			/*
-			Francesa:
-			InclinaÁ„o mÌnima: 36%
-			Consumo mÈdio: 17 unidades / m≤
-			*/
-
-			if(print == 1){
-				printf("\n------\n\n");
-				printf("Cer‚mica Francesa\n");
-				printf("InclinaÁ„o mÌnima recomendada: 36%%\n");
-			}
+int get_telhas_metro_quad()
+{
+    int opt;
+    float telhas_p_metro;
 
-			return 17;
+    do
+    {
 
-			break;
+        printf("Escolha um m√©todo:\n 1 - Dimens√µes da telha\n 2 - Unidades por metro quadrado\n\nSua escolha: ");
+        scanf("%d", &opt);
 
-		case 10:
-			/*
-			Germ‚nica:
-			InclinaÁ„o mÌnima: 45%
-			Consumo mÈdio: 32 unidades / m≤
-			*/
+        switch(opt)
+        {
 
-			if(print == 1){
-				printf("\n------\n\n");
-				printf("Cer‚mica Germ‚nica\n");
-				printf("InclinaÁ„o mÌnima recomendada: 45%%\n");
-			}
+            case 1:
 
-			return 32;
+                printf("\nInforme as dimens√µes da telha\n");
 
-			break;
+                float a_largura, a_comprimento, area_telha;
 
-		case 11:
-			/*
-			Uruguaia:
-			InclinaÁ„o mÌnima: 45%
-			Consumo mÈdio: 30 unidades / m≤
-			*/
+                //Para telhas de amianto ou alum√≠nio as dimens√µes podem variar, por isso o usu√°rio √© quem entra com essas dimens√µes
+                printf(" Digite a largura da telha (cm): ");
+                scanf(" %f", &a_largura);
 
-			if(print == 1){
-				printf("\n------\n\n");
-				printf("Cer‚mica Uruguaia\n");
-				printf("InclinaÁ„o mÌnima recomendada: 45%%\n");
-			}
+                printf(" Digite a comprimento da telha  (cm): ");
+                scanf(" %f", &a_comprimento);
 
-			return 30;
+                //Calcula a √°rea da telha
+                area_telha = a_largura/100 * a_comprimento/100;
 
-			break;
+                telhas_p_metro = 1 / area_telha;
 
-		case 12:
-			/*
-			Plan:
-			InclinaÁ„o mÌnima: 27%
-			Consumo mÈdio: 27 unidades / m≤
-			*/
+                break;
 
-			if(print == 1){
-				printf("\n------\n\n");
-				printf("Cer‚mica Plan\n");
-				printf("InclinaÁ„o mÌnima recomendada: 27%%\n");
-			}
+            case 2:
 
-			return 27;
+                printf("\nInforme a quantidade de telha por metro quadrado: ");
+                scanf("%f", &telhas_p_metro);
 
-			break;
+                break;
 
-		case 13:
-			/*
-			Plana:
-			InclinaÁ„o mÌnima: 36%
-			Consumo mÈdio: 35 unidades / m≤.
-			*/
+            default:
+                printf("\nOp√ß√£o inv√°lida\n\n");
 
-			if(print == 1){
-				printf("\n------\n\n");
-				printf("Telha Plana\n");
-				printf("InclinaÁ„o mÌnima recomendada: 36%%\n");
-			}
+        }
 
-			return 35;
+    }while(opt > 2);
 
-			break;
+    printf("\n");
 
-		case 14:
-			/*
-			Amianto:
-			InclinaÁ„o mÌnima: 15%
-			*/
-			printf("\n------\n\n");
-			printf("Amianto/AlumÌnio\n");
-			printf("InclinaÁ„o mÌnima recomendada: 15%%\n");
-
-			float a_largura, a_comprimento, area_telha;
-
-			//Para telhas de amianto ou alumÌnio as dimensıes podem variar, por isso o usu·rio È quem entra com essas dimensıes
-			printf("Digite a largura da telha (cm): ");
-			scanf("%f", &a_largura);
-
-			printf("Digite a comprimento da telha  (cm): ");
-			scanf("%f", &a_comprimento);
-
-			//Calcula a ·rea da telha
-			area_telha = a_largura/100 * a_comprimento/100;
-
-			return 1 / area_telha;
-
-			break;
-
-		default:
-
-			return 0;
-
-			break;
-
-	}
+    return telhas_p_metro;
 
 }
 
-int main(void){
+int main(void)
+{
+    //Geral
+    int usr_opt = 0, //Usada para receber as escolhas do usu√°rio quando forem apresentadas op√ß√µes
+    	erros = 0;//Contador de erros ao salvar e ler um arquivo
+
+    //Telhado
+    int inclinacao = 0;//Inclina√ß√£o do telhado
+
+	float largura_base = 0.0,//Largura da base do telhado (laje)
+		comprimento_base = 0.0,//Comprimento da base do telhado (laje)
+		area_telhado_corrigida = 0.0;//√Årea do telhado corrigida j√° incluindo a inclina√ß√£o do teclado
+
+	//Telhas
+	int qtd_telhas = 0;//Quantidade de telhas no total
+
+	float custo_total = 0.0,//Custo total das telhas no final
+		  preco_unit = 0.0,//Pre√ßo unit√°rio de cada telha
+		  qtd_telha_metro = 0.0;//Quantidade de telhas por metro quadrado
+
+	//Madeiramento
+	int qtd_tercas = 0, //Quantidade de ter√ßas para as duas √°guas do telhado
+        qtd_caibros = 0,// Quantidade de caibros para o telhado
+        qtd_ripas = 0; //Quantidade de ripas para o telhado
+
+	float tercas_espacamento = 0.0, //Espa√ßamento entre as ter√ßas
+		metragem_pontaletes = 0.0,
+		metragem_caibros = 0.0,
+		metragem_ripas = 0.0,
+		metragem_tercas = 0.0,
+		comprimento_garga = 0.0;
 
     setlocale(LC_ALL, "");
 
-    int usr_opt = 0, //Usada para receber as escolhas do usu·rio quando forem apresentadas opÁıes
-    	inclinacao = 0,//InclinaÁ„o do telhado
-		qtd_telhas = 0,//Quantidade de telhas no total
-		tipo_telha = 0,//Modelo de telha escolhida pelo usu·rio
-		erros = 0;//Contador de erros ao salvar e ler um arquivo
-
-    float largura_base = 0.0,//Largura da base do telhado (laje)
-    	  comprimento_base = 0.0,//Comprimento da base do telhado (laje)
-		  area_telhado_corrigida = 0.0,//¡rea do telhado corrigida j· incluindo a inclinaÁ„o do teclado
-		  custo_total = 0.0,//Custo total das telhas no final
-		  preco_unit = 0.0,//PreÁo unit·rio de cada telha
-		  qtd_telha_metro = 0.0;//Quantidade de telhas por metro quadrado
-
-    //Armazena o tipo de telha para ser salvo no arquivo
-    char *dir_arquivo = malloc(sizeof(char *));
-
-    do{
+    do
+    {
     	system("cls");
 
-		printf("--------------------\nOR«AMENTO DO TELHADO\n--------------------\n");
-
-		printf("Escolha uma aÁ„o:\n 1 - Novo orÁamento\n 2 - Editar orÁamento existente\n 3 - Sair\n\nSua escolha: ");
-		scanf("%d", &usr_opt);
+		printf("--------------------\nOR√áAMENTO DO TELHADO\n--------------------\n");
 
-		if(usr_opt == 3){
-			printf("\n\nFinalizando.");
-			break;
-		}
+        printf("\nBASE DO TELHADO");
+        do
+        {
+            printf("\n------\n\n");
+            //L√™ a largura e comprimento da base do telhado (laje)
+            printf(" Digite a largura da base do telhado(m): ");
+            scanf("%f", &largura_base);
 
-		switch(usr_opt){
+            printf(" Digite o comprimento da base do telhado(m): ");
+            scanf("%f", &comprimento_base);
 
-			//ComeÁa um novo orÁamento
-			case 1:
+            if(largura_base <= 0 || comprimento_base <= 0)
+            {
+                printf("\nA largura e comprimento da base devem ser ambos maiores que zero.\n");
+            }
 
-				do{
+        }while(largura_base <= 0 || comprimento_base <= 0);
 
-					do{
+        do
+        {
+            //L√™ a inclina√ß√£o desejada para o telhado em porcentagem.
+            //Com essa inclina√ß√£o ser√° calculada a altura do centro do telhado (cumeerira, onde os "lados" do telhado se dividem (/|\)).
+            //Essa porcentagem √© calculada em cima da metade da largura da laje.
+            printf(" Informe a inclina√ß√£o desejada (deve ser maior que 30%%): ");
+            scanf("%d", &inclinacao);
 
-						do{
-							printf("\n------\n\n");
-							//LÍ a largura e comprimento da base do telhado (laje)
-							printf("Digite a largura da base do telhado(m): ");
-							scanf("%f", &largura_base);
+            //Inclina√ß√£o abaixo de 30% n√£o √© normatizada
+            if(inclinacao < 30)
+            {
+                printf("\nInclina√ß√£o inv√°lida. Deve ser maior que 30%%.");
+            }
 
-							printf("Digite o comprimento da base do telhado(m): ");
-							scanf("%f", &comprimento_base);
+        }while(inclinacao < 30);
 
-							if(largura_base <= 0 || comprimento_base <= 0){
-								printf("\nA largura e comprimento da base devem ser ambos maiores que zero.\n");
-							}
+        //Exibe a √°rea da laje e a inclina√ß√£o calculados
+        printf("\n√Årea calculada: %.2f", largura_base * comprimento_base);
+        printf("\nInclina√ß√£o: %d%%", inclinacao);
 
-						}while(largura_base <= 0 || comprimento_base <= 0);
+        setbuf(stdin, NULL);
 
-						do{
-							printf("\n------\n\n");
-							//LÍ a inclinaÁ„o desejada para o telhado em porcentagem.
-							//Com essa inclinaÁ„o ser· calculada a altura do centro do telhado (cumeerira, onde os "lados" do telhado se dividem (/|\)).
-							//Essa porcentagem È calculada em cima da metade da largura da laje.
-							printf("Informe a inclinaÁ„o desejada (deve ser maior que 30%%): ");
-							scanf("%d", &inclinacao);
+        printf("\n\nTELHAS");
+        printf("\n------\n\n");
 
-							//InclinaÁ„o abaixo de 30% n„o È normatizada
-							if(inclinacao < 30){
-								printf("\nInclinaÁ„o inv·lida. Deve ser maior que 30%%.");
-							}
+        qtd_telha_metro = get_telhas_metro_quad();
 
-						}while(inclinacao < 30);
+        //Calcula a √°rea do telhado considerando a inclina√ß√£o
+        area_telhado_corrigida = corrigir_area(inclinacao, largura_base, comprimento_base);
 
-						//Exibe a ·rea da laje e a inclinaÁ„o calculados
-						printf("\n¡rea calculada: %.2f", largura_base * comprimento_base);
-						printf("\nInclinaÁ„o: %d%%", inclinacao);
+        //Calcula a quantidade de telha
+        qtd_telhas = calcula_qtd_telhas(area_telhado_corrigida, qtd_telha_metro);
 
-						printf("\n\nContinuar?\n 1 - Sim\n 2 - N„o");
-						printf("\n\nSua escolha: ");
-						scanf("%d", &usr_opt);
+        printf("√Årea do telhado corrigida, considerando a inclina√ß√£o: %.2f", area_telhado_corrigida);
+        printf("\nQuantidade aproximada de telhas: %d\n", qtd_telhas);
 
-						if(usr_opt == 2){
-							system("cls");
-						}
+        do
+        {
 
-					}while(usr_opt == 2);
+            printf("Informe o preco unit√°rio do tipo de telha escolhido: ");
+            scanf(" %f", &preco_unit);
 
-					do{
+            if(preco_unit <= 0.0)
+            {
+                printf("\nO pre√ßo unit√°rio deve ser maior que zero.\n\n");
+            }
 
-						printf("\n------\n\n");
-						printf("Selecione o tipo de telha:\n\n");
+            setbuf(stdin, NULL);
 
-						printf(" 1 - Cer‚mica Americana\n");
-						printf(" 2 - Cer‚mica Colonial Paulista\n");
-						printf(" 3 - Cer‚mica Colonial Paulista (com trava)\n");
-						printf(" 4 - Cer‚mica Colonial Paulista (grande)\n");
-						printf(" 5 - Cer‚mica Italiana\n");
-						printf(" 6 - Cer‚mica Romana\n");
-						printf(" 7 - Cer‚mica Romana Plan\n");
-						printf(" 8 - Cer‚mica Portuguesa\n");
-						printf(" 9 - Cer‚mica Francesa\n");
-						printf(" 10 - Cer‚mica Germ‚nica\n");
-						printf(" 11 - Cer‚mica Uruguaia\n");
-						printf(" 12 - Cer‚mica Plan\n");
-						printf(" 13 - Plana\n");
-						printf(" 14 - Amianto/AlumÌnio");
+        }while(preco_unit <= 0.0);
 
-						printf("\n\nSua escolha: ");
-						scanf("%d", &usr_opt);
+        //Calcula o pre√ßo final das telhas
+        custo_total = calcula_preco(qtd_telhas, preco_unit);
 
-						if(usr_opt <= 14){
-							//Salva o tipo de telha escolhido
-							tipo_telha = usr_opt;
-							qtd_telha_metro = get_telhas_metro_quad(tipo_telha, 1);
+        printf("Custo total das telhas: R$ %.2f", custo_total);
 
-							//Calcula a ·rea do telhado considerando a inclinaÁ„o
-							area_telhado_corrigida = corrigir_area(inclinacao, largura_base, comprimento_base);
+        //Reseta o buffer pois por algum motivo o pr√≥ximo scanf n√£o estava sendo executado
+        setbuf(stdin, NULL);
 
-							//Calcula a quantidade de telha
-							qtd_telhas = calcula_qtd_telhas(area_telhado_corrigida, qtd_telha_metro);
-						}
-						else{
-							printf("OpÁ„o inv·lida.");
-							Sleep(300);
-						}
+        printf("\n\nMADEIRAMENTO");
+        printf("\n------\n\n");
 
-					}while(usr_opt > 14);
+        //Calcula a quantidade de ter√ßas
+        printf("Ter√ßas:\n Digite o espa√ßamento das ter√ßas (m): ");
+        scanf("%f", &tercas_espacamento);
 
+        qtd_tercas = ceil(largura_base / tercas_espacamento);
+        metragem_tercas = comprimento_base * qtd_tercas;
 
-					printf("\nQuantidade aproximada de telhas: %d\n", qtd_telhas);
+        printf(" Quantidade de ter√ßas de %.2f metros: %d\n", comprimento_base, qtd_tercas);
+        printf(" Quantidade de metros de ter√ßas: %2.f", metragem_tercas);
 
-					do{
+        //Calcula a quantidade de pontaletes
+        printf("\n\nPontaletes:\n");
 
-						printf("\n------\n\n");
-						printf("Informe o preco unit·rio do tipo de telha escolhido: ");
-						scanf(" %f", &preco_unit);
+        metragem_pontaletes = (
+                                ( (largura_base / 2) * inclinacao ) * 2 +
+                                ( ( (largura_base / 2) / 2 ) * inclinacao ) * 6 // 3 pontaletes em cada √°gua
+                              );
 
-						if(preco_unit <= 0.0){
-							printf("\nO preÁo unit·rio deve ser maior que zero.\n");
-						}
+        printf(" Quantidade de pontaletes (m): %.2f", metragem_pontaletes);
 
-						setbuf(stdin, NULL);
+        //Calcula a quantidade de ber√ßos
+        //Para cada pontalete h√° 1 ber√ßo de 0.5m
+        printf("\n\nBer√ßos:\n Quantidade de ber√ßos (m): %.2f", 6 * 0.5);
 
-					}while(preco_unit <= 0.0);
+        //Calcula a quantidade de madeira para a trama, que inclui os caibros e as ripas
+        printf("\n\nTrama:\n");
 
-					//Calcula o preÁo final das telhas
-					custo_total = calcula_preco(qtd_telhas, preco_unit);
+        //Calcula a quantidade de caibros
+        printf(" Caibros:\n");
 
-					printf("Custo total das telhas: R$ %.2f", custo_total);
+        float altura_cumeeira = (inclinacao / 100) * (largura_base / 2);
 
-					printf("\n------\n\n");
+        qtd_caibros = ceil( (comprimento_base / 0.5) * 2 );
 
-					int opt = 0;
+        metragem_caibros = qtd_caibros * (largura_base / 2);
 
-					//Reseta o buffer pois por algum motivo o prÛximo scanf n„o estava sendo executado
-					setbuf(stdin, NULL);
+        printf("  Quantidade de caibros: %d\n", qtd_caibros);
+        printf("  Quantidade de metros de caibro: %.2f", metragem_caibros );
 
-					printf("Salvar os resultados obtidos?\n1 - Sim\n2 - N„o\n\nSua escolha: ");
-					scanf("%d", &opt);
+        //Calcula a quantidade de ripas
 
+        printf("\n Ripas:\n");
 
-					//Salva os resultados obtidos
-					if(opt == 1){
+        printf("  Digite o comprimento da garga: ");
+        scanf("%f", &comprimento_garga);
 
-						do{
+        qtd_ripas = 2 * ceil((largura_base / 2) / comprimento_garga);
+        metragem_ripas = qtd_ripas * comprimento_base;
 
-							erros = 0;
-							printf("\n------\n\n");
-							printf("Salvando:\n");
+        printf("  Quantidade de ripas: %d\n", qtd_ripas);
+        printf("  Quantidade de metros de ripas: %.2f\n", metragem_ripas);
 
-							setbuf(stdin, NULL);
+        printf("\n------\n");
+        printf("Conclu√≠do.");
+        printf("\n------\n");
 
-							printf("Digite um nome para o arquivo: ");
-							gets(dir_arquivo);
+        printf("\nRecalcular or√ßamento?\n 1 - Sim\n 2 - N√£o\n\nSua escolha: ");
+        scanf("%d", &usr_opt);
 
-							strcat(dir_arquivo, ".txt");
+        if(usr_opt == 1)
+        {
+            system("cls");
+        }
 
-							printf("\nRegistros ser„o salvos em '%s'\n", dir_arquivo);
-
-							setbuf(stdin, NULL);
-
-							int status = 0;
-
-							//Salva o tipo de telha
-							status = set_record(dir_arquivo, C_TELHA_TIPO, int_to_char(tipo_telha));
-
-							if(status == 0){
-								erros++;
-								printf(" Ocorreu um erro ao salvar o tipo de telha...\n");
-							}
-							else if(status == 1){
-								printf(" Tipo de telha salvo...\n");
-							}
-							else if(status == 2){
-								printf(" Tipo de telha atualizado...\n");
-							}
-
-							//Salva a quantidade de telhas
-							status = set_record(dir_arquivo, C_TELHA_QTD, int_to_char(qtd_telhas));
-
-							if(status == 0){
-								erros++;
-								printf(" Ocorreu um erro ao salvar a quantidade de telhas...\n");
-							}
-							else if(status == 1){
-								printf(" Quantidade de telhas salva...\n");
-							}
-							else if(status == 2){
-								printf(" Quantidade de telhas atualizada...\n");
-							}
-
-							//Salva o custo total das telhas
-							status = set_record(dir_arquivo, C_TELHA_CUSTO_TOTAL, float_to_char(custo_total));
-
-							if(status == 0){
-								erros++;
-								printf(" Ocorreu um erro ao salvar o custo total das telhas...\n");
-							}
-							else if(status == 1){
-								printf(" Custo total das telhas salvo...\n");
-							}
-							else if(status == 2){
-								printf(" Custo total das telhas atualizado...\n");
-							}
-
-							//Salva o preÁo unit·rio das telhas
-							status = set_record(dir_arquivo, C_TELHA_PRECO_UNIT, float_to_char(preco_unit));
-
-							if(status == 0){
-								erros++;
-								printf(" Ocorreu um erro ao salvar o preÁo unit·rio das telhas...\n");
-							}
-							else if(status == 1){
-								printf(" PreÁo unit·rio das telhas salvo...\n");
-							}
-							else if(status == 2){
-								printf(" PreÁo unit·rio das telhas atualizado...\n");
-							}
-
-							//Salva a inclinaÁ„o do telhado
-							status = set_record(dir_arquivo, C_TELHADO_INCLINACAO, int_to_char(inclinacao));
-
-							if(status == 0){
-								erros++;
-								printf(" Ocorreu um erro ao salvar a inclinacao do telhado...\n");
-							}
-							else if(status == 1){
-								printf(" Inclinacao do telhado salva...\n");
-							}
-							else if(status == 2){
-								printf(" Inclinacao do telhado atualizada...\n");
-							}
-
-							//Salva a largura da base
-							status = set_record(dir_arquivo, C_TELHADO_LARGURA_BASE, float_to_char(largura_base));
-
-							if(status == 0){
-								erros++;
-								printf(" Ocorreu um erro ao salvar a largura da base do telhado...\n");
-							}
-							else if(status == 1){
-								printf(" Largura da base do telhado salva...\n");
-							}
-							else if(status == 2){
-								printf(" Largura da base do telhado atualizada...\n");
-							}
-
-							//Salva o comprimento da base
-							status = set_record(dir_arquivo, C_TELHADO_COMPRIMENTO_BASE, float_to_char(comprimento_base));
-
-							if(status == 0){
-								erros++;
-								printf(" Ocorreu um erro ao salvar o comprimento da base do telhado...\n");
-							}
-							else if(status == 1){
-								printf(" Comprimento da base do telhado salvo...\n");
-							}
-							else if(status == 2){
-								printf(" Comprimento da base do telhado atualizado...\n");
-							}
-
-							//Salva ·rea do telhado corrigida
-							status = set_record(dir_arquivo, C_TELHADO_AREA_CORRIGIDA, float_to_char(area_telhado_corrigida));
-
-							if(status == 0){
-								erros++;
-								printf(" Ocorreu um erro ao salvar a ·rea corrigida do telhado...\n");
-							}
-							else if(status == 1){
-								printf(" ¡rea corrigida do telhado salva...\n");
-							}
-							else if(status == 2){
-								printf(" ¡rea corrigida do telhado atualizada...\n");
-							}
-
-							if(erros > 0){
-								printf("\n\nOcorreram %d erros ao salvar os registros. Deseja tentar novamente?\n(Registros n„o salvos podem causar problemas no futuro)\n 1 - Sim\n 2 - N„o\n\nSua escolha: ", erros);
-								scanf("%d", &usr_opt);
-							}
-
-						}while(erros > 0 && usr_opt == 1);
-
-					}
-
-					printf("\nConcluÌdo.");
-
-					printf("\n\n------\n");
-
-					printf("\nRecalcular orÁamento?\n 1 - Sim\n 2 - N„o\n\nSua escolha: ");
-					scanf("%d", &usr_opt);
-
-					if(usr_opt == 1){
-						system("cls");
-					}
-
-				}while(usr_opt == 1);
-
-				break;
-
-			//------------------------------
-			//Carrega um orÁamento existente
-			case 2:
-
-				do{
-					setbuf(stdin, NULL);
-
-					printf("\n------\n\n");
-					printf("Digite o diretÛrio do arquivo com o orÁamento salvo: ");
-					gets(dir_arquivo);
-
-					printf("\nConfirmar diretÛrio?\n'%s'\n 1 - Sim\n 2 - N„o\n\nSua escolha: ", dir_arquivo);
-					scanf("%d", &usr_opt);
-
-				}while(usr_opt == 2);
-
-				do{
-					usr_opt = 0;
-					erros = 0;
-
-					//LÍ os dados salvos no arquivo
-					largura_base = atof( get_record(dir_arquivo, C_TELHADO_LARGURA_BASE) );
-
-					if(largura_base == 0){
-						erros++;
-					}
-
-					comprimento_base = atof( get_record(dir_arquivo, C_TELHADO_COMPRIMENTO_BASE) );
-
-					if(comprimento_base == 0){
-						erros++;
-					}
-
-					inclinacao = atoi( get_record(dir_arquivo, C_TELHADO_INCLINACAO) );
-
-					if(inclinacao == 0){
-						erros++;
-					}
-
-					tipo_telha = atoi( get_record(dir_arquivo, C_TELHA_TIPO) );
-
-					if(tipo_telha == 0){
-						erros++;
-					}
-
-					preco_unit = atof( get_record(dir_arquivo, C_TELHA_PRECO_UNIT) );
-
-					if(preco_unit == 0){
-						erros++;
-					}
-
-					printf("Registros lidos do arquivo:\n\n");
-					printf(" Largura da base: %.2f\n", largura_base);
-					printf(" Comprimento base: %.2f\n", comprimento_base);
-					printf(" Inclinacao do telhado: %d\n", inclinacao);
-					printf(" Modelo de telha: %d\n", tipo_telha);
-					printf(" PreÁo unit·rio da telha: %f\n", preco_unit);
-
-					if(erros > 0){
-						printf("\n------\n\n");
-						printf("Ocorreram %d erros ao ler os registros salvos. Deseja tentar novamente?\n(N„o ser· possÌvel prosseguir sem os registros)\n 1 - Sim\n 2 - N„o\n\nSua escolha: ", erros);
-						scanf("%d", &usr_opt);
-					}
-					else{
-						printf("\nRegistros recuperados com sucesso.");
-					}
-
-				}while(usr_opt == 1);
-
-				if(erros == 0){
-
-					do{
-
-						printf("\n------\n\n");
-						printf("Selecione o item que deseja editar:\n");
-
-						printf(" 1 - Dimensıes do telhado\n");
-						printf(" 2 - InclinaÁ„o do telhado\n");
-						printf(" 3 - Modelo da telha\n");
-						printf(" 4 - PreÁo unit·rio da telha\n\n");
-
-						printf(" 5 - Salvar modificaÁıes\n");
-
-						printf(" 6 - Voltar ao inÌcio\n");
-
-						printf("\n\nSua escolha: ");
-						scanf("%d", &usr_opt);
-
-						if(usr_opt > 6){
-							printf("OpÁ„o inv·lida.");
-							Sleep(300);
-							continue;
-						}
-						else if(usr_opt == 6){
-							continue;
-						}
-
-						switch(usr_opt){
-							//Dimensıes do telhado
-							case 1:
-								do{
-									printf("\n------\n\n");
-									//LÍ a largura e comprimento da base do telhado (laje)
-									printf("Digite a largura da base do telhado(m): ");
-									scanf("%f", &largura_base);
-
-									printf("Digite o comprimento da base do telhado(m): ");
-									scanf("%f", &comprimento_base);
-
-									if(largura_base <= 0 || comprimento_base <= 0){
-										printf("\nA largura e comprimento da base devem ser ambos maiores que zero.\n");
-									}
-
-								}while(largura_base <= 0 || comprimento_base <= 0);
-
-								break;
-
-							//------------------------------
-							//InclinaÁ„o
-							case 2:
-
-								do{
-									printf("\n------\n\n");
-									//LÍ a inclinaÁ„o desejada para o telhado em porcentagem.
-									//Com essa inclinaÁ„o ser· calculada a altura do centro do telhado (cumeerira, onde os "lados" do telhado se dividem (/|\)).
-									//Essa porcentagem È calculada em cima da metade da largura da laje.
-									printf("Informe a inclinaÁ„o desejada (deve ser maior que 30%%): ");
-									scanf("%d", &inclinacao);
-
-									//InclinaÁ„o abaixo de 30% n„o È normatizada
-									if(inclinacao < 30){
-										printf("\nInclinaÁ„o inv·lida. Deve ser maior que 30%%.");
-									}
-
-								}while(inclinacao < 30);
-
-								break;
-
-							//------------------------------
-							//Modelo da telha
-							case 3:
-
-								do{
-
-									printf("\n------\n\n");
-									printf("Selecione o tipo de telha:\n\n");
-
-									printf(" 1 - Cer‚mica Americana\n");
-									printf(" 2 - Cer‚mica Colonial Paulista\n");
-									printf(" 3 - Cer‚mica Colonial Paulista (com trava)\n");
-									printf(" 4 - Cer‚mica Colonial Paulista (grande)\n");
-									printf(" 5 - Cer‚mica Italiana\n");
-									printf(" 6 - Cer‚mica Romana\n");
-									printf(" 7 - Cer‚mica Romana Plan\n");
-									printf(" 8 - Cer‚mica Portuguesa\n");
-									printf(" 9 - Cer‚mica Francesa\n");
-									printf(" 10 - Cer‚mica Germ‚nica\n");
-									printf(" 11 - Cer‚mica Uruguaia\n");
-									printf(" 12 - Cer‚mica Plan\n");
-									printf(" 13 - Plana\n");
-									printf(" 14 - Amianto/AlumÌnio");
-
-									printf("\n\nSua escolha: ");
-									scanf("%d", &usr_opt);
-
-									if(usr_opt <= 14){
-										//Salva o tipo de telha escolhido
-										tipo_telha = usr_opt;
-									}
-									else{
-										printf("OpÁ„o inv·lida.");
-										Sleep(300);
-									}
-
-									//Obtem a quantidade de telhas por metro quadrado
-									qtd_telha_metro = get_telhas_metro_quad(tipo_telha, 0);
-
-								}while(usr_opt > 14);
-
-								break;
-
-							//------------------------------
-							//PreÁo da telha
-							case 4:
-
-								do{
-									printf("\n------\n\n");
-									printf("Informe o preco unit·rio do tipo de telha escolhido: ");
-									scanf("%f", &preco_unit);
-
-									if(preco_unit <= 0){
-										printf("\nO preÁo unit·rio deve ser maior que zero.\n");
-									}
-
-								}while(preco_unit <= 0);
-
-								break;
-
-							//------------------------------
-							//Salvar alteraÁıes
-							case 5:
-
-								//Calcula a ·rea do telhado considerando a inclinaÁ„o
-								area_telhado_corrigida = corrigir_area(inclinacao, largura_base, comprimento_base);
-
-								//Calcula a quantidade de telha
-								qtd_telhas = calcula_qtd_telhas(area_telhado_corrigida, qtd_telha_metro);
-
-								//Calcula o preÁo total das telhas
-								custo_total = calcula_preco(qtd_telhas, preco_unit);
-
-
-								do{
-
-									erros = 0;
-									printf("\n------\n\n");
-									printf("Salvando:\n");
-
-									printf("\nRegistros ser„o salvos em '%s'\n", dir_arquivo);
-
-									setbuf(stdin, NULL);
-
-									int status = 0;
-
-									//Salva o tipo de telha
-									status = set_record(dir_arquivo, C_TELHA_TIPO, int_to_char(tipo_telha));
-
-									if(status == 0){
-										erros++;
-										printf(" Ocorreu um erro ao salvar o tipo de telha...\n");
-									}
-									else if(status == 1){
-										printf(" Tipo de telha salvo...\n");
-									}
-									else if(status == 2){
-										printf(" Tipo de telha atualizado...\n");
-									}
-
-									//Salva a quantidade de telhas
-									status = set_record(dir_arquivo, C_TELHA_QTD, int_to_char(qtd_telhas));
-
-									if(status == 0){
-										erros++;
-										printf(" Ocorreu um erro ao salvar a quantidade de telhas...\n");
-									}
-									else if(status == 1){
-										printf(" Quantidade de telhas salva...\n");
-									}
-									else if(status == 2){
-										printf(" Quantidade de telhas atualizada...\n");
-									}
-
-									//Salva o custo total das telhas
-									status = set_record(dir_arquivo, C_TELHA_CUSTO_TOTAL, float_to_char(custo_total));
-
-									if(status == 0){
-										erros++;
-										printf(" Ocorreu um erro ao salvar o custo total das telhas...\n");
-									}
-									else if(status == 1){
-										printf(" Custo total das telhas salvo...\n");
-									}
-									else if(status == 2){
-										printf(" Custo total das telhas atualizado...\n");
-									}
-
-									//Salva o preÁo unit·rio das telhas
-									status = set_record(dir_arquivo, C_TELHA_PRECO_UNIT, float_to_char(preco_unit));
-
-									if(status == 0){
-										erros++;
-										printf(" Ocorreu um erro ao salvar o preÁo unit·rio das telhas...\n");
-									}
-									else if(status == 1){
-										printf(" PreÁo unit·rio das telhas salvo...\n");
-									}
-									else if(status == 2){
-										printf(" PreÁo unit·rio das telhas atualizado...\n");
-									}
-
-									//Salva a inclinaÁ„o do telhado
-									status = set_record(dir_arquivo, C_TELHADO_INCLINACAO, int_to_char(inclinacao));
-
-									if(status == 0){
-										erros++;
-										printf(" Ocorreu um erro ao salvar a inclinacao do telhado...\n");
-									}
-									else if(status == 1){
-										printf(" Inclinacao do telhado salva...\n");
-									}
-									else if(status == 2){
-										printf(" Inclinacao do telhado atualizada...\n");
-									}
-
-									//Salva a largura da base
-									status = set_record(dir_arquivo, C_TELHADO_LARGURA_BASE, float_to_char(largura_base));
-
-									if(status == 0){
-										erros++;
-										printf(" Ocorreu um erro ao salvar a largura da base do telhado...\n");
-									}
-									else if(status == 1){
-										printf(" Largura da base do telhado salva...\n");
-									}
-									else if(status == 2){
-										printf(" Largura da base do telhado atualizada...\n");
-									}
-
-									//Salva o comprimento da base
-									status = set_record(dir_arquivo, C_TELHADO_COMPRIMENTO_BASE, float_to_char(comprimento_base));
-
-									if(status == 0){
-										erros++;
-										printf(" Ocorreu um erro ao salvar o comprimento da base do telhado...\n");
-									}
-									else if(status == 1){
-										printf(" Comprimento da base do telhado salvo...\n");
-									}
-									else if(status == 2){
-										printf(" Comprimento da base do telhado atualizado...\n");
-									}
-
-									//Salva ·rea do telhado corrigida
-									status = set_record(dir_arquivo, C_TELHADO_AREA_CORRIGIDA, float_to_char(area_telhado_corrigida));
-
-									if(status == 0){
-										erros++;
-										printf(" Ocorreu um erro ao salvar a ·rea corrigida do telhado...\n");
-									}
-									else if(status == 1){
-										printf(" ¡rea corrigida do telhado salva...\n");
-									}
-									else if(status == 2){
-										printf(" ¡rea corrigida do telhado atualizada...\n");
-									}
-
-									if(erros > 0){
-										printf("\n\nOcorreram %d erros ao salvar os registros. Deseja tentar novamente?\n(Registros n„o salvos podem causar problemas no futuro)\n 1 - Sim\n 2 - N„o\n\nSua escolha: ", erros);
-										scanf("%d", &usr_opt);
-									}
-
-								}while(erros > 0 && usr_opt == 1);
-
-								printf("\nOrÁamento atualizado.");
-
-								break;
-
-						}
-
-					}while(1);
-
-				}
-
-				break;
-
-			//------------------------------
-			default:
-
-				printf("OpÁ„o inv·lida.");
-				Sleep(300);
-				//system("cls");
-
-				break;
-
-		}//switch(usr_opt)
-
-    }while(1);
+    }while(usr_opt == 1);
 
     return 0;
 }
