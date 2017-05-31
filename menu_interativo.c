@@ -2,11 +2,12 @@
 #include<stdlib.h>
 #include<windows.h> //COORD
 #include<locale.h>
+#include<string.h>
 
 //Quantidade de itens na lista
 #define QTD_ITENS 7
 
-//CÃ³digo das teclas
+//Código das teclas
 #define KEY_UP 72
 #define KEY_DOWN 80
 #define KEY_ESC 27
@@ -15,110 +16,161 @@
 #define TRUE 1
 #define FALSE 0
 
-//Move o cursor d oterminal para a posiÃ§Ã£o x,y indicada nos parÃ¢metros
+#define LIST_START 4
+
+//Estrutura que representa cada item da lista
+typedef struct
+{
+    int x; //Coordenadas x da posição para a qual o cursor deve ser movido no console
+    int y; //Coordenadas y da posição para a qual o cursor deve ser movido no console
+    char value[15]; //Valor entrado pelo usuário
+    char label[128]; //Descrição do item que será mostrado na tela
+
+}_NODE;
+
+//Inicialização dos itens da lista.
+//Novos itens são acrescentados aqui
+void init_nodes(_NODE * nodes)
+{
+    //Item 1
+    nodes[0].x = 9;
+    nodes[0].y = 4;
+    strcpy(nodes[0].value, "0");
+    strcpy(nodes[0].label, "Item 1:");
+
+    //Item 2
+    nodes[1].x = 9;
+    nodes[1].y = 5;
+    strcpy(nodes[1].value, "0");
+    strcpy(nodes[1].label, "Item 2:");
+
+    //Item 3
+    nodes[2].x = 9;
+    nodes[2].y = 6;
+    strcpy(nodes[2].value, "0");
+    strcpy(nodes[2].label, "Item 3:");
+
+    //Item 4
+    nodes[3].x = 9;
+    nodes[3].y = 7;
+    strcpy(nodes[3].value, "0");
+    strcpy(nodes[3].label, "Item 4:");
+
+    //Item 5
+    nodes[4].x = 9;
+    nodes[4].y = 8;
+    strcpy(nodes[4].value, "0");
+    strcpy(nodes[4].label, "Item 5:");
+
+    //Item 6
+    nodes[5].x = 9;
+    nodes[5].y = 9;
+    strcpy(nodes[5].value, "0");
+    strcpy(nodes[5].label, "Item 6:");
+
+    //Item 7
+    nodes[6].x = 9;
+    nodes[6].y = 10;
+    strcpy(nodes[6].value, "0");
+    strcpy(nodes[6].label, "Item 7:");
+}
+
+//Move o cursor do terminal para a posição x,y indicada nos parâmetros
 void mgotoxy(int x, int y)
 {
       COORD p={x,y};
-      SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),p);//COLOCA O CURSOR NA COLUNA E LINHA INDICADA MAIS ABAIXO
+      SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),p);
 }
 
 //Move o cursor para o item (especificado por "goto_node") da lista ("nodes")
-void update_caret(int nodes[QTD_ITENS][2], int goto_node)
+void update_caret(_NODE node)
 {
-    //Limpa o indicador do primeiro item
-    if(goto_node != 0){
-        mgotoxy(0, nodes[0][1]);
-        printf(" ");
-    }
-
-    //Limpa o indicador de um item antes do atual
-    mgotoxy(0, nodes[goto_node - 1][1]);
-    printf(" ");
-
-    //Limpa o indicador de um item depois do atual
-    mgotoxy(0, nodes[goto_node + 1][1]);
-    printf(" ");
-
-    //Limpa o indicador do Ãºltimo item
-    if(goto_node != QTD_ITENS - 1){
-        mgotoxy(0, nodes[QTD_ITENS - 1][1]);
+    int i;
+    for(i = LIST_START; i < LIST_START + QTD_ITENS; i++){
+        mgotoxy(0, i);
         printf(" ");
     }
 
     //Move o '>' para o inicio da linah do item
-    mgotoxy(0, nodes[goto_node][1]);
+    mgotoxy(0, node.y);
     printf(">");
-    //Move o cursor para a posiÃ§Ã£o onde estÃ¡ o valor
-    mgotoxy(nodes[goto_node][0], nodes[goto_node][1]);
+    //Move o cursor para a posição onde está o valor
+    mgotoxy(node.x, node.y);
 }
 
 //"Limpa" a linha especificada
-void clear_line(int line){
-
+void clear_line(int line)
+{
     mgotoxy(0, line);
     printf("                                                       ");
+}
+
+//Local onde as regras de negócio referentes a cada item podem ser implementadas
+void handle_ops(_NODE node, int index){
+
+    mgotoxy(0, QTD_ITENS + 7);
+
+    //index representa o índice do item, na ordem posição que este aparece na lista (começando em zero)
+    switch(index){
+
+    case 0:
+        printf("\n------\nSoma:\n");
+        int a, soma;
+
+        printf("Digite A: ");
+        scanf("%d", &a);
+
+        soma = a + atoi(node.value) ;
+
+        printf("\nSoma = %d\n", soma);
+    }
 
 }
 
 int main(void)
 {
+    //Itens da lista
+    _NODE nodes[QTD_ITENS];
 
-    //Coordenadas x,y da posiÃ§Ã£o para a qual o cursor deve ser movido no console
-    int coords[QTD_ITENS][2] = {
-        {9, 4}, //Item 1
-        {9, 5}, //Item 2
-        {9, 6}, //Item 3
-        {9, 7}, //Item 4
-        {9, 8}, //Item 5
-        {9, 9}, //Item 6
-        {9, 10} //Item 7
-    };
+    //Inicializa a lista
+    init_nodes(nodes);
 
     int current_node = 0, //Item da lista no qual o cursor se encontra atualmente
-        update_screen = TRUE; //Controla quando a lista deve ser atualizada. Inicia TRUE para que a lista seja desenhada na inicializaÃ§Ã£o do programa
+        update_screen = TRUE; //Controla quando a lista deve ser atualizada. Inicia TRUE para que a lista seja desenhada na inicialização do programa
 
     char key; //Tecla pressionada no teclado
-
-    //Cada item necessita de uma variÃ¡vel individual, para possibilitar a ediÃ§Ã£o dos valores
-    int item1 = 0,
-        item2 = 0,
-        item4 = 0,
-        item5 = 0;
-    float item3 = 0.0,
-        item6 = 0.0,
-        item7 = 0.0;
 
     do{
 
         if(update_screen == TRUE){
 
-            system("cls");
+            //system("cls");
 
-            printf("Navegue com as setas para cima e para baixo\nPressione ENTER em um item pra editÃ¡-lo\nPressione a tecla ESC para sair\n");
+            mgotoxy(0, 0);
 
-            printf("\n Item 1: %d", item1);
-            printf("\n Item 2: %d", item2);
-            printf("\n Item 3: %f", item3);
-            printf("\n Item 4: %d", item4);
-            printf("\n Item 5: %d", item5);
-            printf("\n Item 6: %f", item6);
-            printf("\n Item 7: %f", item7);
+            printf("Navegue com as setas para cima e para baixo\nPressione ENTER em um item pra editá-lo\nPressione a tecla ESC para sair\n");
+
+            //Imprime a lista
+            int i;
+            for(i = 0; i < QTD_ITENS; i++){
+                printf("\n %s %s", nodes[i].label, nodes[i].value);
+            }
 
             //Move o cursor para o item especificado por "current_node"
-            update_caret(coords, current_node);
-            //Indica para nÃ£o atualizar a lista
+            update_caret(nodes[current_node]);
+            //Indica para não atualizar a lista
             update_screen = FALSE;
 
         }
 
-        //LÃª a tecla pressionada no teclado
+        //Lê a tecla pressionada no teclado
         key = getch();
 
         //Sobe um item na lista
         if(key == KEY_UP){
 
-            //Sobe um item na lista. Caso jÃ¡ esteja no primeiro item, indica o Ãºltimo item como prÃ³ximo.
-            //Altera o valor do item, que serÃ¡ carregado ao final dessa iteraÃ§Ã£o
+            //Sobe um item na lista. Caso já esteja no primeiro item, indica o último item como próximo.
+            //Altera o valor do item, que será carregado ao final dessa iteração
             if(current_node <= 0){
                 current_node = QTD_ITENS - 1;
             }
@@ -130,8 +182,8 @@ int main(void)
         //Desce um item na lista
         else if(key == KEY_DOWN){
 
-            //Desce um item na lista. Caso jÃ¡ esteja no Ãºltimo item, indica o primeiro item como prÃ³ximo.
-            //Altera o valor do item, que serÃ¡ carregado ao final dessa iteraÃ§Ã£o
+            //Desce um item na lista. Caso já esteja no último item, indica o primeiro item como próximo.
+            //Altera o valor do item, que será carregado ao final dessa iteração
             if(current_node >= QTD_ITENS - 1){
                 current_node = 0;
             }
@@ -143,54 +195,26 @@ int main(void)
         //Seleciona um item na lista
         else if(key == KEY_ENTER){
 
-            //Posiciona o cursor na posiÃ§Ã£o de ediÃ§Ã£o
+            //Posiciona o cursor na posição de edição
             mgotoxy(0, QTD_ITENS + 5);
-            printf("Digite um valor para o item: "); //Essa linha Ã© apagada no final da ediÃ§Ã£o
+            printf("Digite um valor para o item: "); //Essa linha é apagada no final da edição
 
             //update_caret(coords, current_node);
 
-            //Identifica o item atual e direciona para a leitura deste
-            switch(current_node){
+            scanf("%14[^\n]", nodes[current_node].value);
 
-                //Cada caso representa um item na lista
-                case 0:
-                    scanf("%d", &item1);
-                break;
-
-                case 1:
-                    scanf("%d", &item2);
-                break;
-
-                case 2:
-                    scanf("%f", &item3);
-                break;
-
-                case 3:
-                    scanf("%d", &item4);
-                break;
-
-                case 4:
-                    scanf("%d", &item5);
-                break;
-
-                case 5:
-                    scanf("%f", &item6);
-                break;
-
-                case 6:
-                    scanf("%f", &item7);
-                break;
-            }
+            //Executa alguma operação adicional para o item
+            handle_ops(nodes[current_node], current_node);
 
             //Limpa o buffer de entrada
             setbuf(stdin, NULL);
             fflush(stdin);
 
-            //Limpa a linha de ediÃ§Ã£o ( printf("Digite um valor para o item: "); )
+            //Limpa a linha de edição ( printf("Digite um valor para o item: "); )
             clear_line(QTD_ITENS + 5);
 
             update_screen = TRUE;
-            update_caret(coords, current_node);
+            update_caret(nodes[current_node]);
 
         }
 
@@ -198,12 +222,12 @@ int main(void)
         //mgotoxy(0, QTD_ITENS + 5);
         //printf("current_node: %d", current_node);
 
-        //Atualiza o cursor para a posiÃ§Ã£o do item atual (ao pressionar a tecla cima/baixo, o cursor Ã© atualizado aqui)
-        update_caret(coords, current_node);
+        //Atualiza o cursor para a posição do item atual (ao pressionar a tecla cima/baixo, o cursor é atualizado aqui)
+        update_caret(nodes[current_node]);
 
     }while(key != KEY_ESC);
 
-    //Ao pressionar ESC o programa Ã© finalizado
+    //Ao pressionar ESC o programa é finalizado
     mgotoxy(0, QTD_ITENS + 5);
 
     system("pause");
