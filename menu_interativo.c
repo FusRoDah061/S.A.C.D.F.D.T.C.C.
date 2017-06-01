@@ -3,6 +3,7 @@
 #include<windows.h> //COORD
 #include<locale.h>
 #include<string.h>
+#include<locale.h>
 
 //Quantidade de itens na lista
 #define QTD_ITENS 7
@@ -16,6 +17,7 @@
 #define TRUE 1
 #define FALSE 0
 
+//Linha na qual a lista começa
 #define LIST_START 4
 
 //Estrutura que representa cada item da lista
@@ -106,7 +108,8 @@ void clear_line(int line)
 }
 
 //Local onde as regras de negócio referentes a cada item podem ser implementadas
-void handle_ops(_NODE node, int index){
+void handle_ops(_NODE node, int index)
+{
 
     mgotoxy(0, QTD_ITENS + 7);
 
@@ -129,6 +132,8 @@ void handle_ops(_NODE node, int index){
 
 int main(void)
 {
+    setlocale(LC_ALL, "");
+
     //Itens da lista
     _NODE nodes[QTD_ITENS];
 
