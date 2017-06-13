@@ -1,0 +1,98 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<locale.h>
+#include<ctype.h>
+
+
+    int main(){
+
+            int sabe_mais;
+            char more;
+
+
+            setlocale(LC_ALL,"");
+
+            system("color 0e");
+
+             printf("\nDigite o piso que deseja saber mais:\nEscolha o tipo de piso:\n1 - CERÂMICA\n2 - PORCELANATO\n3 - GRANITO\n4 - MÁRMORE\n5 - LAMINADO DE MADEIRA\n6 - SILESTONE\n7 - TÁBUA CORRIDA\n8 - TACÃO\n9 - LAJOTA\n10 - ARDÓSIA\n11 - CIMENTO QUEIMADO\n12 - PEDRA PORTUGUESA\n13 - PEDRA SÃO TOMÉ\n14 - GRANITINA\n");
+
+              //  printf("\nEscolha o tipo de piso:\n1 - CERÂMICA\n2 - PORCELANATO\n3 - GRANITO\n4 - MÁRMORE\n5 - LAMINADO DE MADEIRA\n6 - SILESTONE\n7 - TÁBUA CORRIDA\n8 - TACÃO\n9 - LAJOTA\n10 - ARDÓSIA\n11 - CIMENTO QUEIMADO\n12 - PEDRA PORTUGUESA\n13 - PEDRA SÃO TOMÉ\n14 - GRANITINA\n15 - OUTRO\n16 - MAIS INFORMAÇÕES\n");
+
+                scanf("%d", &sabe_mais);
+
+
+
+        system("color 0e");
+
+                do{
+
+                        if(sabe_mais<1 || sabe_mais>14){
+                            printf("Digite um valor de 1 a 14: ");
+                            scanf("%d", &sabe_mais);
+                        }
+
+            do{
+                        if(more == 'S'){
+                        printf("Digite um valor de 1 a 14: ");
+                                scanf("%d", &sabe_mais);
+                        }
+
+                    if(sabe_mais == 1){
+                        printf("\nA cerâmica é o tipo de piso mais conhecido e usado no Brasil. São encontradas de vários tamanhos (desde 20×30, 40×40, 60×60, 80×80, 100×100), texturas, qualidades e preços.Podem ser utilizadas em áreas internas e externas.\n");
+                    }
+                    else if(sabe_mais == 2){
+                        printf("\nO Porcelanato é produzido em massa única já na sua coloração e com matérias-primas nobres.Podem ser semi-polidos, polidos e peça rústica.Também há os porcelanatos esmaltados e os porcelanatos digitais polidos com a mais alta qualidade e com várias texturas, principalmente imitando madeiras, mármores e granitos.\n");
+                    }
+                    else if(sabe_mais == 3){
+                        printf("\nO granito é uma pedra muito indicada para pisos devido a sua beleza, resistência e durabilidade. São utilizados desde residências até em locais com grande movimentação de pessoas como shoppings, supermercados, aeroportos, etc.Possuem várias tonalidades e quanto mais raro mais caro..\n");
+                    }
+                    else if(sabe_mais == 4){
+                        printf("\nO mármore também é uma rocha metamórfica, composta principalmente por minerais de calcita com colaração mais uniforme e formação de veios definidos.É indicado para utilização em ambientes internos apenas.\n");
+                    }
+                    else if(sabe_mais == 5){
+                        printf("\nEsse piso tem esse nome porque são constituídos de lâminas de madeira. É um tipo de piso flutuante porque não é colado no contrapiso. São assentados sobre manta, em sistema de encaixe tipo Click e presos pelos rodapés que são colados.São sustentáveis por serem de madeira reflorestada.\n");
+                    }
+                    else if(sabe_mais == 6){
+                        printf("\nSilestone é um material composto por grande quantidade de quartzo, outros minerais em menor escala, resina de poliéster e pigmentos. Com porosidade nula, possui várias texturas e um custo muito elevado.\n");
+                    }
+                    else if(sabe_mais == 7){
+                        printf("\nPiso em madeira natural de lei, geralmente extraída da Amazônia.Conferem muita beleza e conforto, mas não são sustentáveis. Sua instalação é sobre um ripamento e possuem encaixe tipo macho-fêmea.\n");
+                    }
+                    else if(sabe_mais == 8){
+                        printf("\nOs tacos foram sucesso nos anos 1960 a 1980. Atualmente são utilizados em ambientes mais específicos e possuem custo elevado. Assim como a tábua corrida, necessitam de raspar e sintecar. As madeiras mais comuns para tacão são a grápia, cumaru e ipê.\n");
+                    }
+                    else if(sabe_mais == 10){
+                        printf("\nPiso em pedra ardósia foi largamente utilizado nos anos 1980 devido a sua durabilidade e baixo custo. Podem ser utilizadas em pisos internos de áreas molhadas e áreas externas.\n");
+                    }
+                    else if(sabe_mais == 11){
+                        printf("\nSolução de baixo custo para pisos e quando bem feita confere ótimo acabamento. Indicado tanto para áreas internas quanto para áreas externas. Muito utilizado em bares, boates e galpões industriais.\n");
+                    }
+                    else if(sabe_mais == 12){
+                        printf("\nMuito utilizadas em calçadas a pedra portuguesa mais famosa do mundo é o calçadão de Copacabana no Rio de Janeiro. A execução do trabalho é bastante demorada porque cada pedra é assentada uma a uma.\n");
+                    }
+                    else if(sabe_mais == 13){
+                        printf("\nCom vários outros nomes pelo Brasil afora a Pedra São Tomé é o piso mais utilizado ao redor das piscinas. São vendidas em regulares 30x30cm e irregulares (retalhos).\n");
+                    }
+                    else if(sabe_mais == 14){
+                        printf("\nA granitina é uma massa de cimento misturada com pequenas pedrinhas de granito aplicadas no piso. Após a cura do piso é polida com discos diamantados que conferem uma superfície lisa e brilhante. O piso em granitina é muito utilizado em áreas internas e externas de clubes, escolas, aeroportos.\n");
+                    }
+                }while(sabe_mais>14 || sabe_mais<1);
+
+                printf("Deseja saber mais sobre outro piso?\n(S ou N)");
+                scanf(" %c", &more);
+
+                more = toupper(more);
+
+
+
+            }while(more == 'S');
+
+
+                system("pause");
+
+
+
+
+
+
+        }
