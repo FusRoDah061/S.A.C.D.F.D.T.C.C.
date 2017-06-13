@@ -3,22 +3,22 @@
 #include <locale.h>
 #include <conio.h>
 
-//Constante correspondente ‡ taxa de perda que deve ser considerada ao calcular quantidades de materiais
+//Constante correspondente √† taxa de perda que deve ser considerada ao calcular quantidades de materiais
 //a serem utilizados em uma obra.
 #define TAXA_DE_PERDA 0.10
 
 /*
- * Calcula a quantidade total de galıes de tinta necess·rios para pintar a ·rea interna da construÁ„o
- * com base nas ·reas das paredes existentes na casa, na ·rea total do teto, na quantidade de dem„os
- * que se deseja aplicar e no rendimento informado no gal„o de tinta escolhido pelo usu·rio.
+ * Calcula a quantidade total de gal√µes de tinta necess√°rios para pintar a √°rea interna da constru√ß√£o
+ * com base nas √°reas das paredes existentes na casa, na √°rea total do teto, na quantidade de dem√£os
+ * que se deseja aplicar e no rendimento informado no gal√£o de tinta escolhido pelo usu√°rio.
  *
- * Par‚metros:
- * (float) areas_paredes: vetor que contÈm em cada posiÁ„o a ·rea de cada parede presente na construÁ„o.
- * (int) qtde_paredes: quantidade total de paredes presente na construÁ„o.
- * (float) area_tetos: ·rea total do teto.
+ * Par√¢metros:
+ * (float) areas_paredes: vetor que cont√©m em cada posi√ß√£o a √°rea de cada parede presente na constru√ß√£o.
+ * (int) qtde_paredes: quantidade total de paredes presente na constru√ß√£o.
+ * (float) area_tetos: √°rea total do teto.
  *
  * Retorna:
- * (int) qtde_total_galoes: quantidade total de galıes de tinta necess·rios para pintar a ·rea interna da construÁ„o.
+ * (int) qtde_total_galoes: quantidade total de gal√µes de tinta necess√°rios para pintar a √°rea interna da constru√ß√£o.
  */
 int calcula_qtde_total_galoes_tinta(float * areas_paredes, int qtde_paredes, float area_tetos) {
     int qtde_total_galoes = 0,
@@ -29,12 +29,12 @@ int calcula_qtde_total_galoes_tinta(float * areas_paredes, int qtde_paredes, flo
           area_total = 0.0;
 
     do {
-        printf("\nQuantidade de dem„os que ir· aplicar: ");
+        printf("\nQuantidade de dem√£os que ir√° aplicar: ");
         scanf("%d", &qtde_demaos);
     } while (qtde_demaos <= 0);
 
     do {
-        printf("\nRendimento da tinta informado no gal„o: ");
+        printf("\nRendimento da tinta informado no gal√£o: ");
         scanf("%f", &rendimento_tinta);
     } while (rendimento_tinta <= 0);
 
@@ -50,19 +50,19 @@ int calcula_qtde_total_galoes_tinta(float * areas_paredes, int qtde_paredes, flo
 }
 
 /*
- * Calcula a quantidade de revestimento (em unidades) necess·ria para revestir internamente cada
- * parede da construÁ„o com base nas ·reas de cada parede e na quantidade de revestimento (em
- * unidades) necess·ria para revestir uma ·rea de um metro quadrado.
- * Armazena a quantidade de revestimento (em unidades) necess·ria para revestir internamente cada
- * parede em uma vari·vel respons·vel por contabilizar a quantidade total de revestimento necess·ria
- * para revestir internamente todas as paredes presentes na construÁ„o.
+ * Calcula a quantidade de revestimento (em unidades) necess√°ria para revestir internamente cada
+ * parede da constru√ß√£o com base nas √°reas de cada parede e na quantidade de revestimento (em
+ * unidades) necess√°ria para revestir uma √°rea de um metro quadrado.
+ * Armazena a quantidade de revestimento (em unidades) necess√°ria para revestir internamente cada
+ * parede em uma vari√°vel respons√°vel por contabilizar a quantidade total de revestimento necess√°ria
+ * para revestir internamente todas as paredes presentes na constru√ß√£o.
  *
- * Par‚metros:
- * (int) qtde_revestimento_por_parede: vetor que armazena em casa posiÁ„o a quantidade de revestimento (em unidades) necess·ria para revestir uma parede.
- * (int) qtde_paredes: quantidade de paredes presentes na construÁ„o.
- * (int) qtde_total_revestimento: vari·vel que contabiliza a quantidade total de revestimento para toda a construÁ„o.
- * (float) areas_paredes: vetor que armazena em casa posiÁ„o a ·rea de cada parede individualmente.
- * (int) qtde_revestimento_por_metro_quadrado: quantidade de revestimento necess·ria para preencher uma ·rea de um metro quadrado.
+ * Par√¢metros:
+ * (int) qtde_revestimento_por_parede: vetor que armazena em casa posi√ß√£o a quantidade de revestimento (em unidades) necess√°ria para revestir uma parede.
+ * (int) qtde_paredes: quantidade de paredes presentes na constru√ß√£o.
+ * (int) qtde_total_revestimento: vari√°vel que contabiliza a quantidade total de revestimento para toda a constru√ß√£o.
+ * (float) areas_paredes: vetor que armazena em casa posi√ß√£o a √°rea de cada parede individualmente.
+ * (int) qtde_revestimento_por_metro_quadrado: quantidade de revestimento necess√°ria para preencher uma √°rea de um metro quadrado.
  */
 void calcula_qtde_revestimento_por_parede(int * qtde_revestimento_por_parede, int qtde_paredes, int * qtde_total_revestimento, float * areas_paredes, int qtde_revestimento_por_metro_quadrado) {
     int i;
@@ -72,17 +72,17 @@ void calcula_qtde_revestimento_por_parede(int * qtde_revestimento_por_parede, in
     for (i=0; i<qtde_paredes; i++) {
         qtde_revestimento_por_parede[i] = ceil(qtde_revestimento_por_metro_quadrado * areas_paredes[i]);
         *qtde_total_revestimento += qtde_revestimento_por_parede[i];
-        printf("\n %d™ parede: %d", i+1, qtde_revestimento_por_parede[i]);
+        printf("\n %d¬™ parede: %d", i+1, qtde_revestimento_por_parede[i]);
     }
 }
 
 /*
- * Calcula a quantidade de revestimento (em unidades) necess·ria para preencher uma ·rea de um
- * metro quadrado com base nas medidas do revestimento utilizado, sendo estas fornecidas pelo usu·rio.
+ * Calcula a quantidade de revestimento (em unidades) necess√°ria para preencher uma √°rea de um
+ * metro quadrado com base nas medidas do revestimento utilizado, sendo estas fornecidas pelo usu√°rio.
  *
  * Retorna:
- * (int) qtde_revestimento_por_metro_quadrado: quantidade de revestimento (em unidades) necess·rioa para
- *       preencher uma ·rea de um metro quadrado.
+ * (int) qtde_revestimento_por_metro_quadrado: quantidade de revestimento (em unidades) necess√°rioa para
+ *       preencher uma √°rea de um metro quadrado.
  */
 int calcula_qtde_revestimento_por_metro_quadrado() {
     int qtde_revestimento_por_metro_quadrado = 0;
@@ -108,11 +108,11 @@ int calcula_qtde_revestimento_por_metro_quadrado() {
 }
 
 /*
- * Exibe opÁıes de revestimento para que o usu·rio possa escolher o revestimento que
+ * Exibe op√ß√µes de revestimento para que o usu√°rio possa escolher o revestimento que
  * deseja utilizar em sua obra.
  *
  * Retorna:
- * (int) tipo_revestimento: tipo de revestimento escolhido pelo usu·rio.
+ * (int) tipo_revestimento: tipo de revestimento escolhido pelo usu√°rio.
  */
 int escolhe_tipo_revestimento() {
     int tipo_revestimento;
@@ -121,16 +121,18 @@ int escolhe_tipo_revestimento() {
     printf("Tipos de Revestimento\n");
     printf("--------------------\n");
 
+    system("start menu-revestimento");
+
     do {
-        printf("\nSelecione o tipo do revestimento: \n\n");
+        /*printf("\nSelecione o tipo do revestimento: \n\n");
 
         printf(" 1 - Papel de parede\n");
         printf(" 2 - Madeira\n");
         printf(" 3 - Pastilhas\n");
-        printf(" 4 - Revestimento cimentÌcio\n");
-        printf(" 5 - Ladrilho hidr·ulico\n");
+        printf(" 4 - Revestimento ciment√≠cio\n");
+        printf(" 5 - Ladrilho hidr√°ulico\n");
         printf(" 6 - Azulejo comum\n");
-        printf(" 7 - Outra opÁ„o");
+        printf(" 7 - Outra op√ß√£o");*/
 
         printf("\n\nSua escolha: ");
         scanf("%d", &tipo_revestimento);
@@ -140,44 +142,44 @@ int escolhe_tipo_revestimento() {
 }
 
 /*
- * Calcula a quantidade de tijolos necess·rios para construir cada oit„o com base nas ·reas dos
- * oitıes e na quantidade de tiolos necess·rios para preencher uma ·rea de um metro quadrado.
- * Armaneza a quantidade de tijolos necess·rios por oit„o em uma vari·vel respons·vel por
- * contabilizar a quantidade total de tijolos necess·rios para construir todas as paredes e oitıes
- * da construÁ„o.
+ * Calcula a quantidade de tijolos necess√°rios para construir cada oit√£o com base nas √°reas dos
+ * oit√µes e na quantidade de tiolos necess√°rios para preencher uma √°rea de um metro quadrado.
+ * Armaneza a quantidade de tijolos necess√°rios por oit√£o em uma vari√°vel respons√°vel por
+ * contabilizar a quantidade total de tijolos necess√°rios para construir todas as paredes e oit√µes
+ * da constru√ß√£o.
  *
- * Par‚metros:
- * (int) qtde_tijolos_por_oit„o: vetor que armazena em cada posiÁ„o a quantidade de tijolos necess·ria para construir um oit„o.
- * (int) qtde_oitoes: quantidade total de oitıes presentes na construÁ„o.
- * (int) qtde_total_tijolos: vari·vel que contabiliza a quantidade total de tijolos necess·ria para toda a construÁ„o.
- * (float) areas_oitıes: vetor que armazena em casa posiÁ„o a ·rea de cada oit„o individualmente.
- * (int) qtde_tijolos_por_metro_quadrado: quantidade de tijolos necess·ria para preencher uma ·rea de um metro quadrado.
+ * Par√¢metros:
+ * (int) qtde_tijolos_por_oit√£o: vetor que armazena em cada posi√ß√£o a quantidade de tijolos necess√°ria para construir um oit√£o.
+ * (int) qtde_oitoes: quantidade total de oit√µes presentes na constru√ß√£o.
+ * (int) qtde_total_tijolos: vari√°vel que contabiliza a quantidade total de tijolos necess√°ria para toda a constru√ß√£o.
+ * (float) areas_oit√µes: vetor que armazena em casa posi√ß√£o a √°rea de cada oit√£o individualmente.
+ * (int) qtde_tijolos_por_metro_quadrado: quantidade de tijolos necess√°ria para preencher uma √°rea de um metro quadrado.
  */
 void calcula_qtde_tijolos_por_oitao(int * qtde_tijolos_por_oitao, int qtde_oitoes, int * qtde_total_tijolos, float * areas_oitoes, int qtde_tijolos_por_metro_quadrado) {
     int i;
 
-    printf("\n\n----- Quantidade de tijolos por oit„o -----");
+    printf("\n\n----- Quantidade de tijolos por oit√£o -----");
 
     for (i=0; i<qtde_oitoes; i++) {
         qtde_tijolos_por_oitao[i] = ceil(qtde_tijolos_por_metro_quadrado * areas_oitoes[i]);
         *qtde_total_tijolos += qtde_tijolos_por_oitao[i];
-        printf("\n %d∫ oit„o: %d", i+1, qtde_tijolos_por_oitao[i]);
+        printf("\n %d¬∫ oit√£o: %d", i+1, qtde_tijolos_por_oitao[i]);
     }
 }
 
 /*
- * Calcula a quantidade de tijolos necess·rios para construir cada parede com base nas ·reas das
- * paredes e na quantidade de tiolos necess·rios para preencher uma ·rea de um metro quadrado.
- * Armaneza a quantidade de tijolos necess·rios por parede em uma vari·vel respons·vel por
- * contabilizar a quantidade total de tijolos necess·rios para construir todas as paredes e oitıes
- * da construÁ„o.
+ * Calcula a quantidade de tijolos necess√°rios para construir cada parede com base nas √°reas das
+ * paredes e na quantidade de tiolos necess√°rios para preencher uma √°rea de um metro quadrado.
+ * Armaneza a quantidade de tijolos necess√°rios por parede em uma vari√°vel respons√°vel por
+ * contabilizar a quantidade total de tijolos necess√°rios para construir todas as paredes e oit√µes
+ * da constru√ß√£o.
  *
- * Par‚metros:
- * (int) qtde_tijolos_por_parede: vetor que armazena em cada posiÁ„o a quantidade de tijolos necess·ria para construir uma parede.
- * (int) qtde_paredes: quantidade total de paredes presentes na construÁ„o.
- * (int) qtde_total_tijolos: vari·vel que contabiliza a quantidade total de tijolos necess·ria para toda a construÁ„o.
- * (float) areas_paredes: vetor que armazena em casa posiÁ„o a ·rea de cada parede individualmente.
- * (int) qtde_tijolos_por_metro_quadrado: quantidade de tijolos necess·ria para preencher uma ·rea de um metro quadrado.
+ * Par√¢metros:
+ * (int) qtde_tijolos_por_parede: vetor que armazena em cada posi√ß√£o a quantidade de tijolos necess√°ria para construir uma parede.
+ * (int) qtde_paredes: quantidade total de paredes presentes na constru√ß√£o.
+ * (int) qtde_total_tijolos: vari√°vel que contabiliza a quantidade total de tijolos necess√°ria para toda a constru√ß√£o.
+ * (float) areas_paredes: vetor que armazena em casa posi√ß√£o a √°rea de cada parede individualmente.
+ * (int) qtde_tijolos_por_metro_quadrado: quantidade de tijolos necess√°ria para preencher uma √°rea de um metro quadrado.
  */
 void calcula_qtde_tijolos_por_parede(int * qtde_tijolos_por_parede, int qtde_paredes, int * qtde_total_tijolos, float * areas_paredes, int qtde_tijolos_por_metro_quadrado) {
     int i;
@@ -187,17 +189,17 @@ void calcula_qtde_tijolos_por_parede(int * qtde_tijolos_por_parede, int qtde_par
     for (i=0; i<qtde_paredes; i++) {
         qtde_tijolos_por_parede[i] = ceil(qtde_tijolos_por_metro_quadrado * areas_paredes[i]);
         *qtde_total_tijolos += qtde_tijolos_por_parede[i];
-        printf("\n %d™ parede: %d", i+1, qtde_tijolos_por_parede[i]);
+        printf("\n %d¬™ parede: %d", i+1, qtde_tijolos_por_parede[i]);
     }
 }
 
 /*
- * Calcula a quantidade de tijolos necess·rios para preencher uma ·rea de um metro quadrado
- * com base nas medidas do tijolo utilizado, sendo estas fornecidas pelo usu·rio.
+ * Calcula a quantidade de tijolos necess√°rios para preencher uma √°rea de um metro quadrado
+ * com base nas medidas do tijolo utilizado, sendo estas fornecidas pelo usu√°rio.
  *
  * Retorna:
- * (int) qtde_tijolos_por_metro_quadrado: quantidade de tijolos necess·rios para preencher
- *       uma ·rea de um metro quadrado.
+ * (int) qtde_tijolos_por_metro_quadrado: quantidade de tijolos necess√°rios para preencher
+ *       uma √°rea de um metro quadrado.
  */
 int calcula_qtde_tijolos_por_metro_quadrado() {
     int qtde_tijolos_por_metro_quadrado = 0;
@@ -223,21 +225,21 @@ int calcula_qtde_tijolos_por_metro_quadrado() {
 }
 
 /*
- * Calcula a ·rea de um oit„o presente na casa com base no tamanho de sua altura e base,
- * sendo ambas as medidas fornecidas pelo usu·rio.
+ * Calcula a √°rea de um oit√£o presente na casa com base no tamanho de sua altura e base,
+ * sendo ambas as medidas fornecidas pelo usu√°rio.
  *
  * Retorna:
- * (float) area_oitao: ·rea do oit„o.
+ * (float) area_oitao: √°rea do oit√£o.
  */
 float calcula_area_oitao() {
     float altura_oitao = 0,
           base_oitao = 0,
           area_oitao = 0;
 
-    printf("\nAltura do oit„o em metros: ");
+    printf("\nAltura do oit√£o em metros: ");
     scanf("%f", &altura_oitao);
 
-    printf("Base do oit„o em metros: ");
+    printf("Base do oit√£o em metros: ");
     scanf("%f", &base_oitao);
 
     area_oitao = ((base_oitao * altura_oitao)/2);
@@ -246,14 +248,14 @@ float calcula_area_oitao() {
 }
 
 /*
- * Calcula a ·rea de uma parede, descontando a ·rea das aberturas presentes nela,
+ * Calcula a √°rea de uma parede, descontando a √°rea das aberturas presentes nela,
  * como portas e janelas.
  *
- * Par‚metros:
- * (float) area_aberturas: ·rea total das aberturas presentes na parede, como portas e janelas.
+ * Par√¢metros:
+ * (float) area_aberturas: √°rea total das aberturas presentes na parede, como portas e janelas.
  *
  * Retorna:
- * (float) area_parede: ·rea da parede com a ·rea das aberturas descontada.
+ * (float) area_parede: √°rea da parede com a √°rea das aberturas descontada.
  */
 float calcula_area_parede(float area_aberturas) {
     float altura_parede = 0,
@@ -276,12 +278,12 @@ float calcula_area_parede(float area_aberturas) {
 }
 
 /*
- * Calcula a ·rea das aberturas presentes nas paredes, como portas e janelas, uma vez
- * que estas devem ser descontadas posteriormente no c·culo da ·rea das paredes que
- * ir„o receber tijolos.
+ * Calcula a √°rea das aberturas presentes nas paredes, como portas e janelas, uma vez
+ * que estas devem ser descontadas posteriormente no c√°culo da √°rea das paredes que
+ * ir√£o receber tijolos.
  *
  * Retorna:
- * (float) area_aberturas: ·rea total das aberturas presentes em uma parede, como portas e janelas.
+ * (float) area_aberturas: √°rea total das aberturas presentes em uma parede, como portas e janelas.
  */
 float calcula_area_aberturas() {
     int qtde_aberturas = 0,
@@ -298,12 +300,12 @@ float calcula_area_aberturas() {
 
     for (i=0; i<qtde_aberturas; i++) {
         do {
-            printf("\nAltura da %d™ abertura em metros: ", i+1);
+            printf("\nAltura da %d¬™ abertura em metros: ", i+1);
             scanf("%f", &altura_abertura);
         } while (altura_abertura <= 0);
 
         do {
-            printf("Comprimento da %d™ abertura em metros: ", i+1);
+            printf("Comprimento da %d¬™ abertura em metros: ", i+1);
             scanf("%f", &comprimento_abertura);
         } while (comprimento_abertura <= 0);
 
@@ -314,26 +316,28 @@ float calcula_area_aberturas() {
 }
 
 /*
- * Exibe opÁıes de tijolos para que o usu·rio possa escolher o tijolo que
+ * Exibe op√ß√µes de tijolos para que o usu√°rio possa escolher o tijolo que
  * deseja utilizar em sua obra.
  *
  * Retorna:
- * (int) tipo_tijolo: tipo de tijolo escolhido pelo usu·rio.
+ * (int) tipo_tijolo: tipo de tijolo escolhido pelo usu√°rio.
  */
 int escolhe_tipo_tijolo() {
     int tipo_tijolo;
+
+    system("start menu-tijolos");
 
     printf("\n--------------------\n");
     printf("Tipos de Tijolo\n");
     printf("--------------------\n");
 
     do {
-        printf("\nSelecione o tipo do tijolo: \n\n");
+        /*printf("\nSelecione o tipo do tijolo: \n\n");
 
         printf(" 1 - Blocos\n");
-        printf(" 2 - Tijolos Cer‚micos\n");
-        printf(" 3 - Tijolos MaciÁos\n");
-        printf(" 4 - Outra opÁ„o");
+        printf(" 2 - Tijolos Cer√¢micos\n");
+        printf(" 3 - Tijolos Maci√ßos\n");
+        printf(" 4 - Outra op√ß√£o");*/
 
         printf("\n\nSua escolha: ");
         scanf("%d", &tipo_tijolo);
@@ -345,28 +349,28 @@ int escolhe_tipo_tijolo() {
 void main() {
     setlocale(LC_ALL, "");
 
-    int tipo_tijolo = 0, //Armazena o tipo de tijolo selecionado pelo usu·rio.
-        tipo_revesitmento = 0, //Armanzena o tipo de revestimento selecionado pelo usu·rio.
-        qtde_paredes = 0, //Quantidade total de paredes presentes na construÁ„o.
-        qtde_oitoes = 0, //Quantidade total de oitıes presentes na construÁ„o.
-        qtde_tijolos_por_metro_quadrado = 0, //Quantidade de tijolos necess·ria para preencher uma ·rea de um metro quadrado.
-        qtde_revestimento_por_metro_quadrado = 0, //Quantidade de revestimento (em unidades) necess·ria para preencher uma ·rea de um metro quadrado.
-        qtde_total_tijolos = 0, //Quantidade total de tijolos utilizada na construÁ„o.
-        qtde_total_revestimento = 0, //Quantidade total de revestimento (em unidades) utilizada na construÁ„o.
-        qtde_total_galoes_tinta = 0, //Quanidade total de galıes de tinta necess·ria para pintar a ·rea interna da casa.
-        i = 0; //Contador utilizado para percorrer os vetores existentes na implementaÁ„o.
+    int tipo_tijolo = 0, //Armazena o tipo de tijolo selecionado pelo usu√°rio.
+        tipo_revesitmento = 0, //Armanzena o tipo de revestimento selecionado pelo usu√°rio.
+        qtde_paredes = 0, //Quantidade total de paredes presentes na constru√ß√£o.
+        qtde_oitoes = 0, //Quantidade total de oit√µes presentes na constru√ß√£o.
+        qtde_tijolos_por_metro_quadrado = 0, //Quantidade de tijolos necess√°ria para preencher uma √°rea de um metro quadrado.
+        qtde_revestimento_por_metro_quadrado = 0, //Quantidade de revestimento (em unidades) necess√°ria para preencher uma √°rea de um metro quadrado.
+        qtde_total_tijolos = 0, //Quantidade total de tijolos utilizada na constru√ß√£o.
+        qtde_total_revestimento = 0, //Quantidade total de revestimento (em unidades) utilizada na constru√ß√£o.
+        qtde_total_galoes_tinta = 0, //Quanidade total de gal√µes de tinta necess√°ria para pintar a √°rea interna da casa.
+        i = 0; //Contador utilizado para percorrer os vetores existentes na implementa√ß√£o.
 
-    float preco_unitario_tijolo = 0.0, //PreÁo unir·rio do tijolo fornecido pelo usu·rio.
-          preco_total_tijolos = 0.0, //Custo total dos tijolos utilizados na construÁ„o.
-          preco_unitario_revestimento = 0.0, //PreÁo unit·rio do revestimento fornecido pelo usu·rio.
-          preco_total_revestimento = 0.0, //Custo total do revestimento utilizado na construÁ„o.
-          preco_unitario_galao_tinta = 0.0, //PreÁo unit·trio do gal„o de tinta.
-          preco_total_galao_tinta = 0.0; //Cusuto total de todos os galıes de tinta utilizados na construÁ„o.
+    float preco_unitario_tijolo = 0.0, //Pre√ßo unir√°rio do tijolo fornecido pelo usu√°rio.
+          preco_total_tijolos = 0.0, //Custo total dos tijolos utilizados na constru√ß√£o.
+          preco_unitario_revestimento = 0.0, //Pre√ßo unit√°rio do revestimento fornecido pelo usu√°rio.
+          preco_total_revestimento = 0.0, //Custo total do revestimento utilizado na constru√ß√£o.
+          preco_unitario_galao_tinta = 0.0, //Pre√ßo unit√°trio do gal√£o de tinta.
+          preco_total_galao_tinta = 0.0; //Cusuto total de todos os gal√µes de tinta utilizados na constru√ß√£o.
 
-    char usr_rsp; //Armazena a resposta do usu·rio quando este deve responder com 'S - Sim' ou 'N - N„o'.
+    char usr_rsp; //Armazena a resposta do usu√°rio quando este deve responder com 'S - Sim' ou 'N - N√£o'.
 
     printf("------------------------------------------------------------------------\n");
-    printf("OrÁamento de tijolos, revestimento e tinta para as paredes\n");
+    printf("Or√ßamento de tijolos, revestimento e tinta para as paredes\n");
     printf("------------------------------------------------------------------------\n");
 
 
@@ -376,25 +380,25 @@ void main() {
     } while(qtde_paredes <= 0);
 
     do {
-        printf("\nDigite a quantidade de oitıes presentes em sua casa: ");
+        printf("\nDigite a quantidade de oit√µes presentes em sua casa: ");
         scanf("%d", &qtde_oitoes);
-    } while(&qtde_oitoes <= 0);
+    } while(qtde_oitoes <= 0);
 
-    float areas_paredes[qtde_paredes], //Vetor que armazena a ·rea unit·ria de cada parede (com desconto das ·reas das aberturas presentes) em cada posiÁ„o.
-          areas_oitoes[qtde_oitoes], //Vetor que armazena a ·rea unit·ria de cada oit„o em cada posiÁ„o.
-          areas_aberturas[qtde_paredes], //Vetor que armazena a ·rea das aberturas presentes por parede em cada posiÁ„o.
-          area_tetos = 0.0; //Armazena a ·rea total do teto da construÁ„o.
+    float areas_paredes[qtde_paredes], //Vetor que armazena a √°rea unit√°ria de cada parede (com desconto das √°reas das aberturas presentes) em cada posi√ß√£o.
+          areas_oitoes[qtde_oitoes], //Vetor que armazena a √°rea unit√°ria de cada oit√£o em cada posi√ß√£o.
+          areas_aberturas[qtde_paredes], //Vetor que armazena a √°rea das aberturas presentes por parede em cada posi√ß√£o.
+          area_tetos = 0.0; //Armazena a √°rea total do teto da constru√ß√£o.
 
-    int qtde_tijolos_por_parede[qtde_paredes], //Vetor que armazena a quantidade de tijolos necess·ria para construir cada parede em casa posiÁ„o.
-        qtde_tijolos_por_oitao[qtde_oitoes], //Vetor que armazena a quantidade de tijolos necess·ria para construir cada oit„o em cada posiÁ„o.
-        qtde_revestimento_por_parede[qtde_paredes]; //Vetor que armazena a quantidade de revestimento necess·ria para preencher cada parede em cada posiÁ„o.
+    int qtde_tijolos_por_parede[qtde_paredes], //Vetor que armazena a quantidade de tijolos necess√°ria para construir cada parede em casa posi√ß√£o.
+        qtde_tijolos_por_oitao[qtde_oitoes], //Vetor que armazena a quantidade de tijolos necess√°ria para construir cada oit√£o em cada posi√ß√£o.
+        qtde_revestimento_por_parede[qtde_paredes]; //Vetor que armazena a quantidade de revestimento necess√°ria para preencher cada parede em cada posi√ß√£o.
 
     for (i=0; i<qtde_paredes; i++) {
-        printf("\n----- %d™ parede -----\n", i+1);
+        printf("\n----- %d¬™ parede -----\n", i+1);
 
         do {
-            printf("\nA %d™ parede apresenta aberturas como portas e janelas?", i+1);
-            printf("\n S - Sim\n N - N„o\n");
+            printf("\nA %d¬™ parede apresenta aberturas como portas e janelas?", i+1);
+            printf("\n S - Sim\n N - N√£o\n");
             printf("Sua escolha: ");
             scanf(" %c", &usr_rsp);
         } while (usr_rsp!='S' && usr_rsp!='s' && usr_rsp!='N' && usr_rsp!='n');
@@ -407,19 +411,19 @@ void main() {
 
         areas_paredes[i] = calcula_area_parede(areas_aberturas[i]);
 
-        printf("\n¡rea da %d™ parede, com as ·reas das aberturas descontadas È de: %.2fm≤\n\n", i+1, areas_paredes[i]);
+        printf("\n√Årea da %d¬™ parede, com as √°reas das aberturas descontadas √© de: %.2fm¬≤\n\n", i+1, areas_paredes[i]);
     }
 
     for (i=0; i<qtde_oitoes; i++) {
-        printf("\n----- %d∫ oit„o -----\n", i+1);
+        printf("\n----- %d¬∫ oit√£o -----\n", i+1);
 
         areas_oitoes[i] = calcula_area_oitao();
 
-        printf("\n¡rea do %d∫ oit„o: %.2fm≤\n\n", i+1, areas_oitoes[i]);
+        printf("\n√Årea do %d¬∫ oit√£o: %.2fm¬≤\n\n", i+1, areas_oitoes[i]);
     }
 
     printf("\n\n------------------------------------------------------------------------\n");
-    printf("OrÁamento de Tijolos\n");
+    printf("Or√ßamento de Tijolos\n");
     printf("------------------------------------------------------------------------\n");
 
     tipo_tijolo = escolhe_tipo_tijolo();
@@ -432,12 +436,12 @@ void main() {
 
         case 2:
             printf("\n--------------------\n");
-            printf("Tijolos Cer‚micos\n");
+            printf("Tijolos Cer√¢micos\n");
             break;
 
         case 3:
             printf("\n--------------------\n");
-            printf("Tijolos MaciÁos\n");
+            printf("Tijolos Maci√ßos\n");
             break;
     }
 
@@ -446,7 +450,7 @@ void main() {
     printf("\nRendimento: %d tijolos por metro quadrado.\n", qtde_tijolos_por_metro_quadrado);
 
     do {
-        printf("\nPreÁo Unit·rio do Tijolo: R$ ");
+        printf("\nPre√ßo Unit√°rio do Tijolo: R$ ");
         scanf("%f", &preco_unitario_tijolo);
     } while (preco_unitario_tijolo <= 0);
 
@@ -460,11 +464,11 @@ void main() {
     printf("\n %d tijolos", qtde_total_tijolos);
 
     preco_total_tijolos = preco_unitario_tijolo * qtde_total_tijolos;
-    printf("\n\n----- PreÁo total - Tijolos -----");
+    printf("\n\n----- Pre√ßo total - Tijolos -----");
     printf("\n R$ %.2f", preco_total_tijolos);
 
     printf("\n\n------------------------------------------------------------------------\n");
-    printf("OrÁamento de Revestimento\n");
+    printf("Or√ßamento de Revestimento\n");
     printf("------------------------------------------------------------------------\n");
 
     tipo_revesitmento = escolhe_tipo_revestimento();
@@ -488,12 +492,12 @@ void main() {
 
         case 4:
             printf("\n--------------------\n");
-            printf("Revestimento cimentÌcio\n");
+            printf("Revestimento ciment√≠cio\n");
             break;
 
         case 5:
             printf("\n--------------------\n");
-            printf("Ladrilho hidr·ulico\n");
+            printf("Ladrilho hidr√°ulico\n");
             break;
 
         case 6:
@@ -507,7 +511,7 @@ void main() {
     printf("\nRendimento: %d unidade(s) de revestimento por metro quadrado.\n", qtde_revestimento_por_metro_quadrado);
 
     do {
-        printf("\nPreÁo Unit·rio do Revestimento: R$ ");
+        printf("\nPre√ßo Unit√°rio do Revestimento: R$ ");
         scanf("%f", &preco_unitario_revestimento);
     } while (preco_unitario_revestimento <= 0);
 
@@ -519,30 +523,30 @@ void main() {
     printf("\n %d unidades de revestimento", qtde_total_revestimento);
 
     preco_total_revestimento = preco_unitario_revestimento * qtde_total_revestimento;
-    printf("\n\n----- PreÁo total - Revestimento -----");
+    printf("\n\n----- Pre√ßo total - Revestimento -----");
     printf("\n R$ %.2f\n", preco_total_revestimento);
 
     printf("\n\n------------------------------------------------------------------------\n");
-    printf("OrÁamento de Tinta\n");
+    printf("Or√ßamento de Tinta\n");
     printf("------------------------------------------------------------------------\n");
 
     do {
-        printf("\n¡rea total do teto presenta na construÁ„o: ");
+        printf("\n√Årea total do teto presenta na constru√ß√£o: ");
         scanf("%f", &area_tetos);
     } while (area_tetos <= 0);
 
     qtde_total_galoes_tinta = calcula_qtde_total_galoes_tinta(areas_paredes, qtde_paredes, area_tetos);
     qtde_total_galoes_tinta += ceil(TAXA_DE_PERDA * qtde_total_galoes_tinta);
 
-    printf("\n\n----- Quantidade total de galıes de tinta -----");
-    printf("\n %d galıes de tinta", qtde_total_galoes_tinta);
+    printf("\n\n----- Quantidade total de gal√µes de tinta -----");
+    printf("\n %d gal√µes de tinta", qtde_total_galoes_tinta);
 
     do {
-        printf("\nPreÁo Unit·rio do Gal„o de Tinta: R$ ");
+        printf("\nPre√ßo Unit√°rio do Gal√£o de Tinta: R$ ");
         scanf("%f", &preco_unitario_galao_tinta);
     } while (preco_unitario_galao_tinta <= 0);
 
     preco_total_galao_tinta = preco_unitario_galao_tinta * qtde_total_galoes_tinta;
-    printf("\n\n----- PreÁo total - Tinta -----");
+    printf("\n\n----- Pre√ßo total - Tinta -----");
     printf("\n R$ %.2f\n", preco_total_galao_tinta);
 }
