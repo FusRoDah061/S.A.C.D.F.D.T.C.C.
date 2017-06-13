@@ -26,6 +26,34 @@
 #define C_COMRPRIMENTO_GARGA "compr_garga"
 
 #define C_QTD_DADOS 16
+
+//Dados a serem gravados no arquivo
+//Telhado
+int g_inclinacao = 0;//Inclinação do telhado
+
+float g_largura_base = 0.0,//Largura da base do telhado (laje)
+    g_area_telhado_corrigida = 0.0,//Área do telhado corrigida já incluindo a inclinação do teclado
+    g_comprimento_base = 0.0;//Comprimento da base do telhado (laje)
+
+//Telhas
+int g_qtd_telhas = 0;//Quantidade de telhas no total
+
+float g_custo_total = 0.0,//Custo total das telhas no final
+    g_preco_unit = 0.0,//Preço unitário de cada telha
+    g_qtd_telha_metro = 0.0;//Quantidade de telhas por metro quadrado
+
+//Madeiramento
+int g_qtd_tercas = 0, //Quantidade de terças para as duas águas do telhado
+    g_qtd_caibros = 0,// Quantidade de caibros para o telhado
+    g_qtd_ripas = 0; //Quantidade de ripas para o telhado
+
+float g_tercas_espacamento = 0.0, //Espaçamento entre as terças
+    g_metragem_pontaletes = 0.0,
+    g_metragem_caibros = 0.0,
+    g_metragem_ripas = 0.0,
+    g_metragem_tercas = 0.0,
+    g_comprimento_garga = 0.0;
+
 /*
  * Calcula a área do telhado, onde ficarão as telhas, considerando a inclinação
  *
@@ -37,14 +65,14 @@
  * Retorna:
  * A área do telhado
  */
-float corrigir_area(int inclinacao, float largura_base, float comprimento_base)
+float corrigir_area(int l_inclinacao, float l_largura_base, float l_comprimento_base)
 {
 
-	float altura_cumeeira = (inclinacao / 100) * (largura_base / 2);
+	float altura_cumeeira = (l_inclinacao * (l_largura_base / 2) / 100);
 
-	float largura_corrigida = sqrt( pow( (largura_base / 2), 2 ) + pow( altura_cumeeira, 2 ) );
+	float largura_corrigida = sqrt( pow( (l_largura_base / 2), 2 ) + pow( altura_cumeeira, 2 ) );
 
-	return (largura_corrigida * comprimento_base) * 2;
+	return (largura_corrigida * l_comprimento_base) * 2;
 
 }
 
@@ -58,12 +86,12 @@ float corrigir_area(int inclinacao, float largura_base, float comprimento_base)
  * Retorna:
  * A quantidade de telhas no total
  */
-int calcula_qtd_telhas(float area_telhado, float telhas_metro_quad)
+int calcula_qtd_telhas(float l_area_telhado, float l_telhas_metro_quad)
 {
 
 	int qtd_telhas = 0;
 
-	qtd_telhas = ceil(area_telhado * telhas_metro_quad);
+	qtd_telhas = ceil(l_area_telhado * l_telhas_metro_quad);
 	qtd_telhas += ceil(qtd_telhas * 0.05);
 
 	return qtd_telhas;
@@ -80,10 +108,10 @@ int calcula_qtd_telhas(float area_telhado, float telhas_metro_quad)
  * Retorna:
  * O preço das telhas no total
  */
-float calcula_preco(int qtd, float preco_unit)
+float calcula_preco(int l_qtd, float l_preco_unit)
 {
 
-	return qtd * preco_unit;
+	return l_qtd * l_preco_unit;
 }
 
 /*
@@ -92,7 +120,7 @@ float calcula_preco(int qtd, float preco_unit)
  * Retorna:
  * (float) quantidade de telha por metro quadrado do modelo de telha escolhido
  */
-int get_telhas_metro_quad()
+float get_telhas_metro_quad()
 {
     int opt;
     float telhas_p_metro;
@@ -148,37 +176,11 @@ int get_telhas_metro_quad()
 
 int main(void)
 {
+    setlocale(LC_ALL, "");
+
     //Geral
     int usr_opt = 0, //Usada para receber as escolhas do usuário quando forem apresentadas opções
     	erros = 0;//Contador de erros ao salvar e ler um arquivo
-
-    //Telhado
-    int inclinacao = 0;//Inclinação do telhado
-
-	float largura_base = 0.0,//Largura da base do telhado (laje)
-		comprimento_base = 0.0,//Comprimento da base do telhado (laje)
-		area_telhado_corrigida = 0.0;//Área do telhado corrigida já incluindo a inclinação do teclado
-
-	//Telhas
-	int qtd_telhas = 0;//Quantidade de telhas no total
-
-	float custo_total = 0.0,//Custo total das telhas no final
-		  preco_unit = 0.0,//Preço unitário de cada telha
-		  qtd_telha_metro = 0.0;//Quantidade de telhas por metro quadrado
-
-	//Madeiramento
-	int qtd_tercas = 0, //Quantidade de terças para as duas águas do telhado
-        qtd_caibros = 0,// Quantidade de caibros para o telhado
-        qtd_ripas = 0; //Quantidade de ripas para o telhado
-
-	float tercas_espacamento = 0.0, //Espaçamento entre as terças
-		metragem_pontaletes = 0.0,
-		metragem_caibros = 0.0,
-		metragem_ripas = 0.0,
-		metragem_tercas = 0.0,
-		comprimento_garga = 0.0;
-
-    setlocale(LC_ALL, "");
 
     do
     {
@@ -192,17 +194,17 @@ int main(void)
             printf("\n------\n\n");
             //Lê a largura e comprimento da base do telhado (laje)
             printf(" Digite a largura da base do telhado(m): ");
-            scanf("%f", &largura_base);
+            scanf("%f", &g_largura_base);
 
             printf(" Digite o comprimento da base do telhado(m): ");
-            scanf("%f", &comprimento_base);
+            scanf("%f", &g_comprimento_base);
 
-            if(largura_base <= 0 || comprimento_base <= 0)
+            if(g_largura_base <= 0 || g_comprimento_base <= 0)
             {
                 printf("\nA largura e comprimento da base devem ser ambos maiores que zero.\n");
             }
 
-        }while(largura_base <= 0 || comprimento_base <= 0);
+        }while(g_largura_base <= 0 || g_comprimento_base <= 0);
 
         do
         {
@@ -210,55 +212,55 @@ int main(void)
             //Com essa inclinação será calculada a altura do centro do telhado (cumeerira, onde os "lados" do telhado se dividem (/|\)).
             //Essa porcentagem é calculada em cima da metade da largura da laje.
             printf(" Informe a inclinação desejada (deve ser maior que 30%%): ");
-            scanf("%d", &inclinacao);
+            scanf("%d", &g_inclinacao);
 
             //Inclinação abaixo de 30% não é normatizada
-            if(inclinacao < 30)
+            if(g_inclinacao < 30)
             {
                 printf("\nInclinação inválida. Deve ser maior que 30%%.");
             }
 
-        }while(inclinacao < 30);
+        }while(g_inclinacao < 30);
+
+        //Calcula a área do telhado considerando a inclinação
+        g_area_telhado_corrigida = corrigir_area(g_inclinacao, g_largura_base, g_comprimento_base);
 
         //Exibe a área da laje e a inclinação calculados
-        printf("\nÁrea calculada: %.2f", largura_base * comprimento_base);
-        printf("\nInclinação: %d%%", inclinacao);
+        printf("\nÁrea calculada: %.2f", g_largura_base * g_comprimento_base);
+        printf("\nInclinação: %d%%", g_inclinacao);
+        printf("\nÁrea do telhado corrigida, considerando a inclinação: %.2f", g_area_telhado_corrigida);
 
         setbuf(stdin, NULL);
 
         printf("\n\nTELHAS");
         printf("\n------\n\n");
 
-        qtd_telha_metro = get_telhas_metro_quad();
-
-        //Calcula a área do telhado considerando a inclinação
-        area_telhado_corrigida = corrigir_area(inclinacao, largura_base, comprimento_base);
+        g_qtd_telha_metro = get_telhas_metro_quad();
 
         //Calcula a quantidade de telha
-        qtd_telhas = calcula_qtd_telhas(area_telhado_corrigida, qtd_telha_metro);
+        g_qtd_telhas = calcula_qtd_telhas(g_area_telhado_corrigida, g_qtd_telha_metro);
 
-        printf("Área do telhado corrigida, considerando a inclinação: %.2f", area_telhado_corrigida);
-        printf("\nQuantidade aproximada de telhas: %d\n", qtd_telhas);
+        printf("Quantidade aproximada de telhas: %d\n", g_qtd_telhas);
 
         do
         {
 
-            printf("Informe o preco unitário do tipo de telha escolhido: ");
-            scanf(" %f", &preco_unit);
+            printf("\nInforme o preco unitário das telhas: ");
+            scanf(" %f", &g_preco_unit);
 
-            if(preco_unit <= 0.0)
+            if(g_preco_unit <= 0.0)
             {
                 printf("\nO preço unitário deve ser maior que zero.\n\n");
             }
 
             setbuf(stdin, NULL);
 
-        }while(preco_unit <= 0.0);
+        }while(g_preco_unit <= 0.0);
 
         //Calcula o preço final das telhas
-        custo_total = calcula_preco(qtd_telhas, preco_unit);
+        g_custo_total = calcula_preco(g_qtd_telhas, g_preco_unit);
 
-        printf("Custo total das telhas: R$ %.2f", custo_total);
+        printf("Custo total das telhas: R$ %.2f", g_custo_total);
 
         //Reseta o buffer pois por algum motivo o próximo scanf não estava sendo executado
         setbuf(stdin, NULL);
@@ -268,27 +270,27 @@ int main(void)
 
         //Calcula a quantidade de terças
         printf("Terças:\n Digite o espaçamento das terças (m): ");
-        scanf("%f", &tercas_espacamento);
+        scanf("%f", &g_tercas_espacamento);
 
-        qtd_tercas = ceil(largura_base / tercas_espacamento);
-        metragem_tercas = comprimento_base * qtd_tercas;
+        g_qtd_tercas = ceil(g_largura_base / g_tercas_espacamento);
+        g_metragem_tercas = g_comprimento_base * g_qtd_tercas;
 
-        printf(" Quantidade de terças de %.2f metros: %d\n", comprimento_base, qtd_tercas);
-        printf(" Quantidade de metros de terças: %2.f", metragem_tercas);
+        printf(" Quantidade de terças de %.2f metros: %d\n", g_comprimento_base, g_qtd_tercas);
+        printf(" Quantidade de metros de terças: %2.f", g_metragem_tercas);
 
         //Calcula a quantidade de pontaletes
         printf("\n\nPontaletes:\n");
 
-        metragem_pontaletes = (
-                                ( (largura_base / 2) * inclinacao ) * 2 +
-                                ( ( (largura_base / 2) / 2 ) * inclinacao ) * 6 // 3 pontaletes em cada água
-                              );
+        g_metragem_pontaletes = (
+				( ( (g_largura_base / 2) * g_inclinacao ) / 100 ) * 2 +
+				( ( ( (g_largura_base / 2) / 2 ) * g_inclinacao ) / 100 ) * 6 // 3 pontaletes em cada água
+			);
 
-        printf(" Quantidade de pontaletes (m): %.2f", metragem_pontaletes);
+        printf(" Quantidade de metros de pontaletes: %.2f", g_metragem_pontaletes);
 
         //Calcula a quantidade de berços
         //Para cada pontalete há 1 berço de 0.5m
-        printf("\n\nBerços:\n Quantidade de berços (m): %.2f", 6 * 0.5);
+        printf("\n\nBerços:\n Quantidade de metros de berços: %.2f", 8 * 0.5);
 
         //Calcula a quantidade de madeira para a trama, que inclui os caibros e as ripas
         printf("\n\nTrama:\n");
@@ -296,27 +298,27 @@ int main(void)
         //Calcula a quantidade de caibros
         printf(" Caibros:\n");
 
-        float altura_cumeeira = (inclinacao / 100) * (largura_base / 2);
+        float altura_cumeeira = (g_inclinacao / 100) * (g_largura_base / 2);
 
-        qtd_caibros = ceil( (comprimento_base / 0.5) * 2 );
+        g_qtd_caibros = ceil( (g_comprimento_base / 0.5) * 2 );
 
-        metragem_caibros = qtd_caibros * (largura_base / 2);
+        g_metragem_caibros = g_qtd_caibros * (g_largura_base / 2);
 
-        printf("  Quantidade de caibros: %d\n", qtd_caibros);
-        printf("  Quantidade de metros de caibro: %.2f", metragem_caibros );
+        printf("  Quantidade de caibros: %d\n", g_qtd_caibros);
+        printf("  Quantidade de metros de caibro: %.2f", g_metragem_caibros );
 
         //Calcula a quantidade de ripas
 
         printf("\n Ripas:\n");
 
-        printf("  Digite o comprimento da garga: ");
-        scanf("%f", &comprimento_garga);
+        printf("  Digite o comprimento da garga eme metros: ");
+        scanf("%f", &g_comprimento_garga);
 
-        qtd_ripas = 2 * ceil((largura_base / 2) / comprimento_garga);
-        metragem_ripas = qtd_ripas * comprimento_base;
+        g_qtd_ripas = 2 * ceil((g_largura_base / 2) / g_comprimento_garga);
+        g_metragem_ripas = g_qtd_ripas * g_comprimento_base;
 
-        printf("  Quantidade de ripas: %d\n", qtd_ripas);
-        printf("  Quantidade de metros de ripas: %.2f\n", metragem_ripas);
+        printf("  Quantidade de ripas: %d\n", g_qtd_ripas);
+        printf("  Quantidade de metros de ripas: %.2f\n", g_metragem_ripas);
 
         printf("\n------\n");
         printf("Concluído.");
