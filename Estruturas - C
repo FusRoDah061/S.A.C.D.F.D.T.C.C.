@@ -1,0 +1,405 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<locale.h>
+#include<math.h>
+#include<windows.h>
+#include<conio.h>
+#include<string.h>
+#define pi 3.14
+
+ //float calcula_circ(float deep, float dm);
+
+         float teste(float num)
+    {
+
+
+                    int aux;
+                    float verify;
+
+                    aux=num;
+                    if (aux==0 && aux!= num){
+                    verify = (float)num; //O numero digitado não é inteiro, e já está em "centímetros" - não fazer nada
+                    }
+                    else if(aux>0 && aux == num){
+                    verify = num/100; //O numero digitado não é inteiro e está em "Metros", por isso, deve-se dividir por 100 para se ter a base em cm
+                    }
+                    else if(aux>0 && aux != num){
+                    verify = num/100; //O numero digitado não é inteiro e está em "Metros", por isso, deve-se dividir por 100 para se ter a base em cm
+                    }
+
+                    return verify;
+
+
+}
+
+
+
+        float calcula_cimento(float deep, float dm, float largura_baldrames, float profundidade_baldrames, float perimetro_total, float altura_paredes, int qt_colunas)
+        {
+            float r, area_coluna_chao, area_coluna_parede, total, bald_total, tot_colunas;
+
+            r = dm/2;
+
+
+            area_coluna_chao = ((pi*pow(r,2))*deep); //área das colunas subterrâneas
+
+            area_coluna_parede = ((pi*pow(r,2))*altura_paredes);//área das colunas que sobem acompanhando as paredes
+
+            tot_colunas = (area_coluna_chao+area_coluna_parede)*qt_colunas;//soma das colunas parede+chão
+
+            bald_total = largura_baldrames*profundidade_baldrames*perimetro_total*2;//área dos baldrames, multiplica - se por 2 pois existe o baldrame que sustenta a laje da casa, este possui praticamente a mesma área do que sustenta as paredes
+
+
+
+
+            total = bald_total+tot_colunas;//soma de todas as áreas da estrutura
+
+
+            return total;
+
+        }
+
+
+
+        int calcula_ferro(float perimetro, float profundidade, float altura, int qtde_colunas, float largura_baldrame, float profundidade_baldrame)
+        {
+            int qt_ferro_estribo, qtferro, total_ferro;
+            float larg_stribo, altura_stribo, espacamento = 0.0,tamanho_barra,tamanho_barra_amarra;
+
+
+
+                        do{
+                            printf("Digite a largura do estribo: ");
+                            scanf("%f", &larg_stribo);
+
+                                larg_stribo = teste(larg_stribo);//VERIFICA E CONVERTE
+
+                                     printf("LARG STRIBO = %.2f\n", larg_stribo);
+
+                                if(larg_stribo > largura_baldrame-0.07){
+                                    printf("\nA largura do estribo não pode ser maior que a do baldrame!!\nDigite um valor até %.2f metros\n",largura_baldrame-0.07);
+                                }
+
+                        }while((float)larg_stribo > (float)(largura_baldrame-0.07) );
+
+                        do{   printf("Difite a altura do estribo: ");
+                              scanf("%f", &altura_stribo);
+
+                                altura_stribo = teste(altura_stribo);//VERIFICA E CONVERTE
+
+                                    printf("ALTURA = %.2f\n",altura_stribo);
+
+                                if(altura_stribo > profundidade_baldrame-0.04){
+                                    printf("\nA altura do estribo não pode ser maior que a do baldrame!!\nDigite um valor até %.2f metros\n",profundidade_baldrame-0.04);
+                                }
+                        }while(altura_stribo > profundidade_baldrame-0.04);
+
+
+
+            printf("Digite o tamanho unitário da barra de ferro escolhida para estrutura: ");
+            scanf("%f", &tamanho_barra);
+
+
+            printf("Digite o tamanho unitário da barra de ferro escolhida para amaração da estrutura: ");
+            scanf("%f", &tamanho_barra_amarra);
+
+                        do{
+                            printf("Digite o espaçamento entre as amarrações do estribo: ");
+                            scanf("%f", &espacamento);
+
+                                espacamento = teste(espacamento);
+
+                                    printf("ESPAÇAMENTO = %.2f\n", espacamento);
+
+                                if(espacamento > 0.201){
+                                    printf("O espaçamento não pode ser maior que 20 centímetros!!! Digite um valor menor.\n");
+                                }
+                        }while(espacamento > 0.201);
+
+
+            qt_ferro_estribo = ((larg_stribo*2+altura_stribo*2)*perimetro/espacamento)/tamanho_barra_amarra;//quantidade em metros lineares de ferro para amarração do estribo
+            qtferro = ((perimetro*2+(profundidade+altura)*qtde_colunas)*4)/tamanho_barra;//retorna a quantidade de ferros para estruturas
+
+            printf("estribo: %d barras\n",qt_ferro_estribo);
+            printf("ferro: %.d barras\n",qtferro);
+
+            total_ferro = qt_ferro_estribo+qtferro;
+
+            return total_ferro;
+        }
+
+
+        char pisostr()
+    {
+         char piso_outro[20];
+
+            printf("Digite o piso desejado: ");
+            fflush(stdin);
+            fgets(piso_outro,20,stdin);
+
+            return piso_outro[20];
+    }
+
+
+        int escolhe_piso()
+    {
+
+
+        int piso, sabe_mais;
+        char pisoS;
+
+
+
+    do{
+
+
+        printf("\nEscolha o tipo de piso:\n1 - CERÂMICA\n2 - PORCELANATO\n3 - GRANITO\n4 - MÁRMORE\n5 - LAMINADO DE MADEIRA\n6 - SILESTONE\n7 - TÁBUA CORRIDA\n8 - TACÃO\n9 - LAJOTA\n10 - ARDÓSIA\n11 - CIMENTO QUEIMADO\n12 - PEDRA PORTUGUESA\n13 - PEDRA SÃO TOMÉ\n14 - GRANITINA\n15 - OUTRO\n16 - MAIS INFORMAÇÕES\n");
+        scanf("%d",&piso);
+
+        if(piso == 15){
+
+           //pisoS = pisostr();
+
+
+
+           return piso;
+
+           break;
+
+        }
+
+
+
+
+        if(piso == 16){
+
+                system("start knowmore_ground");
+
+                }
+
+
+
+
+
+            }while(piso > 15 || piso < 0);
+
+
+            return piso;
+
+    }
+
+
+
+
+
+    float gastos(float area_casa,float qt_piso, float qt_cimento,int qt_ferro, int piso)
+    {
+        float precopiso, precoferro, precocimento, precolaje, VALORpiso, VALORferro, VALORcimento, VALORlaje, total;
+
+        printf("Digite o preço do m² do piso escolhido: ");
+        scanf("%f", &precopiso);
+
+        printf("Digite o preço da barra de ferro (unidade): ");
+        scanf("%f", &precoferro);
+
+        printf("Digite o preco do m³ do cimento: ");
+        scanf("%f", &precocimento);
+
+        printf("Digite o preço do m² da laje: ");
+        scanf("%f", &precolaje);
+
+        printf("\nGASTO APROXIMADO:\n");
+
+        printf("valor piso: %.2f\n",VALORpiso = precopiso*qt_piso);
+        printf("Valor ferros: %.2f\n",VALORferro = qt_ferro*precoferro);
+        printf("Valor cimento: %.2f\n",VALORcimento = qt_cimento*precocimento);
+        printf("Valor laje: %.2f\n",VALORlaje = area_casa*precolaje);
+
+        total = VALORpiso + VALORferro + VALORcimento + VALORlaje;
+
+            switch(piso)
+            {
+                case 1:printf("PISO: CERAMICA");
+                break;
+                case 2:printf("PISO: PORCELANATO");
+                break;
+                case 3:printf("PISO: GRANITO");
+                break;
+                case 4:printf("PISO: MÁRMORE");
+                break;
+                case 5:printf("PISO: LAMINADO DE MADEIRA");
+                break;
+                case 6:printf("PISO: SILESTONE");
+                break;
+                case 7:printf("PISO: TÁBUA CORRIDA");
+                break;
+                case 8:printf("PISO: TACÃO");
+                break;
+                case 9:printf("PISO: LAJOTA");
+                break;
+                case 10:printf("PISO: ARDÓSIA");
+                break;
+                case 11:printf("PISO: CIMENTO QUEIMADO");
+                break;
+                case 12:printf("PISO: PEDRA PORTUGUESA");
+                break;
+                case 13:printf("PISO: PEDRA SÃO TOMÉ");
+                break;
+                case 14:printf("PISO: GRANITINA");
+                break;
+            }
+
+        printf("\nGASTO TOTAL: %.2f",total);
+
+    }
+
+
+
+        gastos_cond_2(float area_casa,float area_piso,float qt_cimento,float qt_ferro,char pisoS[20])
+
+        //gastos_cond_2(area_total,area_piso,result,result2,pisoS);
+     {
+        float precopiso, precoferro, precocimento, precolaje, VALORpiso, VALORferro, VALORcimento, VALORlaje, total;
+
+        printf("Digite o preço do m² do piso escolhido: ");
+        scanf("%f", &precopiso);
+
+        printf("Digite o preço da barra de ferro (unidade): ");
+        scanf("%f", &precoferro);
+
+        printf("Digite o preco do m³ do cimento: ");
+        scanf("%f", &precocimento);
+
+        printf("Digite o preço do m² da laje: ");
+        scanf("%f", &precolaje);
+
+        printf("\nGASTO APROXIMADO:\n");
+
+        printf("valor piso: %.2f\n",VALORpiso = precopiso*area_piso);
+        printf("Valor ferros: %.2f\n",VALORferro = qt_ferro*precoferro);
+        printf("Valor cimento: %.2f\n",VALORcimento = qt_cimento*precocimento);
+        printf("Valor laje: %.2f\n",VALORlaje = area_piso*precolaje);
+
+        total = VALORpiso + VALORferro + VALORcimento + VALORlaje;
+
+        printf("PISO: %s", pisoS);
+        printf("\nGASTO TOTAL: %.2f",total);
+
+    }
+
+
+
+
+
+        int main(){
+
+
+            float prof, diam, perimetro_total, larg_bald, prof_bald,area_total, result, result2, alt_paredes, area_piso;
+            int qt_colunas, qtferro, qtpiso, piso, chave_teste = 0;
+
+
+
+
+
+            setlocale(LC_ALL, "");
+
+            printf("ALGORITMO PARA CALCULO DE ESTRUTURAS DA CONSTRUCAO CIVIL BASEADO NO SOLO\n------------------------------------------------------------------------\n");
+
+            printf("Cálculo de cimento para estruturas\n=======================================================\n");
+
+            printf("Digite a área de construção (em metros): ");
+            scanf("%f", &area_total);
+
+            printf("Digite a profundidade das colunas de acordo com o estudo de solo (em metros): ");
+            scanf("%f", &prof);
+
+            printf("Digite o diâmetro das colunas(em centímetros): ");
+            scanf("%f", &diam);
+
+                diam = teste(diam);
+
+                printf("DIAM = %.2f\n", diam);
+
+
+            printf("Digite a largura dos baldrames (em centímetros): ");
+            scanf("%f", &larg_bald);
+
+                larg_bald = teste(larg_bald);
+
+                printf("LARGURA = %.2f\n", larg_bald);
+
+            printf("Digite a profundidade dos baldrames (em centímetros): ");
+            scanf("%f", &prof_bald);
+
+                prof_bald = teste(prof_bald);
+
+                printf("PROF = %.2f\n", prof_bald);
+
+
+
+            printf("Entre com perimetro de todas as paredes da casa (em metros): ");
+            scanf("%f", &perimetro_total);
+
+            printf("Altura das paredes: ");
+            scanf("%f", &alt_paredes);
+
+            qt_colunas = perimetro_total/3;
+
+
+
+            //printf("qt ferro: %d barras\n", qtferro);
+
+            result = calcula_cimento(prof,diam,larg_bald,prof_bald,perimetro_total,alt_paredes,qt_colunas);//calcula e armazena o valor retornado das áreas de estruturas (CAL,CULO CIMENTO)
+
+            printf("\nCálculo de ferragens\n===============================================================\n");
+
+            result2 = calcula_ferro(perimetro_total,prof,alt_paredes,qt_colunas,larg_bald,prof_bald);
+
+            do{
+                    printf("Digite a área que deseja colocar pisos: ");
+            scanf("%f", &area_piso);
+
+                if(area_piso >= area_total){
+                    printf("A área do piso não pode ser maior do que a área total!!\n");
+                }
+
+            }while(area_piso >= area_total);
+
+
+
+
+
+
+        // printf("Quantidade mínima de colunas: %d\n", qt_colunas);
+       // printf("total: %.2f m³ de cimento",result);
+
+        piso = escolhe_piso();
+
+
+        if(piso == 15){
+            char pisoS[51];
+
+            printf("\nDIGITE O PISO ESCOLHIDO: ");
+            fflush(stdin);
+            fgets(pisoS,51,stdin);
+            fflush(stdin);
+
+
+            // puts(pisoS);
+
+                gastos_cond_2(area_total,area_piso,result,result2,pisoS);
+
+                chave_teste = 1;
+        }
+
+
+        if(chave_teste == 0){
+
+            gastos(area_total,area_piso,result,result2,piso);
+
+        }
+
+
+
+}
+
