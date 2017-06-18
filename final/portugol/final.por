@@ -2247,18 +2247,18 @@ programa
 	
 	            //Estruturas
 	                escreva("\n\nESTRUTURAS\n\n")
-	                escreva("Profundidade das colunas: ", ler_registro(dir, C_ESTRUT_PROFUNDIDAE_COLUNAS), "m\n" )
-	                escreva("Diâmetro das colunas: ", ler_registro(dir, C_ESTRUT_DIAMETRO_COLUNAS), "m\n")
-	                escreva("Perimetro total das paredes: ", ler_registro(dir, C_ESTRUT_PERIMETRO_TOTAL), "m\n")
-	                escreva("Largura dos baldrames: ", ler_registro(dir, C_ESTRUT_LARGURA_BALDRAME), "m\n")
-	                escreva("Profundidade dos baldrames: ", ler_registro(dir, C_ESTRUT_PROFUNDIDADE_BALDRAME), "m\n")
-	                escreva("Área total de construção: ", ler_registro(dir, C_ESTRUT_AREA_TOTAL_CONSTRUCAO), "m²\n")
-	                escreva("Quantidade de cimento: ", ler_registro(dir, C_ESTRUT_QUANTIDADE_CIMENTO), "m³\n")
-	                escreva("Altura das paredes: ", ler_registro(dir, C_ESTRUT_ALTURA_PAREDES), "\nm")
+	                escreva("Profundidade das colunas: ", Tipos.cadeia_para_real(ler_registro(dir, C_ESTRUT_PROFUNDIDAE_COLUNAS)), "m\n" )
+	                escreva("Diâmetro das colunas: ", Tipos.cadeia_para_real(ler_registro(dir, C_ESTRUT_DIAMETRO_COLUNAS)), "m\n")
+	                escreva("Perimetro total das paredes: ", Tipos.cadeia_para_real(ler_registro(dir, C_ESTRUT_PERIMETRO_TOTAL)), "m\n")
+	                escreva("Largura dos baldrames: ", Tipos.cadeia_para_real(ler_registro(dir, C_ESTRUT_LARGURA_BALDRAME)), "m\n")
+	                escreva("Profundidade dos baldrames: ", Tipos.cadeia_para_real(ler_registro(dir, C_ESTRUT_PROFUNDIDADE_BALDRAME)), "m\n")
+	                escreva("Área total de construção: ", Tipos.cadeia_para_real(ler_registro(dir, C_ESTRUT_AREA_TOTAL_CONSTRUCAO)), "m²\n")
+	                escreva("Quantidade de cimento: ", Tipos.cadeia_para_real(ler_registro(dir, C_ESTRUT_QUANTIDADE_CIMENTO)), "m³\n")
+	                escreva("Altura das paredes: ", Tipos.cadeia_para_real(ler_registro(dir, C_ESTRUT_ALTURA_PAREDES)), "\nm")
 	                escreva("Quantidade de ferro 3/8: ", ler_registro(dir, C_ESTRUT_QTDE_FERRO_3_8), "\n")
 	                escreva("Quantidade de ferro 3/16: ", ler_registro(dir, C_ESTRUT_QTDE_FERRO_3_16), "\n")
 	                escreva("Quantidade de colunas: ", ler_registro(dir, C_ESTRUT_QTDE_COLUNAS), "\n")
-	                escreva("Quantidade de piso: ", ler_registro(dir, C_ESTRUT_AREA_PISO), "\n")
+	                escreva("Quantidade de piso: ", Tipos.cadeia_para_real(ler_registro(dir, C_ESTRUT_AREA_PISO)), "\n")
 	                escreva("Piso: ", ler_registro(dir, C_ESTRUT_PISO), "\n\n")
 	            //Fim Estruturas
 	
@@ -2280,8 +2280,8 @@ programa
 	                escreva("Tipo de tijolo: ", ler_registro(dir, C_TIJOLO_TIPO), "\n")
 	                escreva("Quantidade total de tijolos: ", ler_registro(dir, C_TIJOLO_QTDE), "\n")
 	                escreva("Quantidade de tijolos por m²: ", ler_registro(dir, C_TIJOLO_QTDE_METRO), "\n")
-	                escreva("Custo total de tijolos: R$ ", ler_registro(dir, C_TIJOLO_CUSTO_TOTAL), "\n")
-	                escreva("Preço unitário do tijolo: R$ ", ler_registro(dir, C_TIJOLO_PRECO_UNIT), "\n\n")
+	                escreva("Custo total de tijolos: R$ ", Tipos.cadeia_para_real(ler_registro(dir, C_TIJOLO_CUSTO_TOTAL)), "\n")
+	                escreva("Preço unitário do tijolo: R$ ", Tipos.cadeia_para_real(ler_registro(dir, C_TIJOLO_PRECO_UNIT)), "\n\n")
 	            //Fim Tijolos
 	
 	            //Revestimento
@@ -2301,23 +2301,23 @@ programa
 	                    escreva("  Parede ", i + 1, ": ", qtd_revestimento_paredes[i], "\n")
 	                }
 	
-	                escreva("Custo total do revestimento: R$ ", ler_registro(dir, C_REVESTIMENTO_CUSTO_TOTAL), "\n" )
-	                escreva("Preço unitário do revestimento: R$ ", ler_registro(dir, C_REVESTIMENTO_PRECO_UNIT), "\n\n")
+	                escreva("Custo total do revestimento: R$ ", Tipos.cadeia_para_real(ler_registro(dir, C_REVESTIMENTO_CUSTO_TOTAL)), "\n" )
+	                escreva("Preço unitário do revestimento: R$ ", Tipos.cadeia_para_real(ler_registro(dir, C_REVESTIMENTO_PRECO_UNIT)), "\n\n")
 	            //Fim Revestimento
 	
 	            //Tinta
 	                escreva("TINTA\n\n")
-	                escreva("Quantidade de gal?es de tinta: ", ler_registro(dir, C_GALAO_TINTA_QTDE), "\n")
-	                escreva("Custo total dos gal?es de tinta: R$ ", ler_registro(dir, C_GALAO_TINTA_CUSTO_TOTAL), "\n")
-	                escreva("Preço unitário do galão de tinta: R$ ", ler_registro(dir, C_GALAO_TINTA_PRECO_UNIT), "\n\n")
+	                escreva("Quantidade de galões de tinta: ", ler_registro(dir, C_GALAO_TINTA_QTDE), "\n")
+	                escreva("Custo total dos galões de tinta: R$ ", Tipos.cadeia_para_real(ler_registro(dir, C_GALAO_TINTA_CUSTO_TOTAL)), "\n")
+	                escreva("Preço unitário do galão de tinta: R$ ", Tipos.cadeia_para_real(ler_registro(dir, C_GALAO_TINTA_PRECO_UNIT)), "\n\n")
 	            //Fim Tinta
 	
 	            //Telhado
 	                escreva("TELHADO\n\n")
 	                escreva("Inclinação: ", ler_registro(dir, C_TELHADO_INCLINACAO), "%\n")
-	                escreva("Largura da laje: ", ler_registro(dir, C_TELHADO_LARGURA_BASE), "m\n")
-	                escreva("Comprimento da laje: ", ler_registro(dir, C_TELHADO_COMPRIMENTO_BASE), "m\n")
-	                escreva("Área do telhado corrigida pela inclinação: ", ler_registro(dir, C_TELHADO_AREA_CORRIGIDA) , "m²\n\n")
+	                escreva("Largura da laje: ", Tipos.cadeia_para_real(ler_registro(dir, C_TELHADO_LARGURA_BASE)), "m\n")
+	                escreva("Comprimento da laje: ", Tipos.cadeia_para_real(ler_registro(dir, C_TELHADO_COMPRIMENTO_BASE)), "m\n")
+	                escreva("Área do telhado corrigida pela inclinação: ", Tipos.cadeia_para_real(ler_registro(dir, C_TELHADO_AREA_CORRIGIDA)), "m²\n\n")
 	            //Fim Telhado
 	
 	            //Madeiramento
@@ -2325,20 +2325,20 @@ programa
 	                escreva("Quantidade de terças: ", ler_registro(dir, C_MADEIRA_QTDE_TERCA), "\n")
 	                escreva("Quantidade de caibros: ", ler_registro(dir, C_MADEIRA_QTDE_CAIBRO), "\n")
 	                escreva("Quantidade de ripas: ", ler_registro(dir, C_MADEIRA_QTDE_RIPAS), "\n")
-	                escreva("Metros de pontaletes: ", ler_registro(dir, C_MADEIRA_METROS_PONTALETES), "\n")
-	                escreva("Metros de caibros: ", ler_registro(dir, C_MADEIRA_METROS_CAIBROS), "\n")
-	                escreva("Metros de ripas: ", ler_registro(dir, C_MADEIRA_METROS_RIPAS), "\n")
-	                escreva("Metros de terças: ", ler_registro(dir, C_MADEIRA_METROS_TERCAS), "\n")
-	                escreva("Espaçamento entre as terças: ", ler_registro(dir, C_ESPACAMENTO_TERCAS), "m\n")
-	                escreva("Comprimento da garga: ", ler_registro(dir, C_COMRPRIMENTO_GARGA), "m\n\n")
+	                escreva("Metros de pontaletes: ", Tipos.cadeia_para_real(ler_registro(dir, C_MADEIRA_METROS_PONTALETES)), "\n")
+	                escreva("Metros de caibros: ", Tipos.cadeia_para_real(ler_registro(dir, C_MADEIRA_METROS_CAIBROS)), "\n")
+	                escreva("Metros de ripas: ", Tipos.cadeia_para_real(ler_registro(dir, C_MADEIRA_METROS_RIPAS)), "\n")
+	                escreva("Metros de terças: ", Tipos.cadeia_para_real(ler_registro(dir, C_MADEIRA_METROS_TERCAS)), "\n")
+	                escreva("Espaçamento entre as terças: ", Tipos.cadeia_para_real(ler_registro(dir, C_ESPACAMENTO_TERCAS)), "m\n")
+	                escreva("Comprimento da garga: ", Tipos.cadeia_para_real(ler_registro(dir, C_COMRPRIMENTO_GARGA)), "m\n\n")
 	            //Fim madeiramento
 	
 	            //Telhas
 	                escreva("TELHAS\n\n")
 	                escreva("Tipo de telha: ", ler_registro(dir, C_TELHA_TIPO), "\n")
 	                escreva("Quantidade de telhas: ", ler_registro(dir, C_TELHA_QTDE), "\n")
-	                escreva("Custo total das telhas: R$ ", ler_registro(dir, C_TELHA_CUSTO_TOTAL), "\n")
-	                escreva("Preço unitário das telhas: R$ ", ler_registro(dir, C_TELHA_PRECO_UNIT), "\n\n")
+	                escreva("Custo total das telhas: R$ ", Tipos.cadeia_para_real(ler_registro(dir, C_TELHA_CUSTO_TOTAL)), "\n")
+	                escreva("Preço unitário das telhas: R$ ", Tipos.cadeia_para_real(ler_registro(dir, C_TELHA_PRECO_UNIT)), "\n\n")
 	            //Fim Telhas
 	
 	        }
@@ -2633,7 +2633,7 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 87422; 
+ * @POSICAO-CURSOR = 73538; 
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
