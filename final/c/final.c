@@ -1948,7 +1948,7 @@ void novo_orcamento()
   	} while (usr_opt == 1);
 
 	  	do {
-	    printf("\n--------------------\nORÇAMENTO DO REVESTIMENTO DE PISO\n--------------------\n");
+	    printf("\n--------------------\nORÇAMENTO DO REVESTIMENTO DE PAREDE\n--------------------\n");
 
 	    tipo_revesitmento = escolhe_tipo_revestimento();
 
@@ -1963,7 +1963,7 @@ void novo_orcamento()
 	        case 2:
 	            printf("\n--------------------\n");
 	            printf("Madeira\n");
-				strcpy(g_tipo_revestimento, "Madeira");
+	            strcpy(g_tipo_revestimento, "Madeira");
 	            break;
 
 	        case 3:
