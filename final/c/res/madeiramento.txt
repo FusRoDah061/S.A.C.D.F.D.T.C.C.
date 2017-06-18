@@ -1,0 +1,27 @@
+Terças:
+Espaçamento de 1.5
+peças/agua = (largura telhado / espaçamento)
+peças total = peças/agua * 2
+total(m) = pecas total * comprimento base
+
+Pontaletes:
+altura cumeeira(m) = (largura telhado / 2 * inclinacao) / 100
+meio(m) = altura cumeeira
+comprimento total(m) = (altura cumeeira * 2) + (meio * 2)
+
+Berços:
+Para cada pontalete há 1 berço de 50cm
+2 berços por água
+berços(m) = 4 * 0,5m
+
+Mão francesa:
+Para cada pontalete há 1 mão francesa de 2m (2 x 1m)
+mfrancesa(m) = 2 * 2 berços * 2m
+
+Trama (caibro e ripas):
+Caibros de 5cm x 6cm, a cada 50cm
+Ripas de 5cm x 2cm (varia com telha)
+caibro(m) = sqrt( (altura cumeeira)^2 + (largura telhado)^2 ) * 2
+
+Garga a cada 35cm
+ripas(m) = 2 * ceil( (caibro / 2) / garga ) * comprimento telhado
