@@ -11,11 +11,11 @@ programa
 	//a serem utilizados em uma obra.
 	const real TAXA_DE_PERDA = 0.10
 	
-	//Constante que define o tamanho m√°ximo de paredes e oit√µes que o usu√°rio pode construir por vez.
+	//Constante que define o tamanho m·ximo de paredes e oitıes que o usu·rio pode construir por vez.
 	const inteiro QTDE_PAREDES = 100
 	const inteiro QTDE_OITOES = 50  
 	
-	//Constantes correspondentes as chaves que ser√£o salvas no arquivo
+	//Constantes correspondentes as chaves que ser„o salvas no arquivo
 	//Telhas
 	const cadeia C_TELHA_TIPO = "tipo_telha"
 	const cadeia C_TELHA_QTDE = "qtde_telha"
@@ -79,10 +79,10 @@ programa
 	
 	//Dados a serem gravados no arquivo
 	//Telhado
-	inteiro g_inclinacao = 0//Inclina√ß√£o do telhado
+	inteiro g_inclinacao = 0//InclinaÁ„o do telhado
 	
 	real g_largura_base = 0.0,//Largura da base do telhado (laje)
-	      g_area_telhado_corrigida = 0.0,//√Årea do telhado corrigida j√° incluindo a inclina√ß√£o do teclado
+	      g_area_telhado_corrigida = 0.0,//¡rea do telhado corrigida j· incluindo a inclinaÁ„o do teclado
 	      g_comprimento_base = 0.0//Comprimento da base do telhado (laje)
 	
 	//Telhas
@@ -90,15 +90,15 @@ programa
 	cadeia g_tipo_telha = ""
 	
 	real g_custo_total = 0.0,//Custo total das telhas no final
-	    g_preco_unit = 0.0,//Pre√ßo unit√°rio de cada telha
+	    g_preco_unit = 0.0,//PreÁo unit·rio de cada telha
 	    g_qtde_telha_metro = 0.0//Quantidade de telhas por metro quadrado
 	
 	//Madeiramento
-	inteiro g_qtde_tercas = 0, //Quantidade de ter√ßas para as duas √°guas do telhado
+	inteiro g_qtde_tercas = 0, //Quantidade de terÁas para as duas ·guas do telhado
 	    g_qtde_caibros = 0,// Quantidade de caibros para o telhado
 	    g_qtde_ripas = 0 //Quantidade de ripas para o telhado
 	
-	real g_tercas_espacamento = 0.0, //Espa√ßamento entre as ter√ßas
+	real g_tercas_espacamento = 0.0, //EspaÁamento entre as terÁas
 	    g_metragem_pontaletes = 0.0,
 	    g_metragem_caibros = 0.0,
 	    g_metragem_ripas = 0.0,
@@ -150,9 +150,9 @@ programa
 	real g_areas_paredes[QTDE_PAREDES]
 	
 	/*
-	*Fun√ß√£o converte() = Evita que o usu√°rio entre com um valor que ir√° alterar os calculos de uma estrutura real, por exemplo:
-		- Usu√°rio digita 21 (o programa entende como 21 metros), mas o calculo real precisa do valor em cent√≠metros, entao a fun√ß√£o verificaso o
-	  valor dado precisa ser corrigido e o devolve com a corre√ß√£o feita, caso n√£o necessite de corre√ß√£o, ela apenas retorna o valor para c√°lculo.
+	*FunÁ„o converte() = Evita que o usu·rio entre com um valor que ir· alterar os calculos de uma estrutura real, por exemplo:
+		- Usu·rio digita 21 (o programa entende como 21 metros), mas o calculo real precisa do valor em centÌmetros, entao a funÁ„o verificaso o
+	  valor dado precisa ser corrigido e o devolve com a correÁ„o feita, caso n„o necessite de correÁ„o, ela apenas retorna o valor para c·lculo.
 	*parametros: valor real
 	*/
 	funcao real converte(real num)
@@ -163,13 +163,13 @@ programa
 	
 		aux=num
 		se (aux == 0 e aux != num){
-			verify = num //O numero digitado n√£o √© inteiro, e j√° est√° em "cent√≠metros" - n√£o fazer nada
+			verify = num //O numero digitado n„o È inteiro, e j· est· em "centÌmetros" - n„o fazer nada
 		}
 		senao se(aux > 0 e aux == num){
-			verify = num/100 //O numero digitado n√£o √© inteiro e est√° em "Metros", por isso, deve-se dividir por 100 para se ter a base em cm
+			verify = num/100 //O numero digitado n„o È inteiro e est· em "Metros", por isso, deve-se dividir por 100 para se ter a base em cm
 		}
 		senao se(aux > 0 e aux != num){
-			verify = num/100 //O numero digitado n√£o √© inteiro e est√° em "Metros", por isso, deve-se dividir por 100 para se ter a base em cm
+			verify = num/100 //O numero digitado n„o È inteiro e est· em "Metros", por isso, deve-se dividir por 100 para se ter a base em cm
 		}
 	
 		retorne verify
@@ -177,16 +177,16 @@ programa
 	}
 	
 	/*
-	*calcula a quantidade necessaria de cimento para a constru√ß√£o das estruturas da casa
+	*calcula a quantidade necessaria de cimento para a construÁ„o das estruturas da casa
 	*
-	*Par√¢metros:
-	*deep = profundidade das colunas subterr√¢neas
-	*dm = diametro das colunas/subterr√¢neas e sobterr√¢neas, j√° que seguem as mesmas medidas
-	*largura_baldrames = largura dos baldrames onde ser√£o construidas as paredes
-	*profundidade_baldrames = profundidade dos baldrames onde ser√£o construidas as paredes
+	*Par‚metros:
+	*deep = profundidade das colunas subterr‚neas
+	*dm = diametro das colunas/subterr‚neas e sobterr‚neas, j· que seguem as mesmas medidas
+	*largura_baldrames = largura dos baldrames onde ser„o construidas as paredes
+	*profundidade_baldrames = profundidade dos baldrames onde ser„o construidas as paredes
 	*perimetro_total = soma de todas as paredes da casa em metros lineares
 	*altura paredes = altura das paredes para base de calculo das colunas
-	*g_qtde_colunas = quantidade de colunas da constru√ß√£o para calculo de cimento em m¬≥
+	*g_qtde_colunas = quantidade de colunas da construÁ„o para calculo de cimento em m≥
 	*/
 	funcao real calcula_cimento(real deep, real dm, real largura_baldrames, real profundidade_baldrames, real perimetro_total, real altura_paredes, inteiro qtde_colunas)
 	{
@@ -194,22 +194,22 @@ programa
 	
 	    r = dm/2
 	
-	    area_coluna_chao = ( ( Matematica.PI * Matematica.potencia(r, 2.0) ) * deep ) //√°rea das colunas subterr√¢neas
+	    area_coluna_chao = ( ( Matematica.PI * Matematica.potencia(r, 2.0) ) * deep ) //·rea das colunas subterr‚neas
 	
-	    area_coluna_parede = ( ( Matematica.PI * Matematica.potencia(r, 2.0) ) * altura_paredes )//√°rea das colunas que sobem acompanhando as paredes
+	    area_coluna_parede = ( ( Matematica.PI * Matematica.potencia(r, 2.0) ) * altura_paredes )//·rea das colunas que sobem acompanhando as paredes
 	
-	    tot_colunas = (area_coluna_chao + area_coluna_parede) * qtde_colunas//soma das colunas parede+ch√£o
+	    tot_colunas = (area_coluna_chao + area_coluna_parede) * qtde_colunas//soma das colunas parede+ch„o
 	
-	    bald_total = largura_baldrames * profundidade_baldrames * perimetro_total * 2//√°rea dos baldrames, multiplica - se por 2 pois existe o baldrame que sustenta a laje da casa, este possui praticamente a mesma √°rea do que sustenta as paredes
+	    bald_total = largura_baldrames * profundidade_baldrames * perimetro_total * 2//·rea dos baldrames, multiplica - se por 2 pois existe o baldrame que sustenta a laje da casa, este possui praticamente a mesma ·rea do que sustenta as paredes
 	
-	    total = bald_total + tot_colunas//soma de todas as √°reas da estrutura
+	    total = bald_total + tot_colunas//soma de todas as ·reas da estrutura
 	
 	    retorne total
 	
 	}
 	
 	/*
-	*Calcula a quantidade de ferro 3/8 e 3/16 para a constru√ß√£o
+	*Calcula a quantidade de ferro 3/8 e 3/16 para a construÁ„o
 	*parametros:
 	*perimetro da casa
 	*profundidade colunaaredes
@@ -233,7 +233,7 @@ programa
 			//escreva("LARG STRIBO = ", larg_stribo, "\n")
 	
 			se(larg_stribo > largura_baldrame-0.07){
-				escreva("\nA largura do estribo n√£o pode ser maior que a do baldrame!\nDigite um valor at√© ", largura_baldrame-0.07, " metros\n")
+				escreva("\nA largura do estribo n„o pode ser maior que a do baldrame!\nDigite um valor atÈ ", largura_baldrame-0.07, " metros\n")
 			}
 	
 		}enquanto(larg_stribo > largura_baldrame-0.07)
@@ -248,35 +248,35 @@ programa
 			//escreva("ALTURA = %.2f\n",altura_stribo)
 	
 			se(altura_stribo > profundidade_baldrame-0.04){
-				escreva("\nA altura do estribo n√£o pode ser maior que a do baldrame!\nDigite um valor at√© %.2f metros\n",profundidade_baldrame-0.04)
+				escreva("\nA altura do estribo n„o pode ser maior que a do baldrame!\nDigite um valor atÈ %.2f metros\n",profundidade_baldrame-0.04)
 			}
 	
 		}enquanto(altura_stribo > profundidade_baldrame-0.04)
 	
-		escreva("Digite o tamanho unit√°rio da barra de ferro escolhida para estrutura: ")
+		escreva("Digite o tamanho unit·rio da barra de ferro escolhida para estrutura: ")
 		leia(tamanho_barra)
 	
 	
-		escreva("Digite o tamanho unit√°rio da barra de ferro escolhida para amara√ß√£o da estrutura: ")
+		escreva("Digite o tamanho unit·rio da barra de ferro escolhida para amaraÁ„o da estrutura: ")
 		leia(tamanho_barra_amarra)
 	
 		faca{
 	
-			escreva("Digite o espa√ßamento entre as amarra√ß?es do estribo: ")
+			escreva("Digite o espaÁamento entre as amarraÁıes do estribo: ")
 			leia(espacamento)
 	
 			espacamento = converte(espacamento)
 	
-			//escreva("ESPA√áAMENTO = %.2f\n", espacamento)
+			//escreva("ESPA«AMENTO = %.2f\n", espacamento)
 	
 			se(espacamento > 0.201){
-				escreva("O espa√ßamento n√£o pode ser maior que 20 cent√≠metros!!! Digite um valor menor.\n")
+				escreva("O espaÁamento n„o pode ser maior que 20 centÌmetros!!! Digite um valor menor.\n")
 			}
 	
 		}enquanto(espacamento > 0.201)
 	
 	
-		qtde_ferro_estribo = ( ( larg_stribo * 2 + altura_stribo * 2 ) * perimetro / espacamento ) / tamanho_barra_amarra //quantidade em barras de ferro para amarra√ß√£o do estribo
+		qtde_ferro_estribo = ( ( larg_stribo * 2 + altura_stribo * 2 ) * perimetro / espacamento ) / tamanho_barra_amarra //quantidade em barras de ferro para amarraÁ„o do estribo
 		qtde_ferro = ( ( perimetro * 2 + ( profundidade + altura ) * qtde_colunas) * 4 ) / tamanho_barra //retorna a quantidade de ferros para estruturas
 	
 		escreva("Estribo: ", qtde_ferro_estribo, " barras\n")
@@ -296,14 +296,14 @@ programa
 	
 		faca{
 	
-			escreva("\nEscolha o tipo de piso:\n1 - CER√ÇMICA\n2 - PORCELANATO\n3 - GRANITO\n4 - M√ÅRMORE\n5 - LAMINADO DE MADEIRA\n6 - SILESTONE\n7 - T√ÅBUA CORRIDA\n8 - TAC√ÉO\n9 - LAJOTA\n10 - ARD√ìSIA\n11 - CIMENTO QUEIMADO\n12 - PEDRA PORTUGUESA\n13 - PEDRA S√£O TOM√â\n14 - GRANITINA\n15 - OUTRO\n\nSua escolha: ")
+			escreva("\nEscolha o tipo de piso:\n1 - CER¬MICA\n2 - PORCELANATO\n3 - GRANITO\n4 - M¡RMORE\n5 - LAMINADO DE MADEIRA\n6 - SILESTONE\n7 - T¡BUA CORRIDA\n8 - TAC√O\n9 - LAJOTA\n10 - ARD”SIA\n11 - CIMENTO QUEIMADO\n12 - PEDRA PORTUGUESA\n13 - PEDRA S„O TOM…\n14 - GRANITINA\n15 - OUTRO\n\nSua escolha: ")
 			leia(piso)
 	
 			se(piso != 15){
 				escolha(piso)
 				{
 					caso 1:
-						g_pisoS = "CER√ÇMICA"
+						g_pisoS = "CER¬MICA"
 					pare
 	
 					caso 2:
@@ -315,7 +315,7 @@ programa
 					pare
 	
 					caso 4:
-						g_pisoS = "M√ÅRMORE"
+						g_pisoS = "M¡RMORE"
 					pare
 	
 					caso 5:
@@ -327,11 +327,11 @@ programa
 					pare
 	
 					caso 7:
-						g_pisoS = "T√ÅBUA CORRIDA"
+						g_pisoS = "T¡BUA CORRIDA"
 					pare
 	
 					caso 8:
-						g_pisoS = "TAC√ÉO"
+						g_pisoS = "TAC√O"
 					pare
 	
 					caso 9:
@@ -339,7 +339,7 @@ programa
 					pare
 	
 					caso 10:
-						g_pisoS = "ARD√ìSIA"
+						g_pisoS = "ARD”SIA"
 					pare
 	
 					caso 11:
@@ -351,7 +351,7 @@ programa
 					pare
 	
 					caso 13:
-						g_pisoS = "PEDRA S√£O TOM√â"
+						g_pisoS = "PEDRA S„O TOM…"
 					pare
 	
 					caso 14:
@@ -368,12 +368,12 @@ programa
 	}
 	
 	/*
-	*Fun√ß√£o calcula gastos da estrutura/pisos
+	*FunÁ„o calcula gastos da estrutura/pisos
 	*parametros:
 	*area_casa: a ser construido
-	*qt_piso: quantidade de piso em m¬≤
-	*qt_cimento: quantidade de cimento em m¬≥
-	*piso: tipo de piso definido na fun√ß√£o anterior
+	*qt_piso: quantidade de piso em m≤
+	*qt_cimento: quantidade de cimento em m≥
+	*piso: tipo de piso definido na funÁ„o anterior
 	*/
 	funcao gastos(real area_casa, real area_piso, real qt_cimento, inteiro piso)
 	{
@@ -381,52 +381,52 @@ programa
 		real precopiso, precoferro, precoferro_316, precocimento, precolaje, VALORpiso, VALORferro, VALORferro_316, VALORcimento, VALORlaje, total
 	
 		faca{
-			escreva("Digite o pre√ßo do m¬≤ do piso escolhido: ")
+			escreva("Digite o preÁo do m≤ do piso escolhido: ")
 			leia(precopiso)
 	
 			se(precopiso <= 0){
-				escreva("Valor inv√°lido\n")
+				escreva("Valor inv·lido\n")
 			}
 	
 		}enquanto(precopiso <= 0)
 	
 		faca{
-			escreva("Digite o pre√ßo da barra de ferro 3/8 (unidade): ")
+			escreva("Digite o preÁo da barra de ferro 3/8 (unidade): ")
 			leia(precoferro)
 	
 			se(precoferro <= 0){
-				escreva("Valor inv√°lido\n")
+				escreva("Valor inv·lido\n")
 			}
 	
 		}enquanto(precoferro <= 0)
 	
 		faca{
-			escreva("Digite o pre√ßo da barra de ferro 3/16 (unidade): ")
+			escreva("Digite o preÁo da barra de ferro 3/16 (unidade): ")
 			leia(precoferro_316)
 	
 			se(precoferro_316 <= 0){
-				escreva("Valor inv√°lido\n")
+				escreva("Valor inv·lido\n")
 			}
 	
 		}enquanto(precoferro_316 <= 0)
 	
 		faca{
-			escreva("Digite o preco do m¬≥ do cimento: ")
+			escreva("Digite o preco do m≥ do cimento: ")
 			leia(precocimento)
 	
 			se(precocimento <= 0){
-				escreva("Valor inv√°lido\n")
+				escreva("Valor inv·lido\n")
 			}
 	
 		}enquanto(precocimento <= 0)
 	
 	
 		faca{
-			escreva("Digite o pre√ßo do m¬≤ da laje: ")
+			escreva("Digite o preÁo do m≤ da laje: ")
 			leia(precolaje)
 	
 			se(precolaje <= 0){
-				escreva("Valor inv√°lido\n")
+				escreva("Valor inv·lido\n")
 			}
 	
 		}enquanto(precolaje <= 0)
@@ -462,7 +462,7 @@ programa
 			pare
 	
 			caso 4:
-				escreva("Piso: M√ÅRMORE")
+				escreva("Piso: M¡RMORE")
 			pare
 	
 			caso 5:
@@ -474,11 +474,11 @@ programa
 			pare
 	
 			caso 7:
-				escreva("Piso: T√ÅBUA CORRIDA")
+				escreva("Piso: T¡BUA CORRIDA")
 			pare
 	
 			caso 8:
-				escreva("Piso: TAC√ÉO")
+				escreva("Piso: TAC√O")
 			pare
 	
 			caso 9:
@@ -486,7 +486,7 @@ programa
 			pare
 	
 			caso 10:
-				escreva("Piso: ARD√ìSIA")
+				escreva("Piso: ARD”SIA")
 			pare
 	
 			caso 11:
@@ -498,7 +498,7 @@ programa
 			pare
 	
 			caso 13:
-				escreva("Piso: PEDRA S√£O TOM√â")
+				escreva("Piso: PEDRA S„O TOM…")
 			pare
 	
 			caso 14:
@@ -512,12 +512,12 @@ programa
 	}
 	
 	/*
-	*Fun√ß√£o calcula gastos da estrutura/pisos -> Esta fun√ß√£o s√≥ sera utilizada caso o piso seja digitado como uma string...
+	*FunÁ„o calcula gastos da estrutura/pisos -> Esta funÁ„o sÛ sera utilizada caso o piso seja digitado como uma string...
 	*parametros:
 	*area_casa: a ser construido
-	*area_piso: quantidade de piso em m¬≤
-	*qt_cimento: quantidade de cimento em m¬≥
-	*pisoS: tipo de piso definido na fun√ß√£o anterior por STRING
+	*area_piso: quantidade de piso em m≤
+	*qt_cimento: quantidade de cimento em m≥
+	*pisoS: tipo de piso definido na funÁ„o anterior por STRING
 	*/
 	funcao gastos_cond_2(real area_casa, real area_piso, real qt_cimento, cadeia pisoS)
 	{
@@ -525,52 +525,52 @@ programa
 		real precopiso, precoferro, precoferro_316, precocimento, precolaje, VALORpiso, VALORferro, VALORferro_316, VALORcimento, VALORlaje, total
 	
 	  	faca{
-	        escreva("Digite o pre√ßo do m¬≤ do piso escolhido: ")
+	        escreva("Digite o preÁo do m≤ do piso escolhido: ")
 	        leia(precopiso)
 	
 	        se(precopiso <= 0){
-	            escreva("Valor inv√°lido\n")
+	            escreva("Valor inv·lido\n")
 	        }
 	
 	  	}enquanto(precopiso <= 0)
 	
 		faca{
-			escreva("Digite o pre√ßo da barra de ferro 3/8 (unidade): ")
+			escreva("Digite o preÁo da barra de ferro 3/8 (unidade): ")
 			leia(precoferro)
 	
 			se(precoferro <= 0){
-				escreva("Valor inv√°lido\n")
+				escreva("Valor inv·lido\n")
 			}
 	
 		}enquanto(precoferro <= 0)
 	
 	  	faca{
-	  		escreva("Digite o pre√ßo da barra de ferro 3/16 (unidade): ")
+	  		escreva("Digite o preÁo da barra de ferro 3/16 (unidade): ")
 	        leia(precoferro_316)
 	
 	    	se(precoferro_316 <= 0){
-	            escreva("Valor inv√°lido\n")
+	            escreva("Valor inv·lido\n")
 	        }
 	
 	  	}enquanto(precoferro_316 <= 0)
 	
 	  	faca{
-	  		escreva("Digite o preco do m¬≥ do cimento: ")
+	  		escreva("Digite o preco do m≥ do cimento: ")
 	        leia(precocimento)
 	
 			se(precocimento <= 0){
-				escreva("Valor inv√°lido\n")
+				escreva("Valor inv·lido\n")
 			}
 	
 	  	}enquanto(precocimento <= 0)
 	
 	
 	  	faca{
-	        escreva("Digite o pre√ßo do m¬≤ da laje: ")
+	        escreva("Digite o preÁo do m≤ da laje: ")
 	        leia(precolaje)
 	
 			se(precolaje <= 0){
-				escreva("Valor inv√°lido\n")
+				escreva("Valor inv·lido\n")
 			}
 	
 	  	}enquanto(precolaje <= 0)
@@ -597,15 +597,15 @@ programa
 	}
 	
 	/*
-	 * Calcula a √°rea do telhado, onde ficar√£o as telhas, considerando a inclina√ß√£o
+	 * Calcula a ·rea do telhado, onde ficar„o as telhas, considerando a inclinaÁ„o
 	 *
-	 * Par√¢metros:
-	 * inclinacao: Inclina√ß√£o do telhado (altura da cumeeira)
+	 * Par‚metros:
+	 * inclinacao: InclinaÁ„o do telhado (altura da cumeeira)
 	 * largura_base: largura da base do telhado (largura da laje)
 	 * comprimento_base: comprimento da base do telhado (comprimento da laje)
 	 *
 	 * Retorna:
-	 * A √°rea do telhado
+	 * A ·rea do telhado
 	 */
 	funcao real corrigir_area(inteiro l_inclinacao, real l_largura_base, real l_comprimento_base)
 	{
@@ -619,11 +619,11 @@ programa
 	}
 	
 	/*
-	 * Calcula quantidade de telhas baseado na √°rea do telhado(corrigida) e a quantidade de telhas por m¬≤
+	 * Calcula quantidade de telhas baseado na ·rea do telhado(corrigida) e a quantidade de telhas por m≤
 	 *
-	 * Par√¢metros:
-	 * area_telhado: √°rea do telhado
-	 * telhas_metro_quad: quantidade de uma telha que ocupa 1 m¬≤
+	 * Par‚metros:
+	 * area_telhado: ·rea do telhado
+	 * telhas_metro_quad: quantidade de uma telha que ocupa 1 m≤
 	 *
 	 * Retorna:
 	 * A quantidade de telhas no total
@@ -641,14 +641,14 @@ programa
 	}
 	
 	/*
-	 * Calcula o pre√ßo das telhas
+	 * Calcula o preÁo das telhas
 	 *
-	 * Par√¢metros:
+	 * Par‚metros:
 	 * qtde: quantidade de telhas calculadas
-	 * preco_unit: pre√ßo unit√°rio da telha
+	 * preco_unit: preÁo unit·rio da telha
 	 *
 	 * Retorna:
-	 * O pre√ßo das telhas no total
+	 * O preÁo das telhas no total
 	 */
 	funcao real calcula_preco(inteiro l_qtde, real l_preco_unit)
 	{
@@ -670,7 +670,7 @@ programa
 	    faca
 	    {
 	
-	        escreva("Escolha um m√©todo:\n 1 - Dimens?es da telha\n 2 - Unidades por metro quadrado\n\nSua escolha: ")
+	        escreva("Escolha um mÈtodo:\n 1 - Dimensıes da telha\n 2 - Unidades por metro quadrado\n\nSua escolha: ")
 	        leia(opt)
 	
 	        escolha(opt)
@@ -678,18 +678,18 @@ programa
 	
 	            caso 1:
 	
-	                escreva("\nInforme as dimens?es da telha\n")
+	                escreva("\nInforme as dimensıes da telha\n")
 	
 	                real a_largura, a_comprimento, area_telha
 	
-	                //Para telhas de amianto ou alum√≠nio as dimens?es podem variar, por isso o usu√°rio √© quem entra com essas dimens?es
+	                //Para telhas de amianto ou alumÌnio as dimens?es podem variar, por isso o usu·rio È quem entra com essas dimens?es
 	                escreva(" Digite a largura da telha (cm): ")
 	                leia(a_largura)
 	
 	                escreva(" Digite a comprimento da telha (cm): ")
 	                leia(a_comprimento)
 	
-	                //Calcula a √°rea da telha
+	                //Calcula a ·rea da telha
 	                area_telha = (a_largura/100) * (a_comprimento/100)
 	
 	                telhas_p_metro = 1 / area_telha
@@ -704,7 +704,7 @@ programa
 	                pare
 	
 	            caso contrario:
-	                escreva("\nOp√ß√£o inv√°lida\n\n")
+	                escreva("\nOpÁ„o inv·lida\n\n")
 	
 	        }
 	
@@ -720,16 +720,16 @@ programa
 	}
 	
 	/*
-	 * Calcula a quantidade total de gal?es de tinta necess√°rios para pintar a √°rea interna da constru√ß√£o
-	 * com base nas √°reas das paredes existentes na casa, na √°rea total do teto, na quantidade de dem√£os
-	 * que se deseja aplicar e no rendimento informado no gal√£o de tinta escolhido pelo usu√°rio.
+	 * Calcula a quantidade total de gal?es de tinta necess·rios para pintar a ·rea interna da construÁ„o
+	 * com base nas ·reas das paredes existentes na casa, na ·rea total do teto, na quantidade de dem„os
+	 * que se deseja aplicar e no rendimento informado no gal„o de tinta escolhido pelo usu·rio.
 	 *
-	 * Par√¢metros:
-	 * (inteiro) qtde_paredes: quantidade total de paredes presente na constru√ß√£o.
-	 * (real) area_tetos: √°rea total do teto.
+	 * Par‚metros:
+	 * (inteiro) qtde_paredes: quantidade total de paredes presente na construÁ„o.
+	 * (real) area_tetos: ·rea total do teto.
 	 *
 	 * Retorna:
-	 * (inteiro) qtde_total_galoes: quantidade total de gal?es de tinta necess√°rios para pintar a √°rea interna da constru√ß√£o.
+	 * (inteiro) qtde_total_galoes: quantidade total de gal?es de tinta necess·rios para pintar a ·rea interna da construÁ„o.
 	 */
 	funcao real calcula_qtde_total_galoes_tinta(real area_tetos) {
 	    real qtde_total_galoes = 0.0,
@@ -739,12 +739,12 @@ programa
 	    inteiro qtde_demaos = 0
 	      
 	    faca {
-	        escreva("\nQuantidade de dem√£os que ir√° aplicar: ")
+	        escreva("\nQuantidade de dem„os que ir· aplicar: ")
 	        leia(qtde_demaos)
 	    } enquanto (qtde_demaos <= 0)
 	      
 	    faca {
-	        escreva("\nRendimento da tinta informado no gal√£o: ")
+	        escreva("\nRendimento da tinta informado no gal„o: ")
 	        leia(rendimento_tinta)
 	    } enquanto (rendimento_tinta <= 0)
 	      
@@ -760,15 +760,15 @@ programa
 	}
 	
 	/*
-	 * Calcula a quantidade de revestimento (em unidades) necess√°ria para revestir internamente cada
-	 * parede da constru√ß√£o com base nas √°reas de cada parede e na quantidade de revestimento (em
-	 * unidades) necess√°ria para revestir uma √°rea de um metro quadrado.
-	 * Armazena a quantidade de revestimento (em unidades) necess√°ria para revestir internamente cada
-	 * parede em uma vari√°vel respons√°vel por contabilizar a quantidade total de revestimento necess√°ria
-	 * para revestir internamente todas as paredes presentes na constru√ß√£o.
+	 * Calcula a quantidade de revestimento (em unidades) necess·ria para revestir internamente cada
+	 * parede da construÁ„o com base nas ·reas de cada parede e na quantidade de revestimento (em
+	 * unidades) necess·ria para revestir uma ·rea de um metro quadrado.
+	 * Armazena a quantidade de revestimento (em unidades) necess·ria para revestir internamente cada
+	 * parede em uma vari·vel respons·vel por contabilizar a quantidade total de revestimento necess·ria
+	 * para revestir internamente todas as paredes presentes na construÁ„o.
 	 *
-	 * Par√¢metros:
-	 * (inteiro) qtde_paredes: quantidade de paredes presentes na constru√ß√£o.
+	 * Par‚metros:
+	 * (inteiro) qtde_paredes: quantidade de paredes presentes na construÁ„o.
 	 */
 	funcao calcula_qtde_revestimento_por_parede() {
 	
@@ -778,17 +778,17 @@ programa
 	        inteiro parede = i+1
 	        g_qtde_revestimento_por_parede[i] = Matematica.arredondar((g_qtde_revestimento_metro_quadrado * g_areas_paredes[i]), 0)
 	        g_qtde_total_revestimento += g_qtde_revestimento_por_parede[i]
-	        escreva("\n " + parede + "¬™ parede: " + g_qtde_revestimento_por_parede[i])
+	        escreva("\n " + parede + "™ parede: " + g_qtde_revestimento_por_parede[i])
 	    }
 	}
 	
 	/*
-	 * Calcula a quantidade de revestimento (em unidades) necess√°ria para preencher uma √°rea de um
-	 * metro quadrado com base nas medidas do revestimento utilizado, sendo estas fornecidas pelo usu√°rio.
+	 * Calcula a quantidade de revestimento (em unidades) necess·ria para preencher uma ·rea de um
+	 * metro quadrado com base nas medidas do revestimento utilizado, sendo estas fornecidas pelo usu·rio.
 	 *
 	 * Retorna:
-	 * (inteiro) qtde_revestimento_por_metro_quadrado: quantidade de revestimento (em unidades) necess√°rioa para
-	 *       preencher uma √°rea de um metro quadrado.
+	 * (inteiro) qtde_revestimento_por_metro_quadrado: quantidade de revestimento (em unidades) necess·rioa para
+	 *       preencher uma ·rea de um metro quadrado.
 	 */
 	funcao real calcula_qtde_revestimento_por_metro_quadrado() {
 	    real qtde_revestimento_por_metro_quadrado = 0,
@@ -814,11 +814,11 @@ programa
 	}
 	
 	/*
-	 * Exibe op√ß?es de revestimento para que o usu√°rio possa escolher o revestimento que
+	 * Exibe opÁ?es de revestimento para que o usu·rio possa escolher o revestimento que
 	 * deseja utilizar em sua obra.
 	 *
 	 * Retorna:
-	 * (inteiro) tipo_revestimento: tipo de revestimento escolhido pelo usu√°rio.
+	 * (inteiro) tipo_revestimento: tipo de revestimento escolhido pelo usu·rio.
 	 */
 	funcao inteiro escolhe_tipo_revestimento() {
 	    inteiro tipo_revestimento
@@ -833,10 +833,10 @@ programa
 	        escreva(" 1 - Papel de parede\n")
 	        escreva(" 2 - Madeira\n")
 	        escreva(" 3 - Pastilhas\n")
-	        escreva(" 4 - Revestimento ciment√≠cio\n")
-	        escreva(" 5 - Ladrilho hidr√°ulico\n")
+	        escreva(" 4 - Revestimento cimentÌcio\n")
+	        escreva(" 5 - Ladrilho hidr·ulico\n")
 	        escreva(" 6 - Azulejo comum\n")
-	        escreva(" 7 - Outra op√ß√£o")
+	        escreva(" 7 - Outra opÁ„o")
 	
 	        escreva("\n\nSua escolha: ")
 	        leia(tipo_revestimento)
@@ -846,42 +846,42 @@ programa
 	}
 	
 	/*
-	 * Calcula a quantidade de tijolos necess√°rios para construir cada oit√£o com base nas √°reas dos
-	 * oit?es e na quantidade de tiolos necess√°rios para preencher uma √°rea de um metro quadrado.
-	 * Armaneza a quantidade de tijolos necess√°rios por oit√£o em uma vari√°vel respons√°vel por
-	 * contabilizar a quantidade total de tijolos necess√°rios para construir todas as paredes e oit?es
-	 * da constru√ß√£o.
+	 * Calcula a quantidade de tijolos necess·rios para construir cada oit„o com base nas ·reas dos
+	 * oit?es e na quantidade de tiolos necess·rios para preencher uma ·rea de um metro quadrado.
+	 * Armaneza a quantidade de tijolos necess·rios por oit„o em uma vari·vel respons·vel por
+	 * contabilizar a quantidade total de tijolos necess·rios para construir todas as paredes e oit?es
+	 * da construÁ„o.
 	 *
-	 * Par√¢metros:
-	 * (inteiro) qtde_tijolos_por_oit√£o: vetor que armazena em cada posi√ß√£o a quantidade de tijolos necess√°ria para construir um oit√£o.
-	 * (inteiro) qtde_oitoes: quantidade total de oit?es presentes na constru√ß√£o.
-	 * (inteiro) qtde_total_tijolos: vari√°vel que contabiliza a quantidade total de tijolos necess√°ria para toda a constru√ß√£o.
-	 * (real) areas_oit?es: vetor que armazena em casa posi√ß√£o a √°rea de cada oit√£o individualmente.
+	 * Par‚metros:
+	 * (inteiro) qtde_tijolos_por_oit„o: vetor que armazena em cada posiÁ„o a quantidade de tijolos necess·ria para construir um oit„o.
+	 * (inteiro) qtde_oitoes: quantidade total de oit?es presentes na construÁ„o.
+	 * (inteiro) qtde_total_tijolos: vari·vel que contabiliza a quantidade total de tijolos necess·ria para toda a construÁ„o.
+	 * (real) areas_oit?es: vetor que armazena em casa posiÁ„o a ·rea de cada oit„o individualmente.
 	
 	 */
 	funcao calcula_qtde_tijolos_por_oitao(inteiro qtde_tijolos_por_oitao[], inteiro qtde_oitoes, inteiro &qtde_total_tijolos, real areas_oitoes[]) {
 	
-	    escreva("\n\n----- Quantidade de tijolos por oit√£o -----")
+	    escreva("\n\n----- Quantidade de tijolos por oit„o -----")
 	
 	    para (inteiro i=0; i < qtde_oitoes; i++) {
 	    		inteiro oitao = i + 1
 	        qtde_tijolos_por_oitao[i] = Matematica.arredondar(g_qtde_tijolo_metro_quadrado * areas_oitoes[i], 0)
 	        qtde_total_tijolos += qtde_tijolos_por_oitao[i]
-	        escreva("\n " + oitao + "¬∫ oit√£o: " + qtde_tijolos_por_oitao[i])
+	        escreva("\n " + oitao + "∫ oit„o: " + qtde_tijolos_por_oitao[i])
 	    }
 	}
 	
 	/*
-	 * Calcula a quantidade de tijolos necess√°rios para construir cada parede com base nas √°reas das
-	 * paredes e na quantidade de tiolos necess√°rios para preencher uma √°rea de um metro quadrado.
-	 * Armaneza a quantidade de tijolos necess√°rios por parede em uma vari√°vel respons√°vel por
-	 * contabilizar a quantidade total de tijolos necess√°rios para construir todas as paredes e oit?es
-	 * da constru√ß√£o.
+	 * Calcula a quantidade de tijolos necess·rios para construir cada parede com base nas ·reas das
+	 * paredes e na quantidade de tiolos necess·rios para preencher uma ·rea de um metro quadrado.
+	 * Armaneza a quantidade de tijolos necess·rios por parede em uma vari·vel respons·vel por
+	 * contabilizar a quantidade total de tijolos necess·rios para construir todas as paredes e oit?es
+	 * da construÁ„o.
 	 *
-	 * Par√¢metros:
-	 * (inteiro) qtde_tijolos_por_parede: vetor que armazena em cada posi√ß√£o a quantidade de tijolos necess√°ria para construir uma parede.
-	 * (inteiro) qtde_paredes: quantidade total de paredes presentes na constru√ß√£o.
-	 * (inteiro) qtde_total_tijolos: vari√°vel que contabiliza a quantidade total de tijolos necess√°ria para toda a constru√ß√£o.
+	 * Par‚metros:
+	 * (inteiro) qtde_tijolos_por_parede: vetor que armazena em cada posiÁ„o a quantidade de tijolos necess·ria para construir uma parede.
+	 * (inteiro) qtde_paredes: quantidade total de paredes presentes na construÁ„o.
+	 * (inteiro) qtde_total_tijolos: vari·vel que contabiliza a quantidade total de tijolos necess·ria para toda a construÁ„o.
 	 */
 	funcao calcula_qtde_tijolos_por_parede(real &qtde_tijolos_por_parede[]) {
 	    inteiro i
@@ -892,17 +892,17 @@ programa
 	    	inteiro parede = i + 1
 	        qtde_tijolos_por_parede[i] = Matematica.arredondar(g_qtde_tijolo_metro_quadrado * g_areas_paredes[i], 0)
 	        g_qtde_total_tijolos += qtde_tijolos_por_parede[i]
-	        escreva("\n " + parede + "¬™ parede: " + qtde_tijolos_por_parede[i])
+	        escreva("\n " + parede + "™ parede: " + qtde_tijolos_por_parede[i])
 	    }
 	}
 	
 	/*
-	 * Calcula a quantidade de tijolos necess√°rios para preencher uma √°rea de um metro quadrado
-	 * com base nas medidas do tijolo utilizado, sendo estas fornecidas pelo usu√°rio.
+	 * Calcula a quantidade de tijolos necess·rios para preencher uma ·rea de um metro quadrado
+	 * com base nas medidas do tijolo utilizado, sendo estas fornecidas pelo usu·rio.
 	 *
 	 * Retorna:
-	 * (inteiro) qtde_tijolos_por_metro_quadrado: quantidade de tijolos necess√°rios para preencher
-	 *       uma √°rea de um metro quadrado.
+	 * (inteiro) qtde_tijolos_por_metro_quadrado: quantidade de tijolos necess·rios para preencher
+	 *       uma ·rea de um metro quadrado.
 	 */
 	funcao real calcula_qtde_tijolos_por_metro_quadrado() {
 	    real qtde_tijolos_por_metro_quadrado = 0.0,
@@ -928,21 +928,21 @@ programa
 	}
 	
 	/*
-	 * Calcula a √°rea de um oit√£o presente na casa com base no tamanho de sua altura e base,
-	 * sendo ambas as medidas fornecidas pelo usu√°rio.
+	 * Calcula a ·rea de um oit„o presente na casa com base no tamanho de sua altura e base,
+	 * sendo ambas as medidas fornecidas pelo usu·rio.
 	 *
 	 * Retorna:
-	 * (real) area_oitao: √°rea do oit√£o.
+	 * (real) area_oitao: ·rea do oit„o.
 	 */
 	funcao real calcula_area_oitao() {
 	    real altura_oitao = 0.0,
 	          base_oitao = 0.0,
 	          area_oitao = 0.0
 	
-	    escreva("\nAltura do oit√£o em metros: ")
+	    escreva("\nAltura do oit„o em metros: ")
 	    leia(altura_oitao)
 	
-	    escreva("Base do oit√£o em metros: ")
+	    escreva("Base do oit„o em metros: ")
 	    leia(base_oitao)
 	
 	    area_oitao = ((base_oitao * altura_oitao)/2)
@@ -951,14 +951,14 @@ programa
 	}
 	
 	/*
-	 * Calcula a √°rea de uma parede, descontando a √°rea das aberturas presentes nela,
+	 * Calcula a ·rea de uma parede, descontando a ·rea das aberturas presentes nela,
 	 * como portas e janelas.
 	 *
-	 * Par√¢metros:
-	 * (real) area_aberturas: √°rea total das aberturas presentes na parede, como portas e janelas.
+	 * Par‚metros:
+	 * (real) area_aberturas: ·rea total das aberturas presentes na parede, como portas e janelas.
 	 *
 	 * Retorna:
-	 * (real) area_parede: √°rea da parede com a √°rea das aberturas descontada.
+	 * (real) area_parede: ·rea da parede com a ·rea das aberturas descontada.
 	 */
 	funcao real calcula_area_parede(real area_aberturas) {
 	    real altura_parede = 0.0,
@@ -981,12 +981,12 @@ programa
 	}
 	
 	/*
-	 * Calcula a √°rea das aberturas presentes nas paredes, como portas e janelas, uma vez
-	 * que estas devem ser descontadas posteriormente no c√°culo da √°rea das paredes que
-	 * ir√£o receber tijolos.
+	 * Calcula a ·rea das aberturas presentes nas paredes, como portas e janelas, uma vez
+	 * que estas devem ser descontadas posteriormente no c·culo da ·rea das paredes que
+	 * ir„o receber tijolos.
 	 *
 	 * Retorna:
-	 * (real) area_aberturas: √°rea total das aberturas presentes em uma parede, como portas e janelas.
+	 * (real) area_aberturas: ·rea total das aberturas presentes em uma parede, como portas e janelas.
 	 */
 	funcao real calcula_area_aberturas() {
 	    inteiro qtde_aberturas = 0
@@ -1003,12 +1003,12 @@ programa
 	    para (inteiro i=0; i<qtde_aberturas; i++) {
 	    	inteiro abertura = i+1
 	        faca {
-	            escreva("\nAltura da " + abertura + "¬™ abertura em metros: ")
+	            escreva("\nAltura da " + abertura + "™ abertura em metros: ")
 	            leia(altura_abertura)
 	        } enquanto (altura_abertura <= 0)
 	
 	        faca {
-	            escreva("Comprimento da " + abertura + "¬™ abertura em metros: ")
+	            escreva("Comprimento da " + abertura + "™ abertura em metros: ")
 	            leia(comprimento_abertura)
 	        } enquanto (comprimento_abertura <= 0)
 	
@@ -1019,11 +1019,11 @@ programa
 	}
 	
 	/*
-	 * Exibe op√ß?es de tijolos para que o usu√°rio possa escolher o tijolo que
+	 * Exibe opÁ?es de tijolos para que o usu·rio possa escolher o tijolo que
 	 * deseja utilizar em sua obra.
 	 *
 	 * Retorna:
-	 * (inteiro) tipo_tijolo: tipo de tijolo escolhido pelo usu√°rio.
+	 * (inteiro) tipo_tijolo: tipo de tijolo escolhido pelo usu·rio.
 	 */
 	funcao inteiro escolhe_tipo_tijolo() {
 	    inteiro tipo_tijolo
@@ -1035,12 +1035,12 @@ programa
 	    faca {
 	        escreva("\nSelecione o tipo do tijolo: \n\n")
 	
-	        escreva(" 1 - Blocos Cer√¢micos\n")
-	        escreva(" 2 - Tijolos Maci√ßos\n")
+	        escreva(" 1 - Blocos Cer‚micos\n")
+	        escreva(" 2 - Tijolos MaciÁos\n")
 	        escreva(" 3 - Tijolos de Adobe\n")
 	        escreva(" 4 - Tijolos Laminados\n")
 	        escreva(" 5 - Tijolos e Blocos de Concreto\n")
-	        escreva(" 6 - Tijolos Ecol√≥gicos\n")
+	        escreva(" 6 - Tijolos EcolÛgicos\n")
 	
 	
 	        escreva("\n\nSua escolha: ")
@@ -1052,10 +1052,10 @@ programa
 	
 	/* Conta quantas ocorrencias um determinado caracter tem em uma determinada string
 	 *
-	 * Par√¢metros:
-	 * (cadeia) str: string onde o caracter ser√° contado
+	 * Par‚metros:
+	 * (cadeia) str: string onde o caracter ser· contado
 	 * (inteiro) str_length: tamanho da string
-	 * (caracter) ch: caracter que ser√° contado
+	 * (caracter) ch: caracter que ser· contado
 	 *
 	 * Retorno:
 	 * (inteiro) quantidade de caracteres ch na string str
@@ -1075,10 +1075,10 @@ programa
 
 	/* Transforma uma string em um vetor de inteiros. Divide a string nos pontos demarcados por um determinado caracter e coloca em um vetor inteiro
 	 *
-	 * Par√¢metros:
-	 * (cadeia) string: string que ser√° dividida
-	 * (inteiro) vetor_destino: vetor que receber√° os valores da string
-	 * (caracter) delimiter: caracter que indica o ponto de divis√£o
+	 * Par‚metros:
+	 * (cadeia) string: string que ser· dividida
+	 * (inteiro) vetor_destino: vetor que receber· os valores da string
+	 * (caracter) delimiter: caracter que indica o ponto de divis„o
 	 */
 	funcao split_string_int(cadeia string, inteiro &vetor_destino[], caracter delimiter)
 	{
@@ -1104,10 +1104,10 @@ programa
 	
 	/* Transforma uma string em um vetor de reais. Divide a string nos pontos demarcados por um determinado caracter e coloca em um vetor real
 	 *
-	 * Par√¢metros:
-	 * (cadeia) string: string que ser√° dividida
-	 * (real) vetor_destino: vetor que receber√° os valores da string
-	 * (caracter) delimiter: caracter que indica o ponto de divis√£o
+	 * Par‚metros:
+	 * (cadeia) string: string que ser· dividida
+	 * (real) vetor_destino: vetor que receber· os valores da string
+	 * (caracter) delimiter: caracter que indica o ponto de divis„o
 	 */
 	funcao split_string_float(cadeia string, real &vetor_destino[], caracter delimiter)
 	{
@@ -1129,15 +1129,15 @@ programa
 	    }
 	}
 	
-	/* Unifica um vetor de reais em uma string, cada elemento sendo separado por um padr√£o especificado
+	/* Unifica um vetor de reais em uma string, cada elemento sendo separado por um padr„o especificado
 	 *
-	 * Par√¢metros:
-	 * (real) array: vetor que ser√° unificado
-	 * (inteiro) array_length: tamanho do vetor que ser√° unificado
-	 * (cadeia) separator: padr√£o que ir√° separar os elementos na string
+	 * Par‚metros:
+	 * (real) array: vetor que ser· unificado
+	 * (inteiro) array_length: tamanho do vetor que ser· unificado
+	 * (cadeia) separator: padr„o que ir· separar os elementos na string
 	 *
 	 * Retorna:
-	 * (cadeia) string: string contendo o conte√∫do j√° unificado do vetor
+	 * (cadeia) string: string contendo o conte˙do j· unificado do vetor
 	 */
 	funcao cadeia split_float_array(real array[], inteiro array_length, cadeia separator) 
 	{
@@ -1158,17 +1158,17 @@ programa
 	}
 	
 	/*
-	 * Escreve um registro no arquivo ou atualiza esse registro se ele j√° existir
+	 * Escreve um registro no arquivo ou atualiza esse registro se ele j· existir
 	 * 
-	 * Par√¢metros:
-	 * (cadeia) dir: diret√≥rio  do arquivo que ser√° lido
+	 * Par‚metros:
+	 * (cadeia) dir: diretÛrio  do arquivo que ser· lido
 	 * (cadeia) chave: identificador do registro a ser inserido
 	 * (cadeia) valor: valor do registro a ser inserido
 	 * 
 	 * Retorna:
 	 * (inteiro) 0: erro
-	 * (inteiro) 1: criou o arquivo (logo s√≥ existe um registro)
-	 * (inteiro) 2: atualizou o registro ou o arquivo j√° existe e o registro foi inserido
+	 * (inteiro) 1: criou o arquivo (logo sÛ existe um registro)
+	 * (inteiro) 2: atualizou o registro ou o arquivo j· existe e o registro foi inserido
 	 */
 	funcao inteiro grava_registro(cadeia dir, cadeia chave, cadeia valor){
 
@@ -1249,14 +1249,14 @@ programa
 		
 	}
 
-	/* L√™ um registro do arquivo
+	/* LÍ um registro do arquivo
 	 * 
-	 * Par√¢metros:
-	 * (cadeia) dir: diret√≥rio  do arquivo que ser√° lido
+	 * Par‚metros:
+	 * (cadeia) dir: diretÛrio  do arquivo que ser· lido
 	 * (cadeia) chave: identificador do registro buscado
 	 * 
 	 * Retorna:
-	 * (cadeia): valor do registro, ou nulo caso o registro ou arquivo n√£o existe
+	 * (cadeia): valor do registro, ou nulo caso o registro ou arquivo n„o existe
 	 */
 	funcao cadeia ler_registro(cadeia dir, cadeia chave){
 	
@@ -1270,13 +1270,13 @@ programa
 
 				se(linha != ""){
 
-					//Extrai a chave da linha lida a partir da posi√ß√£o do espa√ßo divisor da chave e valor
+					//Extrai a chave da linha lida a partir da posiÁ„o do espaÁo divisor da chave e valor
 					cadeia chave_lida = Texto.extrair_subtexto(linha, 0, Texto.posicao_texto(";", linha, 0) )
 					
 					se(chave_lida == chave){
 
 						Arquivos.fechar_arquivo(arquivo)
-						//Extrai o valor da chave da linha lida, a partir da posi√ß√£o do espa√ßo que divide a chave e o valor
+						//Extrai o valor da chave da linha lida, a partir da posiÁ„o do espaÁo que divide a chave e o valor
 						retorne Texto.extrair_subtexto(linha, Texto.posicao_texto(";", linha, 0) + 1,  Texto.numero_caracteres(linha))
 						
 					}
@@ -1299,10 +1299,10 @@ programa
 		cadeia diretorio = "", valor = "", nome_arq = ""
 		inteiro erro = 0, status = 0, usr_opt = 0
 	
-		escreva("\nDigite o diret√≥rio para salvar o arquivo: ")
+		escreva("\nDigite o diretÛrio para salvar o arquivo: ")
 		leia(diretorio)
 	
-		escreva("Escolher um nome para o arquivo?\n 1 - Sim\n 2 - N√£o, usar um nome gen√©rico\n\nSua escolha: ")
+		escreva("Escolher um nome para o arquivo?\n 1 - Sim\n 2 - N„o, usar um nome genÈrico\n\nSua escolha: ")
 		leia(usr_opt)
 	
 		se(usr_opt == 1){
@@ -1662,7 +1662,7 @@ programa
 			}
 	
 			se(erro > 0){
-				escreva("\nOcorreram ", erro, " erros ao salvar o arquivo. Deseja tentar novamente?\n 1 - Sim\n 2 - N√£o\n\nSua escolha: ")
+				escreva("\nOcorreram ", erro, " erros ao salvar o arquivo. Deseja tentar novamente?\n 1 - Sim\n 2 - N„o\n\nSua escolha: ")
 		        leia(usr_opt)
 			}
 	
@@ -1671,16 +1671,16 @@ programa
 	}
 
 	
-	//Segue a rotina de criar um novo or√ßamento
+	//Segue a rotina de criar um novo orÁamento
 	funcao novo_orcamento()
 	{
 	
 	    //Geral
-	    inteiro usr_opt = 0 //Usada para receber as escolhas do usu√°rio quando forem apresentadas op√ß?es
+	    inteiro usr_opt = 0 //Usada para receber as escolhas do usu·rio quando forem apresentadas opÁ?es
 	    
-	    logico chave_mestra = falso // chave de decis√£o para escolha de tipo de fun√ß√£o a ser passada
+	    logico chave_mestra = falso // chave de decis„o para escolha de tipo de funÁ„o a ser passada
 	
-	    caracter usr_rsp //Armazena a resposa do usu√°rio quando este deve responder com 'S - Sim' ou 'N - N√£o'
+	    caracter usr_rsp //Armazena a resposa do usu·rio quando este deve responder com 'S - Sim' ou 'N - N„o'
 	
 	    //ESTRUTURAS
 	    //ALGORITMO PARA CALCULO DE ESTRUTURAS DA CONSTRUCAO CIVIL BASEADO NO SOLO
@@ -1690,11 +1690,11 @@ programa
 	
 	        faca{
 	
-	            escreva("Digite a √°rea de constru√ß√£o (em metros): ")
+	            escreva("Digite a ·rea de construÁ„o (em metros): ")
 	            leia(g_area_total)
 	
 	            se(g_area_total <= 0){
-	                escreva("Valor inv√°lido.\n")
+	                escreva("Valor inv·lido.\n")
 	            }
 	
 	        }enquanto(g_area_total <= 0)
@@ -1705,53 +1705,53 @@ programa
 	            leia(g_profundidade_colunas)
 	
 	            se(g_profundidade_colunas <= 0){
-	                escreva("Valor inv√°lido.\n")
+	                escreva("Valor inv·lido.\n")
 	            }
 	
 	        }enquanto(g_profundidade_colunas <= 0)
 	
 	        faca{
 	
-	            escreva("Digite o di√¢metro das colunas(em cent√≠metros): ")
+	            escreva("Digite o di‚metro das colunas(em centÌmetros): ")
 	            leia(g_diametro_colunas)
 	
 	            se(g_diametro_colunas <= 0){
-	                escreva("Valor inv√°lido.\n")
+	                escreva("Valor inv·lido.\n")
 	            }
 	
 	        }enquanto(g_diametro_colunas <= 0)
 	
-	        g_diametro_colunas = converte(g_diametro_colunas) //Fun√ß√£o converte virifica e corrije se necessario, retornando um valor sempre em metros, para caso o usu√°rio cometa algum erro de unidade de medida
+	        g_diametro_colunas = converte(g_diametro_colunas) //FunÁ„o converte virifica e corrije se necessario, retornando um valor sempre em metros, para caso o usu·rio cometa algum erro de unidade de medida
 	
 	        //escreva("g_diametro_colunas = %.2f\n", g_diametro_colunas) - printfs apenas para verificar a veracidade dos dados...
 	
 	        faca{
 	
-	            escreva("Digite a largura dos baldrames (em cent√≠metros): ")
+	            escreva("Digite a largura dos baldrames (em centÌmetros): ")
 	            leia(g_larg_bald)
 	
 	            se(g_larg_bald <= 0){
-	                escreva("Valor inv√°lido.\n")
+	                escreva("Valor inv·lido.\n")
 	            }
 	
 	        }enquanto(g_larg_bald <= 0)
 	
-	         g_larg_bald = converte(g_larg_bald) //Fun√ß√£o converte virifica e corrije se necessario, retornando um valor sempre em metros, para caso o usu√°rio cometa algum erro de unidade de medida
+	         g_larg_bald = converte(g_larg_bald) //FunÁ„o converte virifica e corrije se necessario, retornando um valor sempre em metros, para caso o usu·rio cometa algum erro de unidade de medida
 	
 	         //escreva("LARGURA = %.2f\n", g_larg_bald)
 	
 	        faca{
 	
-	            escreva("Digite a profundidade dos baldrames (em cent√≠metros): ")
+	            escreva("Digite a profundidade dos baldrames (em centÌmetros): ")
 	            leia(g_prof_bald)
 	
 	            se(g_prof_bald <= 0){
-	                escreva("Valor inv√°lido.\n")
+	                escreva("Valor inv·lido.\n")
 	            }
 	
 	        }enquanto(g_prof_bald <= 0)
 	
-	        g_prof_bald = converte(g_prof_bald)//Fun√ß√£o converte virifica e corrije se necessario, retornando um valor sempre em metros, para caso o usu√°rio cometa algum erro de unidade de medida
+	        g_prof_bald = converte(g_prof_bald)//FunÁ„o converte virifica e corrije se necessario, retornando um valor sempre em metros, para caso o usu·rio cometa algum erro de unidade de medida
 	
 	        //escreva("g_profundidade_colunas = %.2f\n", g_prof_bald)
 	
@@ -1761,7 +1761,7 @@ programa
 	            leia(g_perimetro_total)
 	
 	            se(g_perimetro_total <= 0){
-	                escreva("Valor inv√°lido.\n")
+	                escreva("Valor inv·lido.\n")
 	            }
 	
 	        }enquanto(g_perimetro_total <= 0)
@@ -1772,7 +1772,7 @@ programa
 	            leia(g_alt_paredes)
 	
 	            se(g_alt_paredes <= 0){
-	                escreva("Valor inv√°lido.\n")
+	                escreva("Valor inv·lido.\n")
 	            }
 	
 	        }enquanto(g_alt_paredes <= 0)
@@ -1780,28 +1780,28 @@ programa
 	
 	        g_qtde_colunas = g_perimetro_total/3
 	
-	        g_qtde_cimento = calcula_cimento(g_profundidade_colunas, g_diametro_colunas, g_larg_bald, g_prof_bald, g_perimetro_total, g_alt_paredes, g_qtde_colunas)//calcula e armazena o valor retornado das √°reas de estruturas (CALCULO CIMENTO)
+	        g_qtde_cimento = calcula_cimento(g_profundidade_colunas, g_diametro_colunas, g_larg_bald, g_prof_bald, g_perimetro_total, g_alt_paredes, g_qtde_colunas)//calcula e armazena o valor retornado das ·reas de estruturas (CALCULO CIMENTO)
 	
 	        escreva("\n------\n")
-	        escreva("Conclu√≠do.")
+	        escreva("ConcluÌdo.")
 	        escreva("\n------\n")
 	
-	        escreva("\nRecalcular este or√ßamento?\n 1 - Sim\n 2 - N√£o\n\nSua escolha: ")
+	        escreva("\nRecalcular este orÁamento?\n 1 - Sim\n 2 - N„o\n\nSua escolha: ")
 	        leia(usr_opt)
 	
 	  	} enquanto (usr_opt == 1)
 	
 	    faca{
 	
-	        escreva("\n--------------------\nOR√áAMENTO DAS FERRAGENS\n--------------------\n")
+	        escreva("\n--------------------\nOR«AMENTO DAS FERRAGENS\n--------------------\n")
 	
-	        calcula_ferro(g_perimetro_total, g_profundidade_colunas, g_alt_paredes, g_qtde_colunas, g_larg_bald, g_prof_bald)//fun√ß√£o calcula a quantidade necess√°ria de ferro 3/8 e 3/16, armazenando os dados num vetor global.
+	        calcula_ferro(g_perimetro_total, g_profundidade_colunas, g_alt_paredes, g_qtde_colunas, g_larg_bald, g_prof_bald)//funÁ„o calcula a quantidade necess·ria de ferro 3/8 e 3/16, armazenando os dados num vetor global.
 	
 	        escreva("\n------\n")
-	        escreva("Conclu√≠do.")
+	        escreva("ConcluÌdo.")
 	        escreva("\n------\n")
 	
-	        escreva("\nRecalcular este or√ßamento?\n 1 - Sim\n 2 - N√£o\n\nSua escolha: ")
+	        escreva("\nRecalcular este orÁamento?\n 1 - Sim\n 2 - N„o\n\nSua escolha: ")
 	        leia(usr_opt)
 	
 	  	} enquanto (usr_opt == 1)
@@ -1810,17 +1810,17 @@ programa
 	
 	        faca{
 	
-	            escreva("\nDigite a √°rea que deseja colocar pisos: ")
+	            escreva("\nDigite a ·rea que deseja colocar pisos: ")
 	            leia(g_area_piso)
 	
 	            se(g_area_piso >= g_area_total){
-	                escreva("A √°rea do piso n√£o pode ser maior do que a √°rea total!!\n")
+	                escreva("A ·rea do piso n„o pode ser maior do que a ·rea total!!\n")
 	            }
 	
 	        }enquanto(g_area_piso >= g_area_total)
 	
-	        // escreva("Quantidade m√≠nima de colunas: %d\n", g_qtde_colunas)
-	        // escreva("total: %.2f m¬≥ de cimento",g_qtde_cimento)
+	        // escreva("Quantidade mÌnima de colunas: %d\n", g_qtde_colunas)
+	        // escreva("total: %.2f m≥ de cimento",g_qtde_cimento)
 	
 	        g_piso = escolhe_piso()
 	
@@ -1842,10 +1842,10 @@ programa
 	        }
 	
 	        escreva("\n------\n")
-	        escreva("Conclu√≠do.")
+	        escreva("ConcluÌdo.")
 	        escreva("\n------\n")
 	
-	        escreva("\nRecalcular este or√ßamento?\n 1 - Sim\n 2 - N√£o\n\nSua escolha: ")
+	        escreva("\nRecalcular este orÁamento?\n 1 - Sim\n 2 - N„o\n\nSua escolha: ")
 	        leia(usr_opt)
 	
 	  	} enquanto (usr_opt == 1)
@@ -1853,13 +1853,13 @@ programa
 	    faca
 	    {
 	
-	    	escreva("\n--------------------\nOR√áAMENTO DO TELHADO\n--------------------\n")
+	    	escreva("\n--------------------\nOR«AMENTO DO TELHADO\n--------------------\n")
 	
 	        escreva("\nBASE DO TELHADO")
 	        faca
 	        {
 	            escreva("\n------\n\n")
-	            //L√™ a largura e comprimento da base do telhado (laje)
+	            //LÍ a largura e comprimento da base do telhado (laje)
 	            escreva(" Digite a largura da base do telhado(m): ")
 	            leia(g_largura_base)
 	
@@ -1875,27 +1875,27 @@ programa
 	
 	        faca
 	        {
-	            //L√™ a inclina√ß√£o desejada para o telhado em porcentagem.
-	            //Com essa inclina√ß√£o ser√° calculada a altura do centro do telhado (cumeerira, onde os "lados" do telhado se dividem (/|\)).
-	            //Essa porcentagem √© calculada em cima da metade da largura da laje.
-	            escreva(" Informe a inclina√ß√£o desejada (deve ser maior que 30%): ")
+	            //LÍ a inclinaÁ„o desejada para o telhado em porcentagem.
+	            //Com essa inclinaÁ„o ser· calculada a altura do centro do telhado (cumeerira, onde os "lados" do telhado se dividem (/|\)).
+	            //Essa porcentagem È calculada em cima da metade da largura da laje.
+	            escreva(" Informe a inclinaÁ„o desejada (deve ser maior que 30%): ")
 	            leia(g_inclinacao)
 	
-	            //Inclina√ß√£o abaixo de 30% n√£o √© normatizada
+	            //InclinaÁ„o abaixo de 30% n„o È normatizada
 	            se(g_inclinacao < 30)
 	            {
-	                escreva("\nInclina√ß√£o inv√°lida. Deve ser maior que 30%.")
+	                escreva("\nInclinaÁ„o inv·lida. Deve ser maior que 30%.")
 	            }
 	
 	        }enquanto(g_inclinacao < 30)
 	
-	        //Calcula a √°rea do telhado considerando a inclina√ß√£o
+	        //Calcula a ·rea do telhado considerando a inclinaÁ„o
 	        g_area_telhado_corrigida = corrigir_area(g_inclinacao, g_largura_base, g_comprimento_base)
 	
-	        //Exibe a √°rea da laje e a inclina√ß√£o calculados
-	        escreva("\n√Årea calculada: ", g_largura_base * g_comprimento_base)
-	        escreva("\nInclina√ß√£o: ", g_inclinacao)
-	        escreva("\n√Årea do telhado corrigida, considerando a inclina√ß√£o: ", g_area_telhado_corrigida)
+	        //Exibe a ·rea da laje e a inclinaÁ„o calculados
+	        escreva("\n¡rea calculada: ", g_largura_base * g_comprimento_base)
+	        escreva("\nInclinaÁ„o: ", g_inclinacao)
+	        escreva("\n¡rea do telhado corrigida, considerando a inclinaÁ„o: ", g_area_telhado_corrigida)
 	
 	        escreva("\n\nTELHAS")
 	        escreva("\n------\n\n")
@@ -1910,17 +1910,17 @@ programa
 	        faca
 	        {
 	
-	            escreva("\nInforme o preco unit√°rio das telhas: ")
+	            escreva("\nInforme o preco unit·rio das telhas: ")
 	            leia(g_preco_unit)
 	
 	            se(g_preco_unit <= 0.0)
 	            {
-	                escreva("\nO pre√ßo unit√°rio deve ser maior que zero.\n\n")
+	                escreva("\nO preÁo unit·rio deve ser maior que zero.\n\n")
 	            }
 	
 	        }enquanto(g_preco_unit <= 0.0)
 	
-	        //Calcula o pre√ßo final das telhas
+	        //Calcula o preÁo final das telhas
 	        g_custo_total = calcula_preco(g_qtde_telhas, g_preco_unit)
 	
 	        escreva("Custo total das telhas: R$ ", g_custo_total)
@@ -1928,29 +1928,29 @@ programa
 	        escreva("\n\nMADEIRAMENTO")
 	        escreva("\n------\n\n")
 	
-	        //Calcula a quantidade de ter√ßas
-	        escreva("Ter√ßas:\n Digite o espa√ßamento das ter√ßas (m): ")
+	        //Calcula a quantidade de terÁas
+	        escreva("TerÁas:\n Digite o espaÁamento das terÁas (m): ")
 	        leia(g_tercas_espacamento)
 	
 	        g_qtde_tercas = Matematica.arredondar(g_largura_base / g_tercas_espacamento, 0)
 	        g_metragem_tercas = g_comprimento_base * g_qtde_tercas
 	
-	        escreva(" Quantidade de ter√ßas de ", g_comprimento_base, " metros: ", g_qtde_tercas, "\n")
-	        escreva(" Quantidade de metros de ter√ßas: ", g_metragem_tercas)
+	        escreva(" Quantidade de terÁas de ", g_comprimento_base, " metros: ", g_qtde_tercas, "\n")
+	        escreva(" Quantidade de metros de terÁas: ", g_metragem_tercas)
 	
 	        //Calcula a quantidade de pontaletes
 	        escreva("\n\nPontaletes:\n")
 	
 	        g_metragem_pontaletes = (
 		        ( ( (g_largura_base / 2) * g_inclinacao ) / 100 ) * 2 +
-		        ( ( ( (g_largura_base / 2) / 2 ) * g_inclinacao ) / 100 ) * 6 // 3 pontaletes em cada √°gua
+		        ( ( ( (g_largura_base / 2) / 2 ) * g_inclinacao ) / 100 ) * 6 // 3 pontaletes em cada ·gua
 		    )
 	
 	        escreva(" Quantidade de metros de pontaletes: ", g_metragem_pontaletes)
 	
-	        //Calcula a quantidade de ber√ßos
-	        //Para cada pontalete h√° 1 ber√ßo de 0.5m
-	        escreva("\n\nBer√ßos:\n Quantidade de metros de ber√ßos: ", 8 * 0.5)
+	        //Calcula a quantidade de berÁos
+	        //Para cada pontalete h· 1 berÁo de 0.5m
+	        escreva("\n\nBerÁos:\n Quantidade de metros de berÁos: ", 8 * 0.5)
 	
 	        //Calcula a quantidade de madeira para a trama, que inclui os caibros e as ripas
 	        escreva("\n\nTrama:\n")
@@ -1971,7 +1971,7 @@ programa
 	
 	        escreva("\n Ripas:\n")
 	
-	        escreva("  Digite o comprimento da garga eme metros: ")
+	        escreva("  Digite o comprimento da garga em metros: ")
 	        leia(g_comprimento_garga)
 	
 	        g_qtde_ripas = 2 * Matematica.arredondar((g_largura_base / 2) / g_comprimento_garga, 0)
@@ -1981,20 +1981,20 @@ programa
 	        escreva("\n  Quantidade de metros de ripas: ", g_metragem_ripas, "\n")
 	
 	        escreva("\n------\n")
-	        escreva("Conclu√≠do.")
+	        escreva("ConcluÌdo.")
 	        escreva("\n------\n")
 	
-	        escreva("\nRecalcular este or√ßamento?\n 1 - Sim\n 2 - N√£o\n\nSua escolha: ")
+	        escreva("\nRecalcular este orÁamento?\n 1 - Sim\n 2 - N„o\n\nSua escolha: ")
 	        leia(usr_opt)
 	
 	    }enquanto(usr_opt == 1)
 	
-	    inteiro tipo_tijolo = 0, //Armazena o tipo de tijolo selecionado pelo usu√°rio.
-	        tipo_revesitmento = 0, //Armanzena o tipo de revestimento selecionado pelo usu√°rio.
-	        qtde_oitoes = 0 //Quantidade total de oit√µes presentes na constru√ß√£o.
+	    inteiro tipo_tijolo = 0, //Armazena o tipo de tijolo selecionado pelo usu·rio.
+	        tipo_revesitmento = 0, //Armanzena o tipo de revestimento selecionado pelo usu·rio.
+	        qtde_oitoes = 0 //Quantidade total de oitıes presentes na construÁ„o.
 	    
 		  	faca {
-			    escreva("--------------------\nOR√áAMENTO DOS TIJOLOS\n--------------------\n")
+			    escreva("--------------------\nOR«AMENTO DOS TIJOLOS\n--------------------\n")
 	
 			    faca {
 			        escreva("Digite a quantidade de paredes que deseja construir: ")
@@ -2006,18 +2006,18 @@ programa
 			        leia(qtde_oitoes)
 			    } enquanto(qtde_oitoes <= 0)
 	
-			    real areas_oitoes[QTDE_OITOES], //Vetor que armazena a √°rea unit√°ria de cada oit√£o em cada posi√ß√£o.
-	            areas_aberturas[QTDE_PAREDES], //Vetor que armazena a √°rea das aberturas presentes por parede em cada posi√ß√£o.
-	            qtde_tijolos_por_parede[QTDE_PAREDES], //Vetor que armazena a quantidade de tijolos necess√°ria para construir cada parede em casa posi√ß√£o.
-	            qtde_tijolos_por_oitao[QTDE_OITOES] //Vetor que armazena a quantidade de tijolos necess√°ria para construir cada oit√£o em cada posi√ß√£o.
+			    real areas_oitoes[QTDE_OITOES], //Vetor que armazena a ·rea unit·ria de cada oit„o em cada posiÁ„o.
+	            areas_aberturas[QTDE_PAREDES], //Vetor que armazena a ·rea das aberturas presentes por parede em cada posiÁ„o.
+	            qtde_tijolos_por_parede[QTDE_PAREDES], //Vetor que armazena a quantidade de tijolos necess·ria para construir cada parede em casa posiÁ„o.
+	            qtde_tijolos_por_oitao[QTDE_OITOES] //Vetor que armazena a quantidade de tijolos necess·ria para construir cada oit„o em cada posiÁ„o.
 	
 			    para (inteiro i=0; i<g_qtde_paredes; i++) {
 			        inteiro parede = i + 1
-	                escreva("\n----- " + parede + "¬™ parede -----\n")
+	                escreva("\n----- " + parede + "™ parede -----\n")
 	    
 			        faca {
-			            escreva("\nA ", parede, "¬™ parede apresenta aberturas como portas e janelas?")
-			            escreva("\n S - Sim\n N - N√£o\n")
+			            escreva("\nA ", parede, "™ parede apresenta aberturas como portas e janelas?")
+			            escreva("\n S - Sim\n N - N„o\n")
 			            escreva("Sua escolha: ")
 			            leia(usr_rsp)
 			        } enquanto (usr_rsp!='S' e usr_rsp!='s' e usr_rsp!='N' e usr_rsp!='n')
@@ -2030,16 +2030,16 @@ programa
 	
 			        g_areas_paredes[i] = calcula_area_parede(areas_aberturas[i])
 	
-			        escreva("\n√Årea da ", parede, "¬™ parede, com as √°reas das aberturas descontadas √© de: ", g_areas_paredes[i], "m¬≤\n\n")
+			        escreva("\n¡rea da ", parede, "™ parede, com as ·reas das aberturas descontadas È de: ", g_areas_paredes[i], "m≤\n\n")
 			    }
 	
 			    para (inteiro i=0; i<qtde_oitoes; i++) {
 			        inteiro oitao = i+1
-	                escreva("\n----- " + oitao + "¬∫ oit√£o -----\n")
+	                escreva("\n----- " + oitao + "∫ oit„o -----\n")
 	    
 			        areas_oitoes[i] = calcula_area_oitao()
 	
-			        escreva("\n√Årea do ", oitao, "¬∫ oit√£o: ", areas_oitoes[i], "m¬≤\n\n")
+			        escreva("\n¡rea do ", oitao, "∫ oit„o: ", areas_oitoes[i], "m≤\n\n")
 			    }
 	
 			    tipo_tijolo = escolhe_tipo_tijolo()
@@ -2047,14 +2047,14 @@ programa
 			    escolha (tipo_tijolo) {
 			        caso 1:
 			            escreva("\n--------------------\n")
-			            escreva("Blocos Cer√¢micos\n")
-			            g_tipo_tijolo = "Blocos Cer√¢micos"
+			            escreva("Blocos Cer‚micos\n")
+			            g_tipo_tijolo = "Blocos Cer‚micos"
 			            pare
 	
 			        caso 2:
 			            escreva("\n--------------------\n")
-			            escreva("Tijolos Maci√ßos\n")
-			            g_tipo_tijolo = "Tijolos Maci√ßos"
+			            escreva("Tijolos MaciÁos\n")
+			            g_tipo_tijolo = "Tijolos MaciÁos"
 			            pare
 	
 			        caso 3:
@@ -2077,8 +2077,8 @@ programa
 	
 			        caso 6:
 			            escreva("\n--------------------\n")
-			            escreva("Tijolos Ecol√≥gicos\n")
-			            g_tipo_tijolo = "Tijolos Ecol√≥gicos"
+			            escreva("Tijolos EcolÛgicos\n")
+			            g_tipo_tijolo = "Tijolos EcolÛgicos"
 			            pare
 			    }
 	
@@ -2087,7 +2087,7 @@ programa
 			    escreva("\nRendimento: ", g_qtde_tijolo_metro_quadrado, " tijolos por metro quadrado.\n")
 	
 			    faca {
-			        escreva("\nPre√ßo Unit√°rio do Tijolo: R$ ")
+			        escreva("\nPreÁo Unit·rio do Tijolo: R$ ")
 			        leia(g_preco_unit_tijolo)
 			    } enquanto (g_preco_unit_tijolo <= 0)
 	
@@ -2101,20 +2101,20 @@ programa
 			    escreva("\n ", g_qtde_total_tijolos, " tijolos")
 	
 			    g_custo_total_tijolos = g_preco_unit_tijolo * g_qtde_total_tijolos
-			    escreva("\n\n----- Pre√ßo total - Tijolos -----")
+			    escreva("\n\n----- PreÁo total - Tijolos -----")
 			    escreva("\n R$ ", g_custo_total_tijolos)
 	
 		        escreva("\n------\n")
-		        escreva("Conclu√≠do.")
+		        escreva("ConcluÌdo.")
 		        escreva("\n------\n")
 	
-		        escreva("\nRecalcular or√ßamento?\n 1 - Sim\n 2 - N√£o\n\nSua escolha: ")
+		        escreva("\nRecalcular orÁamento?\n 1 - Sim\n 2 - N„o\n\nSua escolha: ")
 		        leia(usr_opt)
 	
 		  	} enquanto (usr_opt == 1)
 	
 		  	faca {
-			    escreva("\n--------------------\nOR√áAMENTO DO REVESTIMENTO DE PISO\n--------------------\n")
+			    escreva("\n--------------------\nOR«AMENTO DO REVESTIMENTO DE PISO\n--------------------\n")
 	
 			    tipo_revesitmento = escolhe_tipo_revestimento()
 	
@@ -2140,8 +2140,8 @@ programa
 	
 			        caso 4:
 			            escreva("\n--------------------\n")
-			            escreva("Ladrilho hidr√°ulico\n")
-			            g_tipo_revestimento = "Ladrilho Hidr√°ulico"
+			            escreva("Ladrilho hidr·ulico\n")
+			            g_tipo_revestimento = "Ladrilho Hidr·ulico"
 			            pare
 	
 			        caso 5:
@@ -2156,7 +2156,7 @@ programa
 			    escreva("\nRendimento: ", g_qtde_revestimento_metro_quadrado, " unidade(s) de revestimento por metro quadrado.\n")
 	
 			    faca {
-			        escreva("\nPre√ßo Unit√°rio do Revestimento: R$ ")
+			        escreva("\nPreÁo Unit·rio do Revestimento: R$ ")
 			        leia(g_preco_unit_revestimento)
 			    } enquanto (g_preco_unit_revestimento <= 0)
 	
@@ -2168,53 +2168,53 @@ programa
 			    escreva("\n ", g_qtde_total_revestimento, " unidades de revestimento")
 	
 			    g_custo_total_revestimento = g_preco_unit_revestimento * g_qtde_total_revestimento
-			    escreva("\n\n----- Pre√ßo total - Revestimento -----")
+			    escreva("\n\n----- PreÁo total - Revestimento -----")
 			    escreva("\n R$ ", g_custo_total_revestimento, "\n")
 	
 		        escreva("\n------\n")
-		        escreva("Conclu√≠do.")
+		        escreva("ConcluÌdo.")
 		        escreva("\n------\n")
 	
-		        escreva("\nRecalcular or√ßamento?\n 1 - Sim\n 2 - N√£o\n\nSua escolha: ")
+		        escreva("\nRecalcular orÁamento?\n 1 - Sim\n 2 - N„o\n\nSua escolha: ")
 		        leia(usr_opt)
 	
 		  	} enquanto (usr_opt == 1)
 	
 		faca {
-		    escreva("\n--------------------\nOR√áAMENTO DA TINTA\n--------------------\n")
+		    escreva("\n--------------------\nOR«AMENTO DA TINTA\n--------------------\n")
 	
-		    real area_tetos = 0.0 //Armazena a √°rea total do teto da constru√ß√£o.
+		    real area_tetos = 0.0 //Armazena a ·rea total do teto da construÁ„o.
 	
 		    faca {
-		        escreva("\n√Årea total do teto presente na constru√ß√£o: ")
+		        escreva("\n¡rea total do teto presente na construÁ„o: ")
 		        leia(area_tetos)
 		    } enquanto (area_tetos <= 0)
 	
 		    g_qtde_total_galoes_tinta = calcula_qtde_total_galoes_tinta(area_tetos)
 		    g_qtde_total_galoes_tinta += Matematica.arredondar(TAXA_DE_PERDA * g_qtde_total_galoes_tinta, 0)
 	
-		    escreva("\n\n----- Quantidade total de gal?es de tinta -----\n")
-		    escreva(g_qtde_total_galoes_tinta, " gal?es de tinta")
+		    escreva("\n\n----- Quantidade total de galıes de tinta -----\n")
+		    escreva(g_qtde_total_galoes_tinta, " galıes de tinta")
 	
 		    faca {
-		        escreva("\nPre√ßo Unit√°rio do Gal√£o de Tinta: R$ ")
+		        escreva("\nPreÁo Unit·rio do Gal„o de Tinta: R$ ")
 		        leia(g_preco_unit_galao_tinta)
 		    } enquanto (g_preco_unit_galao_tinta <= 0)
 	
 		    g_custo_total_galao_tinta = g_preco_unit_galao_tinta * g_qtde_total_galoes_tinta
-		    escreva("\n\n----- Pre√ßo total - Tinta -----")
+		    escreva("\n\n----- PreÁo total - Tinta -----")
 		    escreva("\n R$ ", g_custo_total_galao_tinta, "\n")
 	
 	        escreva("\n------\n")
-	        escreva("Conclu√≠do.")
+	        escreva("ConcluÌdo.")
 	        escreva("\n------\n")
 	
-	        escreva("\nRecalcular or√ßamento?\n 1 - Sim\n 2 - N√£o\n\nSua escolha: ")
+	        escreva("\nRecalcular orÁamento?\n 1 - Sim\n 2 - N„o\n\nSua escolha: ")
 	        leia(usr_opt)
 	
 	  	} enquanto (usr_opt == 1)
 	
-	  	escreva("\n\nDeseja salvar o or√ßamento?\n 1 - Sim\n 2 - N√£o\n\nSua escolha: ")
+	  	escreva("\n\nDeseja salvar o orÁamento?\n 1 - Sim\n 2 - N„o\n\nSua escolha: ")
 	  	leia(usr_opt)
 	
 	  	se(usr_opt == 1){
@@ -2229,18 +2229,18 @@ programa
 	{
 	
 	    cadeia dir = "",
-	        linha //vari√°vel usada para armazenar temporariamente o valor lido do arquivo, especificamente para os dados relativos ?s paredes, que podem ser v√°rias em uma linha
+	        linha //vari·vel usada para armazenar temporariamente o valor lido do arquivo, especificamente para os dados relativos ?s paredes, que podem ser v·rias em uma linha
 	
 	    inteiro ctrl = 0, i
 	
-	    inteiro size // Vari√°vel que armazena o tamanho dos vetores dos dados realtivos as paredes
-	    real areas_paredes[QTDE_PAREDES] // Vetor que ir√° armazenar as √°reas de cada parede  lidas dos arquivos
-	    inteiro qtd_revestimento_paredes[QTDE_PAREDES] // Vetor que ir√° armazenar as quantidades de revestimento de cada parede lidas dos arquivos
+	    inteiro size // Vari·vel que armazena o tamanho dos vetores dos dados realtivos as paredes
+	    real areas_paredes[QTDE_PAREDES] // Vetor que ir· armazenar as ·reas de cada parede  lidas dos arquivos
+	    inteiro qtd_revestimento_paredes[QTDE_PAREDES] // Vetor que ir· armazenar as quantidades de revestimento de cada parede lidas dos arquivos
 	
 	    faca{
 	        ctrl = 0
 	
-	        escreva("Digite o diret√≥rio do arquivo, incluindo o nome do arquivo: ")
+	        escreva("Digite o diretÛrio do arquivo, incluindo o nome do arquivo: ")
 	        leia(dir)
 	
 	        se(Arquivos.arquivo_existe(dir)){
@@ -2248,12 +2248,12 @@ programa
 	            //Estruturas
 	                escreva("\n\nESTRUTURAS\n\n")
 	                escreva("Profundidade das colunas: ", Tipos.cadeia_para_real(ler_registro(dir, C_ESTRUT_PROFUNDIDAE_COLUNAS)), "m\n" )
-	                escreva("Di√¢metro das colunas: ", Tipos.cadeia_para_real(ler_registro(dir, C_ESTRUT_DIAMETRO_COLUNAS)), "m\n")
+	                escreva("Di‚metro das colunas: ", Tipos.cadeia_para_real(ler_registro(dir, C_ESTRUT_DIAMETRO_COLUNAS)), "m\n")
 	                escreva("Perimetro total das paredes: ", Tipos.cadeia_para_real(ler_registro(dir, C_ESTRUT_PERIMETRO_TOTAL)), "m\n")
 	                escreva("Largura dos baldrames: ", Tipos.cadeia_para_real(ler_registro(dir, C_ESTRUT_LARGURA_BALDRAME)), "m\n")
 	                escreva("Profundidade dos baldrames: ", Tipos.cadeia_para_real(ler_registro(dir, C_ESTRUT_PROFUNDIDADE_BALDRAME)), "m\n")
-	                escreva("√Årea total de constru√ß√£o: ", Tipos.cadeia_para_real(ler_registro(dir, C_ESTRUT_AREA_TOTAL_CONSTRUCAO)), "m¬≤\n")
-	                escreva("Quantidade de cimento: ", Tipos.cadeia_para_real(ler_registro(dir, C_ESTRUT_QUANTIDADE_CIMENTO)), "m¬≥\n")
+	                escreva("¡rea total de construÁ„o: ", Tipos.cadeia_para_real(ler_registro(dir, C_ESTRUT_AREA_TOTAL_CONSTRUCAO)), "m≤\n")
+	                escreva("Quantidade de cimento: ", Tipos.cadeia_para_real(ler_registro(dir, C_ESTRUT_QUANTIDADE_CIMENTO)), "m≥\n")
 	                escreva("Altura das paredes: ", Tipos.cadeia_para_real(ler_registro(dir, C_ESTRUT_ALTURA_PAREDES)), "\nm")
 	                escreva("Quantidade de ferro 3/8: ", ler_registro(dir, C_ESTRUT_QTDE_FERRO_3_8), "\n")
 	                escreva("Quantidade de ferro 3/16: ", ler_registro(dir, C_ESTRUT_QTDE_FERRO_3_16), "\n")
@@ -2266,7 +2266,7 @@ programa
 	                escreva("TIJOLOS\n\n")
 	                escreva("Quantidade de paredes: ", ler_registro(dir, C_QTDE_PAREDES), "\n")
 	
-	                escreva("√Årea das paredes:\n")
+	                escreva("¡rea das paredes:\n")
 	
 	                linha = ler_registro(dir, C_AREA_PAREDES)
 	
@@ -2274,21 +2274,21 @@ programa
 	                split_string_float( linha, areas_paredes, '#' )
 	
 	                para(i = 0; i < size; i++){
-	                    escreva("  Parede ", i + 1, ": ", areas_paredes[i], "m¬≤\n")
+	                    escreva("  Parede ", i + 1, ": ", areas_paredes[i], "m≤\n")
 	                }
 	
 	                escreva("Tipo de tijolo: ", ler_registro(dir, C_TIJOLO_TIPO), "\n")
 	                escreva("Quantidade total de tijolos: ", ler_registro(dir, C_TIJOLO_QTDE), "\n")
-	                escreva("Quantidade de tijolos por m¬≤: ", ler_registro(dir, C_TIJOLO_QTDE_METRO), "\n")
+	                escreva("Quantidade de tijolos por m≤: ", ler_registro(dir, C_TIJOLO_QTDE_METRO), "\n")
 	                escreva("Custo total de tijolos: R$ ", Tipos.cadeia_para_real(ler_registro(dir, C_TIJOLO_CUSTO_TOTAL)), "\n")
-	                escreva("Pre√ßo unit√°rio do tijolo: R$ ", Tipos.cadeia_para_real(ler_registro(dir, C_TIJOLO_PRECO_UNIT)), "\n\n")
+	                escreva("PreÁo unit·rio do tijolo: R$ ", Tipos.cadeia_para_real(ler_registro(dir, C_TIJOLO_PRECO_UNIT)), "\n\n")
 	            //Fim Tijolos
 	
 	            //Revestimento
 	                escreva("REVESTIMENTO\n\n")
 	                escreva("Tipo de revestimento: ", ler_registro(dir, C_REVESTIMENTO_TIPO), "\n")
 	                escreva("Quantidade total de revestimento: ", ler_registro(dir, C_REVESTIMENTO_QTDE), "\n")
-	                escreva("Quantidade de revestimento por m¬≤: ", ler_registro(dir, C_REVESTIMENTO_QTDE_METRO), "\n")
+	                escreva("Quantidade de revestimento por m≤: ", ler_registro(dir, C_REVESTIMENTO_QTDE_METRO), "\n")
 	
 	                escreva("Quantidade de revestimento por parede:\n")
 	
@@ -2302,34 +2302,34 @@ programa
 	                }
 	
 	                escreva("Custo total do revestimento: R$ ", Tipos.cadeia_para_real(ler_registro(dir, C_REVESTIMENTO_CUSTO_TOTAL)), "\n" )
-	                escreva("Pre√ßo unit√°rio do revestimento: R$ ", Tipos.cadeia_para_real(ler_registro(dir, C_REVESTIMENTO_PRECO_UNIT)), "\n\n")
+	                escreva("PreÁo unit·rio do revestimento: R$ ", Tipos.cadeia_para_real(ler_registro(dir, C_REVESTIMENTO_PRECO_UNIT)), "\n\n")
 	            //Fim Revestimento
 	
 	            //Tinta
 	                escreva("TINTA\n\n")
-	                escreva("Quantidade de gal√µes de tinta: ", ler_registro(dir, C_GALAO_TINTA_QTDE), "\n")
-	                escreva("Custo total dos gal√µes de tinta: R$ ", Tipos.cadeia_para_real(ler_registro(dir, C_GALAO_TINTA_CUSTO_TOTAL)), "\n")
-	                escreva("Pre√ßo unit√°rio do gal√£o de tinta: R$ ", Tipos.cadeia_para_real(ler_registro(dir, C_GALAO_TINTA_PRECO_UNIT)), "\n\n")
+	                escreva("Quantidade de galıes de tinta: ", ler_registro(dir, C_GALAO_TINTA_QTDE), "\n")
+	                escreva("Custo total dos galıes de tinta: R$ ", Tipos.cadeia_para_real(ler_registro(dir, C_GALAO_TINTA_CUSTO_TOTAL)), "\n")
+	                escreva("PreÁo unit·rio do gal„o de tinta: R$ ", Tipos.cadeia_para_real(ler_registro(dir, C_GALAO_TINTA_PRECO_UNIT)), "\n\n")
 	            //Fim Tinta
 	
 	            //Telhado
 	                escreva("TELHADO\n\n")
-	                escreva("Inclina√ß√£o: ", ler_registro(dir, C_TELHADO_INCLINACAO), "%\n")
+	                escreva("InclinaÁ„o: ", ler_registro(dir, C_TELHADO_INCLINACAO), "%\n")
 	                escreva("Largura da laje: ", Tipos.cadeia_para_real(ler_registro(dir, C_TELHADO_LARGURA_BASE)), "m\n")
 	                escreva("Comprimento da laje: ", Tipos.cadeia_para_real(ler_registro(dir, C_TELHADO_COMPRIMENTO_BASE)), "m\n")
-	                escreva("√Årea do telhado corrigida pela inclina√ß√£o: ", Tipos.cadeia_para_real(ler_registro(dir, C_TELHADO_AREA_CORRIGIDA)), "m¬≤\n\n")
+	                escreva("¡rea do telhado corrigida pela inclinaÁ„o: ", Tipos.cadeia_para_real(ler_registro(dir, C_TELHADO_AREA_CORRIGIDA)), "m≤\n\n")
 	            //Fim Telhado
 	
 	            //Madeiramento
 	                escreva("MADEIRAMENTO DO TELHADO\n\n")
-	                escreva("Quantidade de ter√ßas: ", ler_registro(dir, C_MADEIRA_QTDE_TERCA), "\n")
+	                escreva("Quantidade de terÁas: ", ler_registro(dir, C_MADEIRA_QTDE_TERCA), "\n")
 	                escreva("Quantidade de caibros: ", ler_registro(dir, C_MADEIRA_QTDE_CAIBRO), "\n")
 	                escreva("Quantidade de ripas: ", ler_registro(dir, C_MADEIRA_QTDE_RIPAS), "\n")
 	                escreva("Metros de pontaletes: ", Tipos.cadeia_para_real(ler_registro(dir, C_MADEIRA_METROS_PONTALETES)), "\n")
 	                escreva("Metros de caibros: ", Tipos.cadeia_para_real(ler_registro(dir, C_MADEIRA_METROS_CAIBROS)), "\n")
 	                escreva("Metros de ripas: ", Tipos.cadeia_para_real(ler_registro(dir, C_MADEIRA_METROS_RIPAS)), "\n")
-	                escreva("Metros de ter√ßas: ", Tipos.cadeia_para_real(ler_registro(dir, C_MADEIRA_METROS_TERCAS)), "\n")
-	                escreva("Espa√ßamento entre as ter√ßas: ", Tipos.cadeia_para_real(ler_registro(dir, C_ESPACAMENTO_TERCAS)), "m\n")
+	                escreva("Metros de terÁas: ", Tipos.cadeia_para_real(ler_registro(dir, C_MADEIRA_METROS_TERCAS)), "\n")
+	                escreva("EspaÁamento entre as terÁas: ", Tipos.cadeia_para_real(ler_registro(dir, C_ESPACAMENTO_TERCAS)), "m\n")
 	                escreva("Comprimento da garga: ", Tipos.cadeia_para_real(ler_registro(dir, C_COMRPRIMENTO_GARGA)), "m\n\n")
 	            //Fim madeiramento
 	
@@ -2338,12 +2338,12 @@ programa
 	                escreva("Tipo de telha: ", ler_registro(dir, C_TELHA_TIPO), "\n")
 	                escreva("Quantidade de telhas: ", ler_registro(dir, C_TELHA_QTDE), "\n")
 	                escreva("Custo total das telhas: R$ ", Tipos.cadeia_para_real(ler_registro(dir, C_TELHA_CUSTO_TOTAL)), "\n")
-	                escreva("Pre√ßo unit√°rio das telhas: R$ ", Tipos.cadeia_para_real(ler_registro(dir, C_TELHA_PRECO_UNIT)), "\n\n")
+	                escreva("PreÁo unit·rio das telhas: R$ ", Tipos.cadeia_para_real(ler_registro(dir, C_TELHA_PRECO_UNIT)), "\n\n")
 	            //Fim Telhas
 	
 	        }
 	        senao{
-	            escreva("\nO arquivo informado n√£o existe.\n\n")
+	            escreva("\nO arquivo informado n„o existe.\n\n")
 	            ctrl = 1
 	        }
 	
@@ -2354,31 +2354,31 @@ programa
 	funcao ajuda()
 	{
 		
-	     escreva("AJUDA\n-----\n√çndice:\n")
-	     escreva("1 - INCLINA√á√ÉO DO TELHADO\n")
+	     escreva("AJUDA\n-----\nÕndice:\n")
+	     escreva("1 - INCLINA«√O DO TELHADO\n")
 	     escreva("2 - MADEIRAMENTO DO TELHADO\n")
 	     escreva("3 - MODELOS DE TELHAS\n")
 	  	escreva("4 - MODELOS DE TIJOLOS\n")
 	  	escreva("5 - MODELOS DE REVESTIMENTO PARA PAREDE\n")
 	  	escreva("6 - MODELOS DE PISO")
 	
-	    escreva("\n* Voc√™ pode usar as teclas num√©ricas para navegar pelos itens.\n\n\n")
+	    escreva("\n* VocÍ pode usar as teclas numÈricas para navegar pelos itens.\n\n\n")
 	
-	    escreva("1. INCLINA√á√ÉO DO TELHADO\n------------------------>\n")
+	    escreva("1. INCLINA«√O DO TELHADO\n------------------------>\n")
 	
 	    escreva("* Pressione F1 para uma imagem ilustrativa.\n\n")
 
-	    escreva(" A inclina√ß√£o do telhado √© calculada com base na largura da laje (dividida por dois no\ncaso de telhado com duas √°guas).O valor para a inclina√ß√£o √© fornecido em porcentagem,\nessa porcentagem corresponde a por√ß√£o da base que ser√° espelhada para compor a cumeeira.\n")
-	    escreva(" Por exemplo, um telhado com base (laje) 12x10m, com inclina√ß√£o de 30% e duas √°guas, temos:\n")
+	    escreva(" A inclinaÁ„o do telhado È calculada com base na largura da laje (dividida por dois no\ncaso de telhado com duas ·guas).O valor para a inclinaÁ„o È fornecido em porcentagem,\nessa porcentagem corresponde a porÁ„o da base que ser· espelhada para compor a cumeeira.\n")
+	    escreva(" Por exemplo, um telhado com base (laje) 12x10m, com inclinaÁ„o de 30% e duas ·guas, temos:\n")
 	    escreva("  a. Calculamos a metade da largura da base, nesse caso 6 (12/2 = 6);\n")
-	    escreva("  b. Calculamos 30% do valor achado anteriormente, ficando com 1.8m (6 * 0.3 = 1.8).\n     Essa ser√°a altura da cumeeira.\n\n")
+	    escreva("  b. Calculamos 30% do valor achado anteriormente, ficando com 1.8m (6 * 0.3 = 1.8).\n     Essa ser·a altura da cumeeira.\n\n")
 	
 	    escreva("\n2. MADEIRAMENTO DO TELHADO\n-------------------------->\n")
 	
 	    escreva("* Pressione F2 para uma imagem ilustrativa.\n\n")
 	
-	    escreva(" O madeiramento do telhado contempla toda a madeira usada para dar sustenta√ß√£o ao telhado:\n")
-	    escreva(". Ter√ßa;\n. Pontalete;\n. Ber√ßo;\n. M√£o Francesa;\n. Trama:\n  . Caibro;\n  . Ripas.\n\n")
+	    escreva(" O madeiramento do telhado contempla toda a madeira usada para dar sustentaÁ„o ao telhado:\n")
+	    escreva(". TerÁa;\n. Pontalete;\n. BerÁo;\n. M„o Francesa;\n. Trama:\n  . Caibro;\n  . Ripas.\n\n")
 	
 	    escreva("\n3. MODELOS DE TELHAS\n-------------------->\n")
 	
@@ -2386,120 +2386,120 @@ programa
 	
 	    escreva("\n TELHA PORTUGUESA\n----------------->\n")
 	
-	    escreva("   Material: Cer√¢mica\n")
-	    escreva("   Quantidade: 17 pe√ßas por metro quadrado\n")
-	    escreva("   Dimens√µes: 38x20")
-	    escreva("   Peso: 2,6 Kg por pe√ßa\n")
-	    escreva("   Inclina√ß√£o M√≠nima: 35%\n\n")
+	    escreva("   Material: Cer‚mica\n")
+	    escreva("   Quantidade: 17 peÁas por metro quadrado\n")
+	    escreva("   Dimensıes: 38x20")
+	    escreva("   Peso: 2,6 Kg por peÁa\n")
+	    escreva("   InclinaÁ„o MÌnima: 35%\n\n")
 	
 	    escreva("\n TELHA ROMANA\n------------->\n")
 	
-	    escreva("   Material: Cer√¢mica\n")
-	    escreva("   Quantidade: 16 pe√ßas por metro quadrado\n")
-	    escreva("   Dimens√µes: 40x21")
-	    escreva("   Peso: 2,7 Kg por pe√ßa\n")
-	    escreva("   Inclina√ß√£o M√≠nima: 35%\n\n")
+	    escreva("   Material: Cer‚mica\n")
+	    escreva("   Quantidade: 16 peÁas por metro quadrado\n")
+	    escreva("   Dimensıes: 40x21")
+	    escreva("   Peso: 2,7 Kg por peÁa\n")
+	    escreva("   InclinaÁ„o MÌnima: 35%\n\n")
 	
 	    escreva("\n TELHA AMERICANA\n---------------->\n")
 	
-	    escreva("   Material: Cer√¢mica\n")
-	    escreva("   Quantidade: 12 pe√ßas por metro quadrado\n")
-	    escreva("   Dimens√µes: 46x26cm")
-	    escreva("   Peso: 2,9 Kg por pe√ßa\n")
-	    escreva("   Inclina√ß√£o M√≠nima: 30%\n\n")
+	    escreva("   Material: Cer‚mica\n")
+	    escreva("   Quantidade: 12 peÁas por metro quadrado\n")
+	    escreva("   Dimensıes: 46x26cm")
+	    escreva("   Peso: 2,9 Kg por peÁa\n")
+	    escreva("   InclinaÁ„o MÌnima: 30%\n\n")
 	
 	    escreva("\n TELHA FRANCESA\n--------------->\n")
 	
-	    escreva("   Material: Cer√¢mica\n")
-	    escreva("   Quantidade: 16 pe√ßas por metro quadrado\n")
-	    escreva("   Dimens√µes: 38x24")
-	    escreva("   Peso: 2,8 Kg por pe√ßa\n")
-	    escreva("   Inclina√ß√£o M√≠nima: 45%\n\n")
+	    escreva("   Material: Cer‚mica\n")
+	    escreva("   Quantidade: 16 peÁas por metro quadrado\n")
+	    escreva("   Dimensıes: 38x24")
+	    escreva("   Peso: 2,8 Kg por peÁa\n")
+	    escreva("   InclinaÁ„o MÌnima: 45%\n\n")
 	
 	    escreva("\n TELHA ITALIANA\n--------------->\n")
 	
-	    escreva("   Material: Cer√¢mica\n")
-	    escreva("   Quantidade: 13 pe√ßas por metro quadrado\n")
-	    escreva("   Dimens√µes: 45x26")
-	    escreva("   Peso: 3,4 Kg por pe√ßa\n")
-	    escreva("   Inclina√ß√£o M√≠nima: 30%\n\n")
+	    escreva("   Material: Cer‚mica\n")
+	    escreva("   Quantidade: 13 peÁas por metro quadrado\n")
+	    escreva("   Dimensıes: 45x26")
+	    escreva("   Peso: 3,4 Kg por peÁa\n")
+	    escreva("   InclinaÁ„o MÌnima: 30%\n\n")
 	
-	    escreva("\n TELHA GERM√ÇNICA\n---------------->\n")
+	    escreva("\n TELHA GERM¬NICA\n---------------->\n")
 	
-	    escreva("   Material: Cer√¢mica\n")
-	    escreva("   Quantidade: 40 pe√ßas por metro quadrado\n")
-	    escreva("   Dimens√µes:\n\tnormal 36x18,5cm\n\tcurta 24x18,5cm")
-	    escreva("   Peso: 1,16 Kg por pe√ßa\n")
-	    escreva("   Inclina√ß√£o M√≠nima: 30%\n\n")
+	    escreva("   Material: Cer‚mica\n")
+	    escreva("   Quantidade: 40 peÁas por metro quadrado\n")
+	    escreva("   Dimensıes:\n\tnormal 36x18,5cm\n\tcurta 24x18,5cm")
+	    escreva("   Peso: 1,16 Kg por peÁa\n")
+	    escreva("   InclinaÁ„o MÌnima: 30%\n\n")
 	
 	    escreva("\n TELHA HOLANDESA\n---------------->\n")
 	
-	    escreva("   Material: Cer√¢mica\n")
-	    escreva("   Quantidade: 17 pe√ßas por metro quadrado\n")
-	    escreva("   Dimens√µes: 41x24cm")
-	    escreva("   Peso: 2,5 Kg por pe√ßa\n")
-	    escreva("   Inclina√ß√£o M√≠nima: 30%\n\n")
+	    escreva("   Material: Cer‚mica\n")
+	    escreva("   Quantidade: 17 peÁas por metro quadrado\n")
+	    escreva("   Dimensıes: 41x24cm")
+	    escreva("   Peso: 2,5 Kg por peÁa\n")
+	    escreva("   InclinaÁ„o MÌnima: 30%\n\n")
 	
 	    escreva("\n TELHA URUGUAIA\n--------------->\n")
 
-	    escreva("   Material: Cer√¢mica\n")
-	    escreva("   Quantidade: 16 pe√ßas por metro quadrado\n")
-	    escreva("   Dimens√µes: 28x19,5cm")
-	    escreva("   Peso: 1 Kg por pe√ßa\n")
-	    escreva("   Inclina√ß√£o M√≠nima: 45%\n\n")
+	    escreva("   Material: Cer‚mica\n")
+	    escreva("   Quantidade: 16 peÁas por metro quadrado\n")
+	    escreva("   Dimensıes: 28x19,5cm")
+	    escreva("   Peso: 1 Kg por peÁa\n")
+	    escreva("   InclinaÁ„o MÌnima: 45%\n\n")
 	
 	    escreva("\n TELHA PLAN\n----------->\n")
 
-	    escreva("   Material: Cer√¢mica\n")
-	    escreva("   Quantidade: 26 pe√ßas por metro quadrado\n")
-	    escreva("   Dimens√µes:\n\tcapa 48x16cm\n\tcanal: 48x19cm")
-	    escreva("   Peso: 2,3 Kg por pe√ßa\n")
-	    escreva("   Inclina√ß√£o M√≠nima: 30%\n\n")
+	    escreva("   Material: Cer‚mica\n")
+	    escreva("   Quantidade: 26 peÁas por metro quadrado\n")
+	    escreva("   Dimensıes:\n\tcapa 48x16cm\n\tcanal: 48x19cm")
+	    escreva("   Peso: 2,3 Kg por peÁa\n")
+	    escreva("   InclinaÁ„o MÌnima: 30%\n\n")
 	
 	    escreva("\n TELHA PAULISTA\n--------------->\n")
 
-	    escreva("   Material: Cer√¢mica\n")
-	    escreva("   Quantidade: 22 pe√ßas por metro quadrado\n")
-	    escreva("   Dimens√µes:\n\tcapa 48x17cm\n\tcanal: 48x20cm")
-	    escreva("   Peso: 2,2 Kg por pe√ßa\n")
-	    escreva("   Inclina√ß√£o M√≠nima: 30%\n")
+	    escreva("   Material: Cer‚mica\n")
+	    escreva("   Quantidade: 22 peÁas por metro quadrado\n")
+	    escreva("   Dimensıes:\n\tcapa 48x17cm\n\tcanal: 48x20cm")
+	    escreva("   Peso: 2,2 Kg por peÁa\n")
+	    escreva("   InclinaÁ„o MÌnima: 30%\n")
 	
 	    escreva("\n\n4. MODELOS DE TIJOLOS\n--------------------->\n")
 	
 	    escreva("* Pressione F4 para uma imagem ilustrativa.\n\n")
 	
-	    escreva("\n BLOCO CER√ÇMICO\n--------------->\n")
+	    escreva("\n BLOCO CER¬MICO\n--------------->\n")
 	
-	  	escreva("   Os blocos cer√¢micos s√£o feitas √† base de argila cozida e s√£o um itens mais utilizados na\nconstru√ß√£o de paredes de alvenaria, podendo haver varia√ß√µes em rela√ß√£o ao n√∫mero de furos e\ntamanho, sendo que os maiores s√£o indicados para esturutras maiores.\n")
-	  	escreva("   Os blocos furados s√£o mais leves e baratos, por√©m, s√£o mais vulner√°veis a quebras durante\na obra.")
-	  	escreva("   √â importante destacar que este material n√£o √© estrutural, ou seja, pode ser utilizado\napenas para o fechamento e n√£o para sustenta√ß√£o de cobertura ou laje.\n")
+	  	escreva("   Os blocos cer‚micos s„o feitas ‡ base de argila cozida e s„o um itens mais utilizados na\nconstruÁ„o de paredes de alvenaria, podendo haver variaÁıes em relaÁ„o ao n˙mero de furos e\ntamanho, sendo que os maiores s„o indicados para esturutras maiores.\n")
+	  	escreva("   Os blocos furados s„o mais leves e baratos, porÈm, s„o mais vulner·veis a quebras durante\na obra.")
+	  	escreva("   … importante destacar que este material n„o È estrutural, ou seja, pode ser utilizado\napenas para o fechamento e n„o para sustentaÁ„o de cobertura ou laje.\n")
 	
-	    escreva("\n TIJOLOS MACI√áOS\n---------------->\n")
+	    escreva("\n TIJOLOS MACI«OS\n---------------->\n")
 	
-	    escreva("   Os tijolos maci√ßos s√£o feitos √† base de argila cozida e s√£o um dos itens mais utilizados\nna constru√ß√£o de paredes de alvenaria.\n")
-	  	escreva("   Possuem mais resist√™ncia com rela√ß√£o aos blocos cer√¢micos, podendo ser deixados aparentes\nou serem divididos ao meio para serem usados como revestimento para as paredes.\n")
+	    escreva("   Os tijolos maciÁos s„o feitos ‡ base de argila cozida e s„o um dos itens mais utilizados\nna construÁ„o de paredes de alvenaria.\n")
+	  	escreva("   Possuem mais resistÍncia com relaÁ„o aos blocos cer‚micos, podendo ser deixados aparentes\nou serem divididos ao meio para serem usados como revestimento para as paredes.\n")
 	
 	    escreva("\n TIJOLOS DE ADOBE\n----------------->\n")
 	
-	    escreva("   S√£o basicamente uma mistura de terra e √°gua, com acr√©scimo de palhas ou outros materiais\norg√¢nicos, feitos atrav√©s de processo artesanal ou semi-industrial de moldagem e secagem.\n")
-	  	escreva("   √â um tijolo ecol√≥gico, porque dispensa o cozimento que gasta muita energia e emite muitos\ngases, mas n√£o √© muito resistente a interp√©ries como chuva e vento, pois absorve muita √°gua\ne pode se desfazer em contato direto e intenso com chuva.\n")
+	    escreva("   S„o basicamente uma mistura de terra e ·gua, com acrÈscimo de palhas ou outros materiais\norg‚nicos, feitos atravÈs de processo artesanal ou semi-industrial de moldagem e secagem.\n")
+	  	escreva("   … um tijolo ecolÛgico, porque dispensa o cozimento que gasta muita energia e emite muitos\ngases, mas n„o È muito resistente a interpÈries como chuva e vento, pois absorve muita ·gua\ne pode se desfazer em contato direto e intenso com chuva.\n")
 	
 	    escreva("\n TIJOLOS LAMINADOS\n------------------>\n")
 	
-	    escreva("   Esta pe√ßa tamb√©m √© conhecida como tijolo de 21 furos devido √† quantidade de orif√≠cios que\napresenta.\n")
-	  	escreva("   Este tipo de tijolo apresenta melhor ader√™ncia de argamassa, possibilitando uma estrutura\nmais firme e tamb√©m tem alta durabilidade.\n")
-	  	escreva("   Indica-se utilizar o modelo horizontalmente, para que apenas a parte lisa fique √† mostra.\n√â muito comum a utiliza√ß√£o deste tipo de tijolo em projetos com tijolo aparente, como fachadas,\npor exemplo.\n")
+	    escreva("   Esta peÁa tambÈm È conhecida como tijolo de 21 furos devido ‡ quantidade de orifÌcios que\napresenta.\n")
+	  	escreva("   Este tipo de tijolo apresenta melhor aderÍncia de argamassa, possibilitando uma estrutura\nmais firme e tambÈm tem alta durabilidade.\n")
+	  	escreva("   Indica-se utilizar o modelo horizontalmente, para que apenas a parte lisa fique ‡ mostra.\n… muito comum a utilizaÁ„o deste tipo de tijolo em projetos com tijolo aparente, como fachadas,\npor exemplo.\n")
 	
 	    escreva("\n TIJOLOS E BLOCOS DE CONCRETO\n----------------------------->\n")
 	
-	    escreva("   Apresenta uma estrutura mais robusta, sendo comumente utilizado em constru√ß√µes maiores e\ntamb√©m em alicerces para casas.\n")
-		escreva("   A vantagem na utiliza√ß√£o de tijolos ou blocos de concreto √© com rela√ß√£o √† economia no consumo\nde argamassa, pois sua anatomia facilita a jun√ß√£o das pe√ßas.\n")
+	    escreva("   Apresenta uma estrutura mais robusta, sendo comumente utilizado em construÁıes maiores e\ntambÈm em alicerces para casas.\n")
+		escreva("   A vantagem na utilizaÁ„o de tijolos ou blocos de concreto È com relaÁ„o ‡ economia no consumo\nde argamassa, pois sua anatomia facilita a junÁ„o das peÁas.\n")
 	
-	  	escreva("\n TIJOLOS ECOL√ìGICOS\n------------------->\n")
+	  	escreva("\n TIJOLOS ECOL”GICOS\n------------------->\n")
 	
-	    escreva("   Produzido a partir de uma mistura de solo, cimento e √°gua, √© uma pe√ßa muito utilizada em\nconstru√ß√µes sustent√°veis devido a sua tend√™ncia ecol√≥gica.\n")
-	  	escreva("   Suas vantagens s√£o o baixo consumo de argamassa, isolamento t√©rmico e ac√∫stico, f√°cil encaixe\ne possibilidade de ficar aparente.\n")
-		escreva("   Por√©m, √© uma pe√ßa que necessita de um profissional especializado e tamb√©m n√£o √© indicada para\nlocais muito √∫midos.\n")
+	    escreva("   Produzido a partir de uma mistura de solo, cimento e ·gua, È uma peÁa muito utilizada em\nconstruÁıes sustent·veis devido a sua tendÍncia ecolÛgica.\n")
+	  	escreva("   Suas vantagens s„o o baixo consumo de argamassa, isolamento tÈrmico e ac˙stico, f·cil encaixe\ne possibilidade de ficar aparente.\n")
+		escreva("   PorÈm, È uma peÁa que necessita de um profissional especializado e tambÈm n„o È indicada para\nlocais muito ˙midos.\n")
 	
 	  	escreva("\n\n5. MODELOS DE REVESTIMENTO PARA PAREDE\n-------------------------------------->\n")
 	
@@ -2507,84 +2507,84 @@ programa
 	
 	    escreva("\n PAPEL DE PAREDE\n---------------->\n")
 	
-	    escreva("   Revestimento simples, facilmente encontrado e de f√°cil instala√ß√£o.\n")
-	  	escreva("   Este tipo de revestimento √© indicado para regi√µes e ambientes menos √∫midos, sendo assim,\n√© ideal evitar a utiliza√ß√£o de papel de parede em banheiros e cozinhas.\n")
+	    escreva("   Revestimento simples, facilmente encontrado e de f·cil instalaÁ„o.\n")
+	  	escreva("   Este tipo de revestimento È indicado para regiıes e ambientes menos ˙midos, sendo assim,\nÈ ideal evitar a utilizaÁ„o de papel de parede em banheiros e cozinhas.\n")
 	
 	    escreva("\n MADEIRA\n-------->\n")
 	
-	    escreva("   Este tipo de material possui uma grande variedade de cores e tonalidades e ajuda a\naquecer os c√¥modos, mantendo uma temperatura agrad√°vel no ambiente.\n")
+	    escreva("   Este tipo de material possui uma grande variedade de cores e tonalidades e ajuda a\naquecer os cÙmodos, mantendo uma temperatura agrad·vel no ambiente.\n")
 	
 	    escreva("\n PASTILHAS\n---------->\n")
 	
-	    escreva("   As pastilhas s√£o pequenas pe√ßas que podem ser feitas de cer√¢mica, resina ou vidro e\ns√£o aplicadas √†s paredes como se fossem pequenos azulejos.\n")
+	    escreva("   As pastilhas s„o pequenas peÁas que podem ser feitas de cer‚mica, resina ou vidro e\ns„o aplicadas ‡s paredes como se fossem pequenos azulejos.\n")
 	
-		escreva("\n LADRILHO HIDR√ÅULICO\n-------------------->\n")
+		escreva("\n LADRILHO HIDR¡ULICO\n-------------------->\n")
 	
-	    escreva("   S√£o azulejos que podem apresentar varia√ß√µes nos tamanhos, mas muito conhecidos por\nsuas estampas coloridas e bem detalhadas.\n")
+	    escreva("   S„o azulejos que podem apresentar variaÁıes nos tamanhos, mas muito conhecidos por\nsuas estampas coloridas e bem detalhadas.\n")
 	
 	  	escreva("\n AZULEJO COMUM\n-------------->\n")
 	
-	    escreva("   S√£o azuelejos que se apresentam no mesmo formato dos ladrilhos hidr√°ulicos, um pouco\nmaiores √†s vezes, mas n√£o possuem um diferencial em espec√≠fico.\n")
+	    escreva("   S„o azuelejos que se apresentam no mesmo formato dos ladrilhos hidr·ulicos, um pouco\nmaiores ‡s vezes, mas n„o possuem um diferencial em especÌfico.\n")
 	
 	    escreva("\n\n6. TIPOS DE PISO\n---------------->\n")
 	
 	    escreva("* Pressione F6 para uma imagem ilustrativa.\n\n")
 	
-	    escreva("\n CER√ÇMICO\n--------->\n")
+	    escreva("\n CER¬MICO\n--------->\n")
 	
-	    escreva("   A cer√¢mica √© o tipo de piso mais conhecido e usado no Brasil. S√£o encontradas de\nv√°rios tamanhos (desde 20√ó30, 40√ó40, 60√ó60, 80√ó80, 100√ó100), texturas, qualidades e pre√ßos. Podem ser\nutilizadas em √°reas internas e externas.\n")
+	    escreva("   A cer‚mica È o tipo de piso mais conhecido e usado no Brasil. S„o encontradas de\nv·rios tamanhos (desde 20◊30, 40◊40, 60◊60, 80◊80, 100◊100), texturas, qualidades e preÁos. Podem ser\nutilizadas em ·reas internas e externas.\n")
 	
 	    escreva("\n PORCELANATO\n------------>\n")
 	
-	    escreva("   O Porcelanato √© produzido em massa √∫nica j√° na sua colora√ß√£o e com mat√©rias-primas\nnobres.Podem ser semi-polidos, polidos e pe√ßa r√∫stica. Tamb√©m h√° os porcelanatos esmaltados e os\nporcelanatos digitais polidos com a mais alta qualidade e com v√°rias texturas, principalmente imitando\nmadeiras, m√°rmores e granitos.\n")
+	    escreva("   O Porcelanato È produzido em massa ˙nica j· na sua coloraÁ„o e com matÈrias-primas\nnobres.Podem ser semi-polidos, polidos e peÁa r˙stica. TambÈm h· os porcelanatos esmaltados e os\nporcelanatos digitais polidos com a mais alta qualidade e com v·rias texturas, principalmente imitando\nmadeiras, m·rmores e granitos.\n")
 	
 	    escreva("\n GRANITO\n-------->\n")
 	
-	    escreva("   O granito √© uma pedra muito indicada para pisos devido a sua beleza, resist√™ncia\ne durabilidade. S√£o utilizados desde resid√™ncias at√© em locais com grande movimenta√ß√£o de pessoas\ncomo shoppings, supermercados, aeroportos, etc. Possuem v√°rias tonalidades e quanto mais raro mais caro.\n")
+	    escreva("   O granito È uma pedra muito indicada para pisos devido a sua beleza, resistÍncia\ne durabilidade. S„o utilizados desde residÍncias atÈ em locais com grande movimentaÁ„o de pessoas\ncomo shoppings, supermercados, aeroportos, etc. Possuem v·rias tonalidades e quanto mais raro mais caro.\n")
 	
-	    escreva("\n M√ÅRMORE\n-------->\n")
+	    escreva("\n M¡RMORE\n-------->\n")
 	
-	    escreva("   O m√°rmore tamb√©m √© uma rocha metam√≥rfica, composta principalmente por minerais\nde calcita com colara√ß√£o mais uniforme e forma√ß√£o de veios definidos. √â indicado para utiliza√ß√£o em\nambientes internos apenas.\n")
+	    escreva("   O m·rmore tambÈm È uma rocha metamÛrfica, composta principalmente por minerais\nde calcita com colaraÁ„o mais uniforme e formaÁ„o de veios definidos. … indicado para utilizaÁ„o em\nambientes internos apenas.\n")
 	
 	    escreva("\n LAMINADO DE MADEIRA\n-------------------->\n")
 	
-	    escreva("   Esse piso tem esse nome porque s√£o constitu√≠dos de l√¢minas de madeira. √â um tipo\nde piso flutuante porque n√£o √© colado no contrapiso. S√£o assentados sobre manta, em sistema de encaixe\ntipo click e presos pelos rodap√©s que s√£o colados.S√£o sustent√°veis por serem de madeira reflorestada.\n")
+	    escreva("   Esse piso tem esse nome porque s„o constituÌdos de l‚minas de madeira. … um tipo\nde piso flutuante porque n„o È colado no contrapiso. S„o assentados sobre manta, em sistema de encaixe\ntipo click e presos pelos rodapÈs que s„o colados.S„o sustent·veis por serem de madeira reflorestada.\n")
 	
 	    escreva("\n SILESTONE\n---------->\n")
 	
-	    escreva("   Silestone √© um material composto por grande quantidade de quartzo, outros minerais\nem menor escala, resina de poli√©ster e pigmentos. Com porosidade nula, possui v√°rias texturas e um\ncusto muito elevado.\n")
+	    escreva("   Silestone È um material composto por grande quantidade de quartzo, outros minerais\nem menor escala, resina de poliÈster e pigmentos. Com porosidade nula, possui v·rias texturas e um\ncusto muito elevado.\n")
 	
-	    escreva("\n T√ÅBUA CORRIDA\n-------------->\n")
+	    escreva("\n T¡BUA CORRIDA\n-------------->\n")
 	
-	    escreva("  Piso em madeira natural de lei, geralmente extra√≠da da Amaz√¥nia. Conferem muita beleza\ne conforto, mas n√£o s√£o sustent√°veis. Sua instala√ß√£o √© sobre um ripamento e possuem encaixe tipo\nmacho-f√™mea.\n")
+	    escreva("  Piso em madeira natural de lei, geralmente extraÌda da AmazÙnia. Conferem muita beleza\ne conforto, mas n„o s„o sustent·veis. Sua instalaÁ„o È sobre um ripamento e possuem encaixe tipo\nmacho-fÍmea.\n")
 	
-	    escreva("\n TAC√ÉO\n------>\n")
+	    escreva("\n TAC√O\n------>\n")
 	
-	    escreva("   Os tacos foram sucesso nos anos 1960 a 1980. Atualmente s√£o utilizados em ambientes mais\nespec√≠ficos e possuem custo elevado. Assim como a t√°bua corrida, necessitam de raspar e\nsintecar. As madeiras mais comuns para tac√£o s√£o a gr√°pia, cumaru e ip√™.\n")
+	    escreva("   Os tacos foram sucesso nos anos 1960 a 1980. Atualmente s„o utilizados em ambientes mais\nespecÌficos e possuem custo elevado. Assim como a t·bua corrida, necessitam de raspar e\nsintecar. As madeiras mais comuns para tac„o s„o a gr·pia, cumaru e ipÍ.\n")
 	
 	    escreva("\n LAJOTA\n------->\n")
 	
-	    escreva("   Instaladas tanto em paredes internas como em fachadas, as lajotas apresentam in√∫meras\nvantagens, entre elas a √≥tima resist√™ncia √†s varia√ß√µes clim√°ticas, a beleza e a rela√ß√£o\ncusto X benef√≠cio. As pe√ßas est√£o cada vez mais inovadoras, com formas geom√©tricas variadas e com pinturas\nde desenhos que conferem um charme todo especial ao ambiente.\n")
+	    escreva("   Instaladas tanto em paredes internas como em fachadas, as lajotas apresentam in˙meras\nvantagens, entre elas a Ûtima resistÍncia ‡s variaÁıes clim·ticas, a beleza e a relaÁ„o\ncusto X benefÌcio. As peÁas est„o cada vez mais inovadoras, com formas geomÈtricas variadas e com pinturas\nde desenhos que conferem um charme todo especial ao ambiente.\n")
 	
-	    escreva("\n ARD√ìSIA\n-------->\n")
+	    escreva("\n ARD”SIA\n-------->\n")
 	
-	    escreva("   Piso em pedra ard√≥sia foi largamente utilizado nos anos 1980 devido a sua durabilidade e\nbaixo custo. Podem ser utilizadas em pisos internos de √°reas molhadas e √°reas externas.\n")
+	    escreva("   Piso em pedra ardÛsia foi largamente utilizado nos anos 1980 devido a sua durabilidade e\nbaixo custo. Podem ser utilizadas em pisos internos de ·reas molhadas e ·reas externas.\n")
 	
 	    escreva("\n CIMENTO QUEIMADO\n----------------->\n")
 	
-	    escreva("   Solu√ß√£o de baixo custo para pisos e quando bem feita confere √≥timo acabamento. Indicado\ntanto para √°reas internas quanto para √°reas externas. Muito utilizado em bares, boates e\ngalp√µes industriais.\n")
+	    escreva("   SoluÁ„o de baixo custo para pisos e quando bem feita confere Ûtimo acabamento. Indicado\ntanto para ·reas internas quanto para ·reas externas. Muito utilizado em bares, boates e\ngalpıes industriais.\n")
 	
 	    escreva("\n PEDRA PORTUGUESA\n----------------->\n")
 	
-	    escreva("   Muito utilizadas em cal√ßadas a pedra portuguesa mais famosa do mundo √© o cal√ßad√£o de\nCopacabana no Rio de Janeiro. A execu√ß√£o do trabalho √© bastante demorada porque cada pedra √©\nassentada uma a uma.\n")
+	    escreva("   Muito utilizadas em calÁadas a pedra portuguesa mais famosa do mundo È o calÁad„o de\nCopacabana no Rio de Janeiro. A execuÁ„o do trabalho È bastante demorada porque cada pedra È\nassentada uma a uma.\n")
 	
-	    escreva("\n PEDRA S√ÉO TOM√â\n--------------->\n")
+	    escreva("\n PEDRA S√O TOM…\n--------------->\n")
 	
-	    escreva("  Com v√°rios outros nomes pelo Brasil afora a Pedra S√£o Tom√© √© o piso mais utilizado ao\nredor das piscinas. S√£o vendidas em regulares 30x30cm e irregulares (retalhos).\n")
+	    escreva("  Com v·rios outros nomes pelo Brasil afora a Pedra S„o TomÈ È o piso mais utilizado ao\nredor das piscinas. S„o vendidas em regulares 30x30cm e irregulares (retalhos).\n")
 	
 	    escreva("\n GRANITINA\n---------->\n")
 	
-	    escreva("  A granitina √© uma massa de cimento misturada com pequenas pedrinhas de granito aplicadas\nno piso. Ap√≥s a cura do piso √© polida com discos diamantados que conferem uma superf√≠cie\nlisa e brilhante. O piso em granitina √© muito utilizado em √°reas internas e externas de clubes, escolas,\naeroportos.\n")
+	    escreva("  A granitina È uma massa de cimento misturada com pequenas pedrinhas de granito aplicadas\nno piso. ApÛs a cura do piso È polida com discos diamantados que conferem uma superfÌcie\nlisa e brilhante. O piso em granitina È muito utilizado em ·reas internas e externas de clubes, escolas,\naeroportos.\n")
 	
 	}
 	
@@ -2595,7 +2595,7 @@ programa
 	
 	    faca{
 	
-	        escreva("Selecione uma a√ß√£o:\n 1 - Criar um novo or√ßamento\n 2 - Visualizar um or√ßamento existente\n 3 - Ajuda\n\nSua escolha: ")
+	        escreva("Selecione uma aÁ„o:\n 1 - Criar um novo orÁamento\n 2 - Visualizar um orÁamento existente\n 3 - Ajuda\n\nSua escolha: ")
 	        leia(usr_opt)
 	
 	        escolha(usr_opt){
@@ -2618,7 +2618,7 @@ programa
 	                pare
 	
 	            caso contrario:
-	                escreva("\nOp√ß√£o inv√°lida\n\n")
+	                escreva("\nOpÁ„o inv·lida\n\n")
 	        }
 	
 	        escreva("\n\n")
@@ -2630,10 +2630,10 @@ programa
 }
 /* $$$ Portugol Studio $$$ 
  * 
- * Esta se√ß√£o do arquivo guarda informa√ß√µes do Portugol Studio.
- * Voc√™ pode apag√°-la se estiver utilizando outro editor.
+ * Esta seÁ„o do arquivo guarda informaÁıes do Portugol Studio.
+ * VocÍ pode apag·-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 73538; 
+ * @POSICAO-CURSOR = 66078; 
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
