@@ -2061,9 +2061,9 @@ void novo_orcamento()
 
 }
 
+
 void carregar_orcamento()
 {
-
     char dir[310],
         linha[101]; //variável usada para armazenar temporariamente o valor lido do arquivo, especificamente para os dados relativos ŕs paredes, que podem ser várias em uma linha
 
@@ -2089,18 +2089,18 @@ void carregar_orcamento()
 
             //Estruturas
                 printf("\n\nESTRUTURAS\n\n");
-                printf("Profundidade das colunas: %sm\n", ler_registro(dir, C_ESTRUT_PROFUNDIDAE_COLUNAS) );
-                printf("Diâmetro das colunas: %sm\n", ler_registro(dir, C_ESTRUT_DIAMETRO_COLUNAS) );
-                printf("Perimetro total das paredes: %sm\n", ler_registro(dir, C_ESTRUT_PERIMETRO_TOTAL) );
-                printf("Largura dos baldrames: %sm\n", ler_registro(dir, C_ESTRUT_LARGURA_BALDRAME) );
-                printf("Profundidade dos baldrames: %sm\n", ler_registro(dir, C_ESTRUT_PROFUNDIDADE_BALDRAME) );
-                printf("Área total de construção: %sm²\n", ler_registro(dir, C_ESTRUT_AREA_TOTAL_CONSTRUCAO) );
-                printf("Quantidade de cimento: %sm³\n", ler_registro(dir, C_ESTRUT_QUANTIDADE_CIMENTO) );
-                printf("Altura das paredes: %s\nm", ler_registro(dir, C_ESTRUT_ALTURA_PAREDES) );
+                printf("Profundidade das colunas: %.2fm\n", atof(ler_registro(dir, C_ESTRUT_PROFUNDIDAE_COLUNAS)) );
+                printf("Diâmetro das colunas: %.2fm\n", atof(ler_registro(dir, C_ESTRUT_DIAMETRO_COLUNAS)) );
+                printf("Perimetro total das paredes: %.2fm\n", atof(ler_registro(dir, C_ESTRUT_PERIMETRO_TOTAL)) );
+                printf("Largura dos baldrames: %.2fm\n", atof(ler_registro(dir, C_ESTRUT_LARGURA_BALDRAME)) );
+                printf("Profundidade dos baldrames: %.2fm\n", atof(ler_registro(dir, C_ESTRUT_PROFUNDIDADE_BALDRAME)) );
+                printf("Área total de construção: %.2fm²\n", atof(ler_registro(dir, C_ESTRUT_AREA_TOTAL_CONSTRUCAO)) );
+                printf("Quantidade de cimento: %.2fm³\n", atof(ler_registro(dir, C_ESTRUT_QUANTIDADE_CIMENTO)) );
+                printf("Altura das paredes: %.2f\nm", atof(ler_registro(dir, C_ESTRUT_ALTURA_PAREDES)) );
                 printf("Quantidade de ferro 3/8: %s\n", ler_registro(dir, C_ESTRUT_QTDE_FERRO_3_8) );
                 printf("Quantidade de ferro 3/16: %s\n", ler_registro(dir, C_ESTRUT_QTDE_FERRO_3_16) );
                 printf("Quantidade de colunas: %s\n", ler_registro(dir, C_ESTRUT_QTDE_COLUNAS) );
-                printf("Quantidade de piso: %s\n", ler_registro(dir, C_ESTRUT_AREA_PISO) );
+                printf("Quantidade de piso: %.2f\n", atof(ler_registro(dir, C_ESTRUT_AREA_PISO)) );
                 printf("Piso: %s\n\n", ler_registro(dir, C_ESTRUT_PISO) );
             //Fim Estruturas
 
@@ -2122,8 +2122,8 @@ void carregar_orcamento()
                 printf("Tipo de tijolo: %s\n", ler_registro(dir, C_TIJOLO_TIPO) );
                 printf("Quantidade total de tijolos: %s\n", ler_registro(dir, C_TIJOLO_QTDE) );
                 printf("Quantidade de tijolos por m²: %s\n", ler_registro(dir, C_TIJOLO_QTDE_METRO) );
-                printf("Custo total de tijolos: R$ %s\n", ler_registro(dir, C_TIJOLO_CUSTO_TOTAL) );
-                printf("Preço unitário do tijolo: R$ %s\n\n", ler_registro(dir, C_TIJOLO_PRECO_UNIT) );
+                printf("Custo total de tijolos: R$ %.2f\n", atof(ler_registro(dir, C_TIJOLO_CUSTO_TOTAL)) );
+                printf("Preço unitário do tijolo: R$ %.2f\n\n", atof(ler_registro(dir, C_TIJOLO_PRECO_UNIT)) );
             //Fim Tijolos
 
             //Revestimento
@@ -2143,23 +2143,23 @@ void carregar_orcamento()
                     printf("  Parede %d: %d\n", i + 1, qtd_revestimento_paredes[i]);
                 }
 
-                printf("Custo total do revestimento: R$ %s\n", ler_registro(dir, C_REVESTIMENTO_CUSTO_TOTAL) );
-                printf("Preço unitário do revestimento: R$ %s\n\n", ler_registro(dir, C_REVESTIMENTO_PRECO_UNIT) );
+                printf("Custo total do revestimento: R$ %.2f\n", atof(ler_registro(dir, C_REVESTIMENTO_CUSTO_TOTAL)) );
+                printf("Preço unitário do revestimento: R$ %.2f\n\n", atof(ler_registro(dir, C_REVESTIMENTO_PRECO_UNIT)) );
             //Fim Revestimento
 
             //Tinta
                 printf("TINTA\n\n");
                 printf("Quantidade de galőes de tinta: %s\n", ler_registro(dir, C_GALAO_TINTA_QTDE) );
-                printf("Custo total dos galőes de tinta: R$ %s\n", ler_registro(dir, C_GALAO_TINTA_CUSTO_TOTAL) );
-                printf("Preço unitário do galão de tinta: R$ %s\n\n", ler_registro(dir, C_GALAO_TINTA_PRECO_UNIT) );
+                printf("Custo total dos galőes de tinta: R$ %.2f\n", atof(ler_registro(dir, C_GALAO_TINTA_CUSTO_TOTAL)) );
+                printf("Preço unitário do galão de tinta: R$ %.2f\n\n", atof(ler_registro(dir, C_GALAO_TINTA_PRECO_UNIT)) );
             //Fim Tinta
 
             //Telhado
                 printf("TELHADO\n\n");
                 printf("Inclinação: %s%%\n", ler_registro(dir, C_TELHADO_INCLINACAO) );
-                printf("Largura da laje: %sm\n", ler_registro(dir, C_TELHADO_LARGURA_BASE) );
-                printf("Comprimento da laje: %sm\n", ler_registro(dir, C_TELHADO_COMPRIMENTO_BASE) );
-                printf("Área do telhado corrigida pela inclinação: %sm²\n\n", ler_registro(dir, C_TELHADO_AREA_CORRIGIDA) );
+                printf("Largura da laje: %.2fm\n", atof(ler_registro(dir, C_TELHADO_LARGURA_BASE)) );
+                printf("Comprimento da laje: %.2fm\n", atof(ler_registro(dir, C_TELHADO_COMPRIMENTO_BASE)) );
+                printf("Área do telhado corrigida pela inclinação: %.2fm²\n\n", atof(ler_registro(dir, C_TELHADO_AREA_CORRIGIDA)) );
             //Fim Telhado
 
             //Madeiramento
@@ -2167,20 +2167,20 @@ void carregar_orcamento()
                 printf("Quantidade de terças: %s\n", ler_registro(dir, C_MADEIRA_QTDE_TERCA) );
                 printf("Quantidade de caibros: %s\n", ler_registro(dir, C_MADEIRA_QTDE_CAIBRO) );
                 printf("Quantidade de ripas: %s\n", ler_registro(dir, C_MADEIRA_QTDE_RIPAS) );
-                printf("Metros de pontaletes: %s\n", ler_registro(dir, C_MADEIRA_METROS_PONTALETES) );
-                printf("Metros de caibros: %s\n", ler_registro(dir, C_MADEIRA_METROS_CAIBROS) );
-                printf("Metros de ripas: %s\n", ler_registro(dir, C_MADEIRA_METROS_RIPAS) );
-                printf("Metros de terças: %s\n", ler_registro(dir, C_MADEIRA_METROS_TERCAS) );
-                printf("Espaçamento entre as terças: %sm\n", ler_registro(dir, C_ESPACAMENTO_TERCAS) );
-                printf("Comprimento da garga: %sm\n\n", ler_registro(dir, C_COMRPRIMENTO_GARGA) );
+                printf("Metros de pontaletes: %.2f\n", atof(ler_registro(dir, C_MADEIRA_METROS_PONTALETES)) );
+                printf("Metros de caibros: %.2f\n", atof(ler_registro(dir, C_MADEIRA_METROS_CAIBROS)) );
+                printf("Metros de ripas: %.2f\n", atof(ler_registro(dir, C_MADEIRA_METROS_RIPAS)) );
+                printf("Metros de terças: %.2f\n", atof(ler_registro(dir, C_MADEIRA_METROS_TERCAS)) );
+                printf("Espaçamento entre as terças: %.2fm\n", atof(ler_registro(dir, C_ESPACAMENTO_TERCAS)) );
+                printf("Comprimento da garga: %.2fm\n\n", atof(ler_registro(dir, C_COMRPRIMENTO_GARGA)) );
             //Fim madeiramento
 
             //Telhas
                 printf("TELHAS\n\n");
                 printf("Tipo de telha: %s\n", ler_registro(dir, C_TELHA_TIPO) );
                 printf("Quantidade de telhas: %s\n", ler_registro(dir, C_TELHA_QTDE) );
-                printf("Custo total das telhas: R$ %s\n", ler_registro(dir, C_TELHA_CUSTO_TOTAL) );
-                printf("Preço unitário das telhas: R$ %s\n\n", ler_registro(dir, C_TELHA_PRECO_UNIT) );
+                printf("Custo total das telhas: R$ %.2f\n", atof(ler_registro(dir, C_TELHA_CUSTO_TOTAL)) );
+                printf("Preço unitário das telhas: R$ %.2f\n\n", atof(ler_registro(dir, C_TELHA_PRECO_UNIT)) );
             //Fim Telhas
 
         }
