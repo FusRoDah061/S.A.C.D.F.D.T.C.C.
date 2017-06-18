@@ -10,7 +10,7 @@
 //a serem utilizados em uma obra.
 #define TAXA_DE_PERDA 0.10
 
-//Constantes correspondentes as chaves que ser√£o salvas no arquivo
+//Constantes correspondentes as chaves que ser„o salvas no arquivo
 //Telhas
 #define C_TELHA_TIPO "tipo_telha"
 #define C_TELHA_QTDE "qtde_telha"
@@ -74,10 +74,10 @@
 
 //Dados a serem gravados no arquivo
 //Telhado
-int g_inclinacao = 0;//Inclina√ß√£o do telhado
+int g_inclinacao = 0;//InclinaÁ„o do telhado
 
 float g_largura_base = 0.0,//Largura da base do telhado (laje)
-      g_area_telhado_corrigida = 0.0,//√Årea do telhado corrigida j√° incluindo a inclina√ß√£o do teclado
+      g_area_telhado_corrigida = 0.0,//¡rea do telhado corrigida j· incluindo a inclinaÁ„o do teclado
       g_comprimento_base = 0.0;//Comprimento da base do telhado (laje)
 
 //Telhas
@@ -85,15 +85,15 @@ int g_qtde_telhas = 0;//Quantidade de telhas no total
 char g_tipo_telha[51];
 
 float g_custo_total = 0.0,//Custo total das telhas no final
-    g_preco_unit = 0.0,//Pre√ßo unit√°rio de cada telha
+    g_preco_unit = 0.0,//PreÁo unit·rio de cada telha
     g_qtde_telha_metro = 0.0;//Quantidade de telhas por metro quadrado
 
 //Madeiramento
-int g_qtde_tercas = 0, //Quantidade de ter√ßas para as duas √°guas do telhado
+int g_qtde_tercas = 0, //Quantidade de terÁas para as duas ·guas do telhado
     g_qtde_caibros = 0,// Quantidade de caibros para o telhado
     g_qtde_ripas = 0; //Quantidade de ripas para o telhado
 
-float g_tercas_espacamento = 0.0, //Espa√ßamento entre as ter√ßas
+float g_tercas_espacamento = 0.0, //EspaÁamento entre as terÁas
     g_metragem_pontaletes = 0.0,
     g_metragem_caibros = 0.0,
     g_metragem_ripas = 0.0,
@@ -146,15 +146,15 @@ float g_custo_total_galao_tinta = 0.0,
 //Gerais
 float *g_areas_paredes;
 
-/* Unifica um vetor de inteiros em uma string, cada elemento sendo separado por um padr√£o especificado
+/* Unifica um vetor de inteiros em uma string, cada elemento sendo separado por um padr„o especificado
  *
- * Par√¢metros:
- * (int *) array: vetor que ser√° unificado
- * (int) array_length: tamanho do vetor que ser√° unificado
- * (char *) separator: padr√£o que ir√° separar os elementos na string
+ * Par‚metros:
+ * (int *) array: vetor que ser· unificado
+ * (int) array_length: tamanho do vetor que ser· unificado
+ * (char *) separator: padr„o que ir· separar os elementos na string
  *
  * Retorna:
- * (char *) string: string contendo o conte√∫do j√° unificado do vetor
+ * (char *) string: string contendo o conte˙do j· unificado do vetor
  */
 char * split_int_array(int * array, int array_length, char * separator)
 {
@@ -177,15 +177,15 @@ char * split_int_array(int * array, int array_length, char * separator)
 
 }
 
-/* Unifica um vetor de reais em uma string, cada elemento sendo separado por um padr√£o especificado
+/* Unifica um vetor de reais em uma string, cada elemento sendo separado por um padr„o especificado
  *
- * Par√¢metros:
- * (float *) array: vetor que ser√° unificado
- * (int) array_length: tamanho do vetor que ser√° unificado
- * (char *) separator: padr√£o que ir√° separar os elementos na string
+ * Par‚metros:
+ * (float *) array: vetor que ser· unificado
+ * (int) array_length: tamanho do vetor que ser· unificado
+ * (char *) separator: padr„o que ir· separar os elementos na string
  *
  * Retorna:
- * (char *) string: string contendo o conte√∫do j√° unificado do vetor
+ * (char *) string: string contendo o conte˙do j· unificado do vetor
  */
 char * split_float_array(float * array, int array_length, char * separator)
 {
@@ -215,10 +215,10 @@ void salvar_dados()
 	char diretorio[255], valor[100], nome_arq[55];
 	int erro = 0, status = 0, usr_opt = 0;
 
-	printf("\nDigite o diret√≥rio para salvar o arquivo: ");
+	printf("\nDigite o diretÛrio para salvar o arquivo: ");
 	scanf(" %199[^\n]", diretorio);
 
-	printf("Escolher um nome para o arquivo?\n 1 - Sim\n 2 - N√£o, usar um nome gen√©rico\n\nSua escolha: ");
+	printf("Escolher um nome para o arquivo?\n 1 - Sim\n 2 - N„o, usar um nome genÈrico\n\nSua escolha: ");
 	scanf("%d", &usr_opt);
 
 	if(usr_opt == 1){
@@ -494,7 +494,7 @@ void salvar_dados()
 		erro = (status == 0) ? (erro + 1) : erro;
 
 		if(erro > 0){
-			printf("\nOcorreram %d erros ao salvar o arquivo. Deseja tentar novamente?\n 1 - Sim\n 2 - N√£o\n\nSua escolha: ", erro);
+			printf("\nOcorreram %d erros ao salvar o arquivo. Deseja tentar novamente?\n 1 - Sim\n 2 - N„o\n\nSua escolha: ", erro);
 	        scanf("%d", &usr_opt);
 		}
 
@@ -502,11 +502,11 @@ void salvar_dados()
 
 }
 
-//FUN√á≈êES CORRELATAS As ESTRUTURAS;
+//FUN«OES CORRELATAS As ESTRUTURAS;
 /*
-*Fun√ß√£o metro_para_centimentro() = Evita que o usu√°rio entre com um valor que ir√° alterar os calculos de uma estrutura real, por exemplo:
-	- Usu√°rio digita 21 (o programa entende como 21 metros), mas o calculo real precisa do valor em cent√≠metros, entao a fun√ß√£o verificase o
-  valor dado precisa ser corrigido e o devolve com a corre√ß√£o feita, caso n√£o necessite de corre√ß√£o, ela apenas retorna o valor para c√°lculo.
+*FunÁ„o metro_para_centimentro() = Evita que o usu·rio entre com um valor que ir· alterar os calculos de uma estrutura real, por exemplo:
+	- Usu·rio digita 21 (o programa entende como 21 metros), mas o calculo real precisa do valor em centÌmetros, entao a funÁ„o verificase o
+  valor dado precisa ser corrigido e o devolve com a correÁ„o feita, caso n„o necessite de correÁ„o, ela apenas retorna o valor para c·lculo.
 *parametros: valor real
 */
 float metro_para_centimentro(float num)
@@ -517,13 +517,13 @@ float metro_para_centimentro(float num)
 
 	aux=num;
 	if (aux==0 && aux!= num){
-		verify = (float)num; //O numero digitado n√£o √© inteiro, e j√° est√° em "cent√≠metros" - n√£o fazer nada
+		verify = (float)num; //O numero digitado n„o È inteiro, e j· est· em "centÌmetros" - n„o fazer nada
 	}
 	else if(aux>0 && aux == num){
-		verify = num/100; //O numero digitado n√£o √© inteiro e est√° em "Metros", por isso, deve-se dividir por 100 para se ter a base em cm
+		verify = num/100; //O numero digitado n„o È inteiro e est· em "Metros", por isso, deve-se dividir por 100 para se ter a base em cm
 	}
 	else if(aux>0 && aux != num){
-		verify = num/100; //O numero digitado n√£o √© inteiro e est√° em "Metros", por isso, deve-se dividir por 100 para se ter a base em cm
+		verify = num/100; //O numero digitado n„o È inteiro e est· em "Metros", por isso, deve-se dividir por 100 para se ter a base em cm
 	}
 
 	return verify;
@@ -531,16 +531,16 @@ float metro_para_centimentro(float num)
 }
 
 /*
-*calcula a quantidade necessaria de cimento para a constru√ß√£o das estruturas da casa
+*calcula a quantidade necessaria de cimento para a construÁ„o das estruturas da casa
 *
-*Par√¢metros:
-*deep = profundidade das colunas subterr√¢neas
-*dm = diametro das colunas/subterr√¢neas e sobterr√¢neas, j√° que seguem as mesmas medidas
-*largura_baldrames = largura dos baldrames onde ser√£o construidas as paredes
-*profundidade_baldrames = profundidade dos baldrames onde ser√£o construidas as paredes
+*Par‚metros:
+*deep = profundidade das colunas subterr‚neas
+*dm = diametro das colunas/subterr‚neas e sobterr‚neas, j· que seguem as mesmas medidas
+*largura_baldrames = largura dos baldrames onde ser„o construidas as paredes
+*profundidade_baldrames = profundidade dos baldrames onde ser„o construidas as paredes
 *perimetro_total = soma de todas as paredes da casa em metros lineares
 *altura paredes = altura das paredes para base de calculo das colunas
-*g_qtde_colunas = quantidade de colunas da constru√ß√£o para calculo de cimento em m¬≥
+*g_qtde_colunas = quantidade de colunas da construÁ„o para calculo de cimento em m≥
 */
 float calcula_cimento(float deep, float dm, float largura_baldrames, float profundidade_baldrames, float perimetro_total, float altura_paredes, int qtde_colunas)
 {
@@ -548,22 +548,22 @@ float calcula_cimento(float deep, float dm, float largura_baldrames, float profu
 
     r = dm/2;
 
-    area_coluna_chao = ( ( M_PI * pow(r, 2) ) * deep ); //√°rea das colunas subterr√¢neas
+    area_coluna_chao = ( ( M_PI * pow(r, 2) ) * deep ); //·rea das colunas subterr‚neas
 
-    area_coluna_parede = ( ( M_PI * pow(r, 2) ) * altura_paredes );//√°rea das colunas que sobem acompanhando as paredes
+    area_coluna_parede = ( ( M_PI * pow(r, 2) ) * altura_paredes );//·rea das colunas que sobem acompanhando as paredes
 
-    tot_colunas = (area_coluna_chao + area_coluna_parede) * qtde_colunas;//soma das colunas parede+ch√£o
+    tot_colunas = (area_coluna_chao + area_coluna_parede) * qtde_colunas;//soma das colunas parede+ch„o
 
-    bald_total = largura_baldrames * profundidade_baldrames * perimetro_total * 2;//√°rea dos baldrames, multiplica - se por 2 pois existe o baldrame que sustenta a laje da casa, este possui praticamente a mesma √°rea do que sustenta as paredes
+    bald_total = largura_baldrames * profundidade_baldrames * perimetro_total * 2;//·rea dos baldrames, multiplica - se por 2 pois existe o baldrame que sustenta a laje da casa, este possui praticamente a mesma ·rea do que sustenta as paredes
 
-    total = bald_total + tot_colunas;//soma de todas as √°reas da estrutura
+    total = bald_total + tot_colunas;//soma de todas as ·reas da estrutura
 
     return total;
 
 }
 
 /*
-*Calcula a quantidade de ferro 3/8 e 3/16 para a constru√ß√£o
+*Calcula a quantidade de ferro 3/8 e 3/16 para a construÁ„o
 *parametros:
 *perimetro da casa
 *profundidade colunaaredes
@@ -587,7 +587,7 @@ void calcula_ferro(float perimetro, float profundidade, float altura, int qtde_c
 		//printf("LARG STRIBO = %.2f\n", larg_stribo);
 
 		if(larg_stribo > largura_baldrame-0.07){
-			printf("\nA largura do estribo n√£o pode ser maior que a do baldrame!\nDigite um valor at√© %.2f metros\n",largura_baldrame-0.07);
+			printf("\nA largura do estribo n„o pode ser maior que a do baldrame!\nDigite um valor atÈ %.2f metros\n",largura_baldrame-0.07);
 		}
 
 	}while((float)larg_stribo > (float)(largura_baldrame-0.07) );
@@ -602,35 +602,35 @@ void calcula_ferro(float perimetro, float profundidade, float altura, int qtde_c
 		//printf("ALTURA = %.2f\n",altura_stribo);
 
 		if(altura_stribo > profundidade_baldrame-0.04){
-			printf("\nA altura do estribo n√£o pode ser maior que a do baldrame!\nDigite um valor at√© %.2f metros\n",profundidade_baldrame-0.04);
+			printf("\nA altura do estribo n„o pode ser maior que a do baldrame!\nDigite um valor atÈ %.2f metros\n",profundidade_baldrame-0.04);
 		}
 
 	}while(altura_stribo > profundidade_baldrame-0.04);
 
-	printf("Digite o tamanho unit√°rio da barra de ferro escolhida para estrutura: ");
+	printf("Digite o tamanho unit·rio da barra de ferro escolhida para estrutura: ");
 	scanf("%f", &tamanho_barra);
 
 
-	printf("Digite o tamanho unit√°rio da barra de ferro escolhida para amara√ß√£o da estrutura: ");
+	printf("Digite o tamanho unit·rio da barra de ferro escolhida para amaraÁ„o da estrutura: ");
 	scanf("%f", &tamanho_barra_amarra);
 
 	do{
 
-		printf("Digite o espa√ßamento entre as amarra√ß≈ëes do estribo: ");
+		printf("Digite o espaÁamento entre as amarraÁoes do estribo: ");
 		scanf("%f", &espacamento);
 
 		espacamento = metro_para_centimentro(espacamento);
 
-		//printf("ESPA√áAMENTO = %.2f\n", espacamento);
+		//printf("ESPA«AMENTO = %.2f\n", espacamento);
 
 		if(espacamento > 0.201){
-			printf("O espa√ßamento n√£o pode ser maior que 20 cent√≠metros!!! Digite um valor menor.\n");
+			printf("O espaÁamento n„o pode ser maior que 20 centÌmetros!!! Digite um valor menor.\n");
 		}
 
 	}while(espacamento > 0.201);
 
 
-	qtde_ferro_estribo = ( ( larg_stribo * 2 + altura_stribo * 2 ) * perimetro / espacamento ) / tamanho_barra_amarra;//quantidade em barras de ferro para amarra√ß√£o do estribo
+	qtde_ferro_estribo = ( ( larg_stribo * 2 + altura_stribo * 2 ) * perimetro / espacamento ) / tamanho_barra_amarra;//quantidade em barras de ferro para amarraÁ„o do estribo
 	qtde_ferro = ( ( perimetro * 2 + ( profundidade + altura ) * qtde_colunas) * 4 ) / tamanho_barra;//retorna a quantidade de ferros para estruturas
 
 	printf("Estribo: %d barras\n", qtde_ferro_estribo);
@@ -649,13 +649,13 @@ int escolhe_piso()
 
 	do{
 
-		printf("\nEscolha o tipo de piso:\n1 - CER√ÇMICA\n2 - PORCELANATO\n3 - GRANITO\n4 - M√ÅRMORE\n5 - LAMINADO DE MADEIRA\n6 - SILESTONE\n7 - T√ÅBUA CORRIDA\n8 - TAC√ÉO\n9 - LAJOTA\n10 - ARD√ìSIA\n11 - CIMENTO QUEIMADO\n12 - PEDRA PORTUGUESA\n13 - PEDRA S√£O TOM√â\n14 - GRANITINA\n15 - OUTRO\n\nSua escolha: ");
+		printf("\nEscolha o tipo de piso:\n1 - CER¬MICA\n2 - PORCELANATO\n3 - GRANITO\n4 - M¡RMORE\n5 - LAMINADO DE MADEIRA\n6 - SILESTONE\n7 - T¡BUA CORRIDA\n8 - TAC√O\n9 - LAJOTA\n10 - ARD”SIA\n11 - CIMENTO QUEIMADO\n12 - PEDRA PORTUGUESA\n13 - PEDRA S„O TOM…\n14 - GRANITINA\n15 - OUTRO\n\nSua escolha: ");
 		scanf("%d",&piso);
 
 		if(piso != 15){
 			switch(piso)
 			{
-				case 1:strcpy(g_pisoS, "CER√ÇMICA");
+				case 1:strcpy(g_pisoS, "CER¬MICA");
 				break;
 
 				case 2:strcpy(g_pisoS, "PORCELANATO");
@@ -664,7 +664,7 @@ int escolhe_piso()
 				case 3:strcpy(g_pisoS, "GRANITO");
 				break;
 
-				case 4:strcpy(g_pisoS, "M√ÅRMORE");
+				case 4:strcpy(g_pisoS, "M¡RMORE");
 				break;
 
 				case 5:strcpy(g_pisoS, "LAMINADO DE MADEIRA");
@@ -673,16 +673,16 @@ int escolhe_piso()
 				case 6:strcpy(g_pisoS, "SILESTONE");
 				break;
 
-				case 7:strcpy(g_pisoS, "T√ÅBUA CORRIDA");
+				case 7:strcpy(g_pisoS, "T¡BUA CORRIDA");
 				break;
 
-				case 8:strcpy(g_pisoS, "TAC√ÉO");
+				case 8:strcpy(g_pisoS, "TAC√O");
 				break;
 
 				case 9:strcpy(g_pisoS, "LAJOTA");
 				break;
 
-				case 10:strcpy(g_pisoS, "ARD√ìSIA");
+				case 10:strcpy(g_pisoS, "ARD”SIA");
 				break;
 
 				case 11:strcpy(g_pisoS, "CIMENTO QUEIMADO");
@@ -691,7 +691,7 @@ int escolhe_piso()
 				case 12:strcpy(g_pisoS, "PEDRA PORTUGUESA");
 				break;
 
-				case 13:strcpy(g_pisoS, "PEDRA S√£O TOM√â");
+				case 13:strcpy(g_pisoS, "PEDRA S„O TOM…");
 				break;
 
 				case 14:strcpy(g_pisoS, "GRANITINA");
@@ -707,12 +707,12 @@ int escolhe_piso()
 }
 
 /*
-*Fun√ß√£o calcula gastos da estrutura/pisos
+*FunÁ„o calcula gastos da estrutura/pisos
 *parametros:
 *area_casa: a ser construido
-*qt_piso: quantidade de piso em m¬≤
-*qt_cimento: quantidade de cimento em m¬≥
-*piso: tipo de piso definido na fun√ß√£o anterior
+*qt_piso: quantidade de piso em m≤
+*qt_cimento: quantidade de cimento em m≥
+*piso: tipo de piso definido na funÁ„o anterior
 */
 void gastos(float area_casa, float area_piso, float qt_cimento, int piso)
 {
@@ -720,52 +720,52 @@ void gastos(float area_casa, float area_piso, float qt_cimento, int piso)
 	float precopiso, precoferro, precoferro_316, precocimento, precolaje, VALORpiso, VALORferro, VALORferro_316, VALORcimento, VALORlaje, total;
 
 	do{
-		printf("Digite o pre√ßo do m¬≤ do piso escolhido: ");
+		printf("Digite o preÁo do m≤ do piso escolhido: ");
 		scanf("%f", &precopiso);
 
 		if(precopiso <= 0){
-			printf("Valor inv√°lido\n");
+			printf("Valor inv·lido\n");
 		}
 
 	}while(precopiso <= 0);
 
 	do{
-		printf("Digite o pre√ßo da barra de ferro 3/8 (unidade): ");
+		printf("Digite o preÁo da barra de ferro 3/8 (unidade): ");
 		scanf("%f", &precoferro);
 
 		if(precoferro <= 0){
-			printf("Valor inv√°lido\n");
+			printf("Valor inv·lido\n");
 		}
 
 	}while(precoferro <= 0);
 
 	do{
-		printf("Digite o pre√ßo da barra de ferro 3/16 (unidade): ");
+		printf("Digite o preÁo da barra de ferro 3/16 (unidade): ");
 		scanf("%f", &precoferro_316);
 
 		if(precoferro_316 <= 0){
-			printf("Valor inv√°lido\n");
+			printf("Valor inv·lido\n");
 		}
 
 	}while(precoferro_316 <= 0);
 
 	do{
-		printf("Digite o preco do m¬≥ do cimento: ");
+		printf("Digite o preco do m≥ do cimento: ");
 		scanf("%f", &precocimento);
 
 		if(precocimento <= 0){
-			printf("Valor inv√°lido\n");
+			printf("Valor inv·lido\n");
 		}
 
 	}while(precocimento <= 0);
 
 
 	do{
-		printf("Digite o pre√ßo do m¬≤ da laje: ");
+		printf("Digite o preÁo do m≤ da laje: ");
 		scanf("%f", &precolaje);
 
 		if(precolaje <= 0){
-			printf("Valor inv√°lido\n");
+			printf("Valor inv·lido\n");
 		}
 
 	}while(precolaje <= 0);
@@ -797,7 +797,7 @@ void gastos(float area_casa, float area_piso, float qt_cimento, int piso)
 		case 3:printf("Piso: GRANITO");
 		break;
 
-		case 4:printf("Piso: M√ÅRMORE");
+		case 4:printf("Piso: M¡RMORE");
 		break;
 
 		case 5:printf("Piso: LAMINADO DE MADEIRA");
@@ -806,16 +806,16 @@ void gastos(float area_casa, float area_piso, float qt_cimento, int piso)
 		case 6:printf("Piso: SILESTONE");
 		break;
 
-		case 7:printf("Piso: T√ÅBUA CORRIDA");
+		case 7:printf("Piso: T¡BUA CORRIDA");
 		break;
 
-		case 8:printf("Piso: TAC√ÉO");
+		case 8:printf("Piso: TAC√O");
 		break;
 
 		case 9:printf("Piso: LAJOTA");
 		break;
 
-		case 10:printf("Piso: ARD√ìSIA");
+		case 10:printf("Piso: ARD”SIA");
 		break;
 
 		case 11:printf("Piso: CIMENTO QUEIMADO");
@@ -824,7 +824,7 @@ void gastos(float area_casa, float area_piso, float qt_cimento, int piso)
 		case 12:printf("Piso: PEDRA PORTUGUESA");
 		break;
 
-		case 13:printf("Piso: PEDRA S√£O TOM√â");
+		case 13:printf("Piso: PEDRA S„O TOM…");
 		break;
 
 		case 14:printf("Piso: GRANITINA");
@@ -837,12 +837,12 @@ void gastos(float area_casa, float area_piso, float qt_cimento, int piso)
 }
 
 /*
-*Fun√ß√£o calcula gastos da estrutura/pisos -> Esta fun√ß√£o s√≥ sera utilizada caso o piso seja digitado como uma string...
+*FunÁ„o calcula gastos da estrutura/pisos -> Esta funÁ„o sÛ sera utilizada caso o piso seja digitado como uma string...
 *parametros:
 *area_casa: a ser construido
-*area_piso: quantidade de piso em m¬≤
-*qt_cimento: quantidade de cimento em m¬≥
-*pisoS: tipo de piso definido na fun√ß√£o anterior por STRING
+*area_piso: quantidade de piso em m≤
+*qt_cimento: quantidade de cimento em m≥
+*pisoS: tipo de piso definido na funÁ„o anterior por STRING
 */
 void gastos_cond_2(float area_casa, float area_piso, float qt_cimento, char * pisoS)
 {
@@ -850,52 +850,52 @@ void gastos_cond_2(float area_casa, float area_piso, float qt_cimento, char * pi
 	float precopiso, precoferro, precoferro_316, precocimento, precolaje, VALORpiso, VALORferro, VALORferro_316, VALORcimento, VALORlaje, total;
 
   	do{
-        printf("Digite o pre√ßo do m¬≤ do piso escolhido: ");
+        printf("Digite o preÁo do m≤ do piso escolhido: ");
         scanf("%f", &precopiso);
 
         if(precopiso <= 0){
-            printf("Valor inv√°lido\n");
+            printf("Valor inv·lido\n");
         }
 
   	}while(precopiso <= 0);
 
 	do{
-		printf("Digite o pre√ßo da barra de ferro 3/8 (unidade): ");
+		printf("Digite o preÁo da barra de ferro 3/8 (unidade): ");
 		scanf("%f", &precoferro);
 
 		if(precoferro <= 0){
-			printf("Valor inv√°lido\n");
+			printf("Valor inv·lido\n");
 		}
 
 	}while(precoferro <= 0);
 
   	do{
-  		printf("Digite o pre√ßo da barra de ferro 3/16 (unidade): ");
+  		printf("Digite o preÁo da barra de ferro 3/16 (unidade): ");
         scanf("%f", &precoferro_316);
 
     	if(precoferro_316 <= 0){
-            printf("Valor inv√°lido\n");
+            printf("Valor inv·lido\n");
         }
 
   	}while(precoferro_316 <= 0);
 
   	do{
-  		printf("Digite o preco do m¬≥ do cimento: ");
+  		printf("Digite o preco do m≥ do cimento: ");
         scanf("%f", &precocimento);
 
 		if(precocimento <= 0){
-			printf("Valor inv√°lido\n");
+			printf("Valor inv·lido\n");
 		}
 
   	}while(precocimento <= 0);
 
 
   	do{
-        printf("Digite o pre√ßo do m¬≤ da laje: ");
+        printf("Digite o preÁo do m≤ da laje: ");
         scanf("%f", &precolaje);
 
 		if(precolaje <= 0){
-			printf("Valor inv√°lido\n");
+			printf("Valor inv·lido\n");
 		}
 
   	}while(precolaje <= 0);
@@ -916,15 +916,15 @@ void gastos_cond_2(float area_casa, float area_piso, float qt_cimento, char * pi
 }
 
 /*
- * Calcula a √°rea do telhado, onde ficar√£o as telhas, considerando a inclina√ß√£o
+ * Calcula a ·rea do telhado, onde ficar„o as telhas, considerando a inclinaÁ„o
  *
- * Par√¢metros:
- * inclinacao: Inclina√ß√£o do telhado (altura da cumeeira)
+ * Par‚metros:
+ * inclinacao: InclinaÁ„o do telhado (altura da cumeeira)
  * largura_base: largura da base do telhado (largura da laje)
  * comprimento_base: comprimento da base do telhado (comprimento da laje)
  *
  * Retorna:
- * A √°rea do telhado
+ * A ·rea do telhado
  */
 float corrigir_area(int l_inclinacao, float l_largura_base, float l_comprimento_base)
 {
@@ -938,11 +938,11 @@ float corrigir_area(int l_inclinacao, float l_largura_base, float l_comprimento_
 }
 
 /*
- * Calcula quantidade de telhas baseado na √°rea do telhado(corrigida) e a quantidade de telhas por m¬≤
+ * Calcula quantidade de telhas baseado na ·rea do telhado(corrigida) e a quantidade de telhas por m≤
  *
- * Par√¢metros:
- * area_telhado: √°rea do telhado
- * telhas_metro_quad: quantidade de uma telha que ocupa 1 m¬≤
+ * Par‚metros:
+ * area_telhado: ·rea do telhado
+ * telhas_metro_quad: quantidade de uma telha que ocupa 1 m≤
  *
  * Retorna:
  * A quantidade de telhas no total
@@ -960,14 +960,14 @@ int calcula_qtde_telhas(float l_area_telhado, float l_telhas_metro_quad)
 }
 
 /*
- * Calcula o pre√ßo das telhas
+ * Calcula o preÁo das telhas
  *
- * Par√¢metros:
+ * Par‚metros:
  * qtde: quantidade de telhas calculadas
- * preco_unit: pre√ßo unit√°rio da telha
+ * preco_unit: preÁo unit·rio da telha
  *
  * Retorna:
- * O pre√ßo das telhas no total
+ * O preÁo das telhas no total
  */
 float calcula_preco(int l_qtde, float l_preco_unit)
 {
@@ -989,7 +989,7 @@ float get_telhas_metro_quad()
     do
     {
 
-        printf("Escolha um m√©todo:\n 1 - Dimens≈ëes da telha\n 2 - Unidades por metro quadrado\n\nSua escolha: ");
+        printf("Escolha um mÈtodo:\n 1 - Dimensoes da telha\n 2 - Unidades por metro quadrado\n\nSua escolha: ");
         scanf("%d", &opt);
 
         switch(opt)
@@ -997,18 +997,18 @@ float get_telhas_metro_quad()
 
             case 1:
 
-                printf("\nInforme as dimens≈ëes da telha\n");
+                printf("\nInforme as dimensoes da telha\n");
 
                 float a_largura, a_comprimento, area_telha;
 
-                //Para telhas de amianto ou alum√≠nio as dimens≈ëes podem variar, por isso o usu√°rio √© quem entra com essas dimens≈ëes
+                //Para telhas de amianto ou alumÌnio as dimensoes podem variar, por isso o usu·rio È quem entra com essas dimensoes
                 printf(" Digite a largura da telha (cm): ");
                 scanf(" %f", &a_largura);
 
                 printf(" Digite a comprimento da telha (cm): ");
                 scanf(" %f", &a_comprimento);
 
-                //Calcula a √°rea da telha
+                //Calcula a ·rea da telha
                 area_telha = (a_largura/100) * (a_comprimento/100);
 
                 telhas_p_metro = 1 / area_telha;
@@ -1023,7 +1023,7 @@ float get_telhas_metro_quad()
                 break;
 
             default:
-                printf("\nOp√ß√£o inv√°lida\n\n");
+                printf("\nOpÁ„o inv·lida\n\n");
 
         }
 
@@ -1039,16 +1039,16 @@ float get_telhas_metro_quad()
 }
 
 /*
- * Calcula a quantidade total de gal≈ëes de tinta necess√°rios para pintar a √°rea interna da constru√ß√£o
- * com base nas √°reas das paredes existentes na casa, na √°rea total do teto, na quantidade de dem√£os
- * que se deseja aplicar e no rendimento informado no gal√£o de tinta escolhido pelo usu√°rio.
+ * Calcula a quantidade total de galoes de tinta necess·rios para pintar a ·rea interna da construÁ„o
+ * com base nas ·reas das paredes existentes na casa, na ·rea total do teto, na quantidade de dem„os
+ * que se deseja aplicar e no rendimento informado no gal„o de tinta escolhido pelo usu·rio.
  *
- * Par√¢metros:
- * (int) qtde_paredes: quantidade total de paredes presente na constru√ß√£o.
- * (float) area_tetos: √°rea total do teto.
+ * Par‚metros:
+ * (int) qtde_paredes: quantidade total de paredes presente na construÁ„o.
+ * (float) area_tetos: ·rea total do teto.
  *
  * Retorna:
- * (int) qtde_total_galoes: quantidade total de gal≈ëes de tinta necess√°rios para pintar a √°rea interna da constru√ß√£o.
+ * (int) qtde_total_galoes: quantidade total de galoes de tinta necess·rios para pintar a ·rea interna da construÁ„o.
  */
 int calcula_qtde_total_galoes_tinta(int qtde_paredes, float area_tetos) {
     int qtde_total_galoes = 0,
@@ -1059,12 +1059,12 @@ int calcula_qtde_total_galoes_tinta(int qtde_paredes, float area_tetos) {
           area_total = 0.0;
 
     do {
-        printf("\nQuantidade de dem√£os que ir√° aplicar: ");
+        printf("\nQuantidade de dem„os que ir· aplicar: ");
         scanf("%d", &qtde_demaos);
     } while (qtde_demaos <= 0);
 
     do {
-        printf("\nRendimento da tinta informado no gal√£o: ");
+        printf("\nRendimento da tinta informado no gal„o: ");
         scanf("%f", &rendimento_tinta);
     } while (rendimento_tinta <= 0);
 
@@ -1080,15 +1080,15 @@ int calcula_qtde_total_galoes_tinta(int qtde_paredes, float area_tetos) {
 }
 
 /*
- * Calcula a quantidade de revestimento (em unidades) necess√°ria para revestir internamente cada
- * parede da constru√ß√£o com base nas √°reas de cada parede e na quantidade de revestimento (em
- * unidades) necess√°ria para revestir uma √°rea de um metro quadrado.
- * Armazena a quantidade de revestimento (em unidades) necess√°ria para revestir internamente cada
- * parede em uma vari√°vel respons√°vel por contabilizar a quantidade total de revestimento necess√°ria
- * para revestir internamente todas as paredes presentes na constru√ß√£o.
+ * Calcula a quantidade de revestimento (em unidades) necess·ria para revestir internamente cada
+ * parede da construÁ„o com base nas ·reas de cada parede e na quantidade de revestimento (em
+ * unidades) necess·ria para revestir uma ·rea de um metro quadrado.
+ * Armazena a quantidade de revestimento (em unidades) necess·ria para revestir internamente cada
+ * parede em uma vari·vel respons·vel por contabilizar a quantidade total de revestimento necess·ria
+ * para revestir internamente todas as paredes presentes na construÁ„o.
  *
- * Par√¢metros:
- * (int) qtde_paredes: quantidade de paredes presentes na constru√ß√£o.
+ * Par‚metros:
+ * (int) qtde_paredes: quantidade de paredes presentes na construÁ„o.
  */
 void calcula_qtde_revestimento_por_parede() {
     int i;
@@ -1098,17 +1098,17 @@ void calcula_qtde_revestimento_por_parede() {
     for (i=0; i<g_qtde_paredes; i++) {
         g_qtde_revestimento_por_parede[i] = ceil(g_qtde_revestimento_metro_quadrado * g_areas_paredes[i]);
         g_qtde_total_revestimento += g_qtde_revestimento_por_parede[i];
-        printf("\n %d¬™ parede: %d", i+1, g_qtde_revestimento_por_parede[i]);
+        printf("\n %d™ parede: %d", i+1, g_qtde_revestimento_por_parede[i]);
     }
 }
 
 /*
- * Calcula a quantidade de revestimento (em unidades) necess√°ria para preencher uma √°rea de um
- * metro quadrado com base nas medidas do revestimento utilizado, sendo estas fornecidas pelo usu√°rio.
+ * Calcula a quantidade de revestimento (em unidades) necess·ria para preencher uma ·rea de um
+ * metro quadrado com base nas medidas do revestimento utilizado, sendo estas fornecidas pelo usu·rio.
  *
  * Retorna:
- * (int) qtde_revestimento_por_metro_quadrado: quantidade de revestimento (em unidades) necess√°rioa para
- *       preencher uma √°rea de um metro quadrado.
+ * (int) qtde_revestimento_por_metro_quadrado: quantidade de revestimento (em unidades) necess·rioa para
+ *       preencher uma ·rea de um metro quadrado.
  */
 int calcula_qtde_revestimento_por_metro_quadrado() {
     int qtde_revestimento_por_metro_quadrado = 0;
@@ -1134,11 +1134,11 @@ int calcula_qtde_revestimento_por_metro_quadrado() {
 }
 
 /*
- * Exibe op√ß≈ëes de revestimento para que o usu√°rio possa escolher o revestimento que
+ * Exibe opÁoes de revestimento para que o usu·rio possa escolher o revestimento que
  * deseja utilizar em sua obra.
  *
  * Retorna:
- * (int) tipo_revestimento: tipo de revestimento escolhido pelo usu√°rio.
+ * (int) tipo_revestimento: tipo de revestimento escolhido pelo usu·rio.
  */
 int escolhe_tipo_revestimento() {
     int tipo_revestimento;
@@ -1153,10 +1153,10 @@ int escolhe_tipo_revestimento() {
         printf(" 1 - Papel de parede\n");
         printf(" 2 - Madeira\n");
         printf(" 3 - Pastilhas\n");
-        printf(" 4 - Revestimento ciment√≠cio\n");
-        printf(" 5 - Ladrilho hidr√°ulico\n");
+        printf(" 4 - Revestimento cimentÌcio\n");
+        printf(" 5 - Ladrilho hidr·ulico\n");
         printf(" 6 - Azulejo comum\n");
-        printf(" 7 - Outra op√ß√£o");
+        printf(" 7 - Outra opÁ„o");
 
         printf("\n\nSua escolha: ");
         scanf("%d", &tipo_revestimento);
@@ -1166,42 +1166,42 @@ int escolhe_tipo_revestimento() {
 }
 
 /*
- * Calcula a quantidade de tijolos necess√°rios para construir cada oit√£o com base nas √°reas dos
- * oit≈ëes e na quantidade de tiolos necess√°rios para preencher uma √°rea de um metro quadrado.
- * Armaneza a quantidade de tijolos necess√°rios por oit√£o em uma vari√°vel respons√°vel por
- * contabilizar a quantidade total de tijolos necess√°rios para construir todas as paredes e oit≈ëes
- * da constru√ß√£o.
+ * Calcula a quantidade de tijolos necess·rios para construir cada oit„o com base nas ·reas dos
+ * oitoes e na quantidade de tiolos necess·rios para preencher uma ·rea de um metro quadrado.
+ * Armaneza a quantidade de tijolos necess·rios por oit„o em uma vari·vel respons·vel por
+ * contabilizar a quantidade total de tijolos necess·rios para construir todas as paredes e oitoes
+ * da construÁ„o.
  *
- * Par√¢metros:
- * (int) qtde_tijolos_por_oit√£o: vetor que armazena em cada posi√ß√£o a quantidade de tijolos necess√°ria para construir um oit√£o.
- * (int) qtde_oitoes: quantidade total de oit≈ëes presentes na constru√ß√£o.
- * (int) qtde_total_tijolos: vari√°vel que contabiliza a quantidade total de tijolos necess√°ria para toda a constru√ß√£o.
- * (float) areas_oit≈ëes: vetor que armazena em casa posi√ß√£o a √°rea de cada oit√£o individualmente.
+ * Par‚metros:
+ * (int) qtde_tijolos_por_oit„o: vetor que armazena em cada posiÁ„o a quantidade de tijolos necess·ria para construir um oit„o.
+ * (int) qtde_oitoes: quantidade total de oitoes presentes na construÁ„o.
+ * (int) qtde_total_tijolos: vari·vel que contabiliza a quantidade total de tijolos necess·ria para toda a construÁ„o.
+ * (float) areas_oitoes: vetor que armazena em casa posiÁ„o a ·rea de cada oit„o individualmente.
 
  */
 void calcula_qtde_tijolos_por_oitao(int * qtde_tijolos_por_oitao, int qtde_oitoes, int * qtde_total_tijolos, float * areas_oitoes) {
     int i;
 
-    printf("\n\n----- Quantidade de tijolos por oit√£o -----");
+    printf("\n\n----- Quantidade de tijolos por oit„o -----");
 
     for (i=0; i<qtde_oitoes; i++) {
         qtde_tijolos_por_oitao[i] = ceil(g_qtde_tijolo_metro_quadrado * areas_oitoes[i]);
         *qtde_total_tijolos += qtde_tijolos_por_oitao[i];
-        printf("\n %d¬∫ oit√£o: %d", i+1, qtde_tijolos_por_oitao[i]);
+        printf("\n %d∫ oit„o: %d", i+1, qtde_tijolos_por_oitao[i]);
     }
 }
 
 /*
- * Calcula a quantidade de tijolos necess√°rios para construir cada parede com base nas √°reas das
- * paredes e na quantidade de tiolos necess√°rios para preencher uma √°rea de um metro quadrado.
- * Armaneza a quantidade de tijolos necess√°rios por parede em uma vari√°vel respons√°vel por
- * contabilizar a quantidade total de tijolos necess√°rios para construir todas as paredes e oit≈ëes
- * da constru√ß√£o.
+ * Calcula a quantidade de tijolos necess·rios para construir cada parede com base nas ·reas das
+ * paredes e na quantidade de tiolos necess·rios para preencher uma ·rea de um metro quadrado.
+ * Armaneza a quantidade de tijolos necess·rios por parede em uma vari·vel respons·vel por
+ * contabilizar a quantidade total de tijolos necess·rios para construir todas as paredes e oitoes
+ * da construÁ„o.
  *
- * Par√¢metros:
- * (int) qtde_tijolos_por_parede: vetor que armazena em cada posi√ß√£o a quantidade de tijolos necess√°ria para construir uma parede.
- * (int) qtde_paredes: quantidade total de paredes presentes na constru√ß√£o.
- * (int) qtde_total_tijolos: vari√°vel que contabiliza a quantidade total de tijolos necess√°ria para toda a constru√ß√£o.
+ * Par‚metros:
+ * (int) qtde_tijolos_por_parede: vetor que armazena em cada posiÁ„o a quantidade de tijolos necess·ria para construir uma parede.
+ * (int) qtde_paredes: quantidade total de paredes presentes na construÁ„o.
+ * (int) qtde_total_tijolos: vari·vel que contabiliza a quantidade total de tijolos necess·ria para toda a construÁ„o.
  */
 void calcula_qtde_tijolos_por_parede(int * qtde_tijolos_por_parede) {
     int i;
@@ -1211,17 +1211,17 @@ void calcula_qtde_tijolos_por_parede(int * qtde_tijolos_por_parede) {
     for (i=0; i<g_qtde_paredes; i++) {
         qtde_tijolos_por_parede[i] = ceil(g_qtde_tijolo_metro_quadrado * g_areas_paredes[i]);
         g_qtde_total_tijolos += qtde_tijolos_por_parede[i];
-        printf("\n %d¬™ parede: %d", i+1, qtde_tijolos_por_parede[i]);
+        printf("\n %d™ parede: %d", i+1, qtde_tijolos_por_parede[i]);
     }
 }
 
 /*
- * Calcula a quantidade de tijolos necess√°rios para preencher uma √°rea de um metro quadrado
- * com base nas medidas do tijolo utilizado, sendo estas fornecidas pelo usu√°rio.
+ * Calcula a quantidade de tijolos necess·rios para preencher uma ·rea de um metro quadrado
+ * com base nas medidas do tijolo utilizado, sendo estas fornecidas pelo usu·rio.
  *
  * Retorna:
- * (int) qtde_tijolos_por_metro_quadrado: quantidade de tijolos necess√°rios para preencher
- *       uma √°rea de um metro quadrado.
+ * (int) qtde_tijolos_por_metro_quadrado: quantidade de tijolos necess·rios para preencher
+ *       uma ·rea de um metro quadrado.
  */
 int calcula_qtde_tijolos_por_metro_quadrado() {
     int qtde_tijolos_por_metro_quadrado = 0;
@@ -1247,21 +1247,21 @@ int calcula_qtde_tijolos_por_metro_quadrado() {
 }
 
 /*
- * Calcula a √°rea de um oit√£o presente na casa com base no tamanho de sua altura e base,
- * sendo ambas as medidas fornecidas pelo usu√°rio.
+ * Calcula a ·rea de um oit„o presente na casa com base no tamanho de sua altura e base,
+ * sendo ambas as medidas fornecidas pelo usu·rio.
  *
  * Retorna:
- * (float) area_oitao: √°rea do oit√£o.
+ * (float) area_oitao: ·rea do oit„o.
  */
 float calcula_area_oitao() {
     float altura_oitao = 0,
           base_oitao = 0,
           area_oitao = 0;
 
-    printf("\nAltura do oit√£o em metros: ");
+    printf("\nAltura do oit„o em metros: ");
     scanf("%f", &altura_oitao);
 
-    printf("Base do oit√£o em metros: ");
+    printf("Base do oit„o em metros: ");
     scanf("%f", &base_oitao);
 
     area_oitao = ((base_oitao * altura_oitao)/2);
@@ -1270,14 +1270,14 @@ float calcula_area_oitao() {
 }
 
 /*
- * Calcula a √°rea de uma parede, descontando a √°rea das aberturas presentes nela,
+ * Calcula a ·rea de uma parede, descontando a ·rea das aberturas presentes nela,
  * como portas e janelas.
  *
- * Par√¢metros:
- * (float) area_aberturas: √°rea total das aberturas presentes na parede, como portas e janelas.
+ * Par‚metros:
+ * (float) area_aberturas: ·rea total das aberturas presentes na parede, como portas e janelas.
  *
  * Retorna:
- * (float) area_parede: √°rea da parede com a √°rea das aberturas descontada.
+ * (float) area_parede: ·rea da parede com a ·rea das aberturas descontada.
  */
 float calcula_area_parede(float area_aberturas) {
     float altura_parede = 0,
@@ -1300,12 +1300,12 @@ float calcula_area_parede(float area_aberturas) {
 }
 
 /*
- * Calcula a √°rea das aberturas presentes nas paredes, como portas e janelas, uma vez
- * que estas devem ser descontadas posteriormente no c√°culo da √°rea das paredes que
- * ir√£o receber tijolos.
+ * Calcula a ·rea das aberturas presentes nas paredes, como portas e janelas, uma vez
+ * que estas devem ser descontadas posteriormente no c·culo da ·rea das paredes que
+ * ir„o receber tijolos.
  *
  * Retorna:
- * (float) area_aberturas: √°rea total das aberturas presentes em uma parede, como portas e janelas.
+ * (float) area_aberturas: ·rea total das aberturas presentes em uma parede, como portas e janelas.
  */
 float calcula_area_aberturas() {
     int qtde_aberturas = 0,
@@ -1322,12 +1322,12 @@ float calcula_area_aberturas() {
 
     for (i=0; i<qtde_aberturas; i++) {
         do {
-            printf("\nAltura da %d¬™ abertura em metros: ", i+1);
+            printf("\nAltura da %d™ abertura em metros: ", i+1);
             scanf("%f", &altura_abertura);
         } while (altura_abertura <= 0);
 
         do {
-            printf("Comprimento da %d¬™ abertura em metros: ", i+1);
+            printf("Comprimento da %d™ abertura em metros: ", i+1);
             scanf("%f", &comprimento_abertura);
         } while (comprimento_abertura <= 0);
 
@@ -1338,11 +1338,11 @@ float calcula_area_aberturas() {
 }
 
 /*
- * Exibe op√ß≈ëes de tijolos para que o usu√°rio possa escolher o tijolo que
+ * Exibe opÁoes de tijolos para que o usu·rio possa escolher o tijolo que
  * deseja utilizar em sua obra.
  *
  * Retorna:
- * (int) tipo_tijolo: tipo de tijolo escolhido pelo usu√°rio.
+ * (int) tipo_tijolo: tipo de tijolo escolhido pelo usu·rio.
  */
 int escolhe_tipo_tijolo() {
     int tipo_tijolo;
@@ -1354,12 +1354,12 @@ int escolhe_tipo_tijolo() {
     do {
         printf("\nSelecione o tipo do tijolo: \n\n");
 
-        printf(" 1 - Blocos Cer√¢micos\n");
-        printf(" 2 - Tijolos Maci√ßos\n");
+        printf(" 1 - Blocos Cer‚micos\n");
+        printf(" 2 - Tijolos MaciÁos\n");
         printf(" 3 - Tijolos de Adobe\n");
         printf(" 4 - Tijolos Laminados\n");
         printf(" 5 - Tijolos e Blocos de Concreto\n");
-        printf(" 6 - Tijolos Ecol√≥gicos\n");
+        printf(" 6 - Tijolos EcolÛgicos\n");
 
 
         printf("\n\nSua escolha: ");
@@ -1371,10 +1371,10 @@ int escolhe_tipo_tijolo() {
 
 /* Conta quantas ocorrencias um determinado caracter tem em uma determinada string
  *
- * Par√¢metros:
- * (char *) str: string onde o caracter ser√° contado
+ * Par‚metros:
+ * (char *) str: string onde o caracter ser· contado
  * (int) str_length: tamanho da string
- * (char) ch: caracter que ser√° contado
+ * (char) ch: caracter que ser· contado
  *
  * Retorno:
  * (int) quantidade de caracteres ch na string str
@@ -1394,14 +1394,14 @@ int count_char(char * str, int str_length, char ch)
 
 /* Retorna o intervalo a partir de start com length numero de caracteres como uma nova string
  *
- * Par√¢metros:
- * (char *) str: string da qual o sgmento do texto ser√° extra√≠do
+ * Par‚metros:
+ * (char *) str: string da qual o sgmento do texto ser· extraÌdo
  * (int) str_length: tamanho da string
- * (int) start: posi√ß√£o inicial do trecho que ser√° extra√≠do
- * (int) length: quantidade de caracteres que ser√£o extra√≠dos a partir da posi√ß√£o inicial
+ * (int) start: posiÁ„o inicial do trecho que ser· extraÌdo
+ * (int) length: quantidade de caracteres que ser„o extraÌdos a partir da posiÁ„o inicial
  *
  * Retorno:
- * (char *) segmento do texto que foi extra√≠do
+ * (char *) segmento do texto que foi extraÌdo
  */
 char * strsub(char * str, int str_length, int start, int length)
 {
@@ -1419,10 +1419,10 @@ char * strsub(char * str, int str_length, int start, int length)
 
 /* Transforma uma string em um vetor de inteiros. Divide a string nos pontos demarcados por um determinado caracter e coloca em um vetor inteiro
  *
- * Par√¢metros:
- * (char *) string: string que ser√° dividida
+ * Par‚metros:
+ * (char *) string: string que ser· dividida
  * (int) string_length: tamanho da string
- * (char) delimiter: caracter que indica o ponto de divis√£o
+ * (char) delimiter: caracter que indica o ponto de divis„o
  *
  * Retorno:
  * (int *) vetor de inteiros contendo os valore obtidos da string
@@ -1456,10 +1456,10 @@ int * split_string_int(char * string, int string_length, char delimiter)
 
 /* Transforma uma string em um vetor de reais. Divide a string nos pontos demarcados por um determinado caracter e coloca em um vetor real
  *
- * Par√¢metros:
- * (char *) string: string que ser√° dividida
+ * Par‚metros:
+ * (char *) string: string que ser· dividida
  * (int) string_length: tamanho da string
- * (char) delimiter: caracter que indica o ponto de divis√£o
+ * (char) delimiter: caracter que indica o ponto de divis„o
  *
  * Retorno:
  * (float *) vetor de reais contendo os valore obtidos da string
@@ -1490,15 +1490,15 @@ float * split_string_float(char * string, int string_length, char delimiter)
 
 }
 
-//Segue a rotina de criar um novo or√ßamento
+//Segue a rotina de criar um novo orÁamento
 void novo_orcamento()
 {
 
     //Geral
-    int usr_opt = 0, //Usada para receber as escolhas do usu√°rio quando forem apresentadas op√ß≈ëes
+    int usr_opt = 0, //Usada para receber as escolhas do usu·rio quando forem apresentadas opÁoes
     	chave_mestra = 0;
 
-    char usr_rsp; //Armazena a resposa do usu√°rio quando este deve responder com 'S - Sim' ou 'N - N√£o'
+    char usr_rsp; //Armazena a resposa do usu·rio quando este deve responder com 'S - Sim' ou 'N - N„o'
 
     system("cls");
 
@@ -1510,11 +1510,11 @@ void novo_orcamento()
 
         do{
 
-            printf("Digite a √°rea de constru√ß√£o (em metros): ");
+            printf("Digite a ·rea de construÁ„o (em metros): ");
             scanf("%f", &g_area_total);
 
             if(g_area_total <= 0){
-                printf("Valor inv√°lido.\n");
+                printf("Valor inv·lido.\n");
             }
 
         }while(g_area_total <= 0);
@@ -1525,53 +1525,53 @@ void novo_orcamento()
             scanf("%f", &g_profundidade_colunas);
 
             if(g_profundidade_colunas <= 0){
-                printf("Valor inv√°lido.\n");
+                printf("Valor inv·lido.\n");
             }
 
         }while(g_profundidade_colunas <= 0);
 
         do{
 
-            printf("Digite o di√¢metro das colunas(em cent√≠metros): ");
+            printf("Digite o di‚metro das colunas(em centÌmetros): ");
             scanf("%f", &g_diametro_colunas);
 
             if(g_diametro_colunas <= 0){
-                printf("Valor inv√°lido.\n");
+                printf("Valor inv·lido.\n");
             }
 
         }while(g_diametro_colunas <= 0);
 
-        g_diametro_colunas = metro_para_centimentro(g_diametro_colunas); //Fun√ß√£o metro_para_centimentro virifica e corrije se necessario, retornando um valor sempre em metros, para caso o usu√°rio cometa algum erro de unidade de medida;
+        g_diametro_colunas = metro_para_centimentro(g_diametro_colunas); //FunÁ„o metro_para_centimentro virifica e corrije se necessario, retornando um valor sempre em metros, para caso o usu·rio cometa algum erro de unidade de medida;
 
         //printf("g_diametro_colunas = %.2f\n", g_diametro_colunas); - printfs apenas para verificar a veracidade dos dados...;
 
         do{
 
-            printf("Digite a largura dos baldrames (em cent√≠metros): ");
+            printf("Digite a largura dos baldrames (em centÌmetros): ");
             scanf("%f", &g_larg_bald);
 
             if(g_larg_bald <= 0){
-                printf("Valor inv√°lido.\n");
+                printf("Valor inv·lido.\n");
             }
 
         }while(g_larg_bald <= 0);
 
-         g_larg_bald = metro_para_centimentro(g_larg_bald); //Fun√ß√£o metro_para_centimentro virifica e corrije se necessario, retornando um valor sempre em metros, para caso o usu√°rio cometa algum erro de unidade de medida;
+         g_larg_bald = metro_para_centimentro(g_larg_bald); //FunÁ„o metro_para_centimentro virifica e corrije se necessario, retornando um valor sempre em metros, para caso o usu·rio cometa algum erro de unidade de medida;
 
          //printf("LARGURA = %.2f\n", g_larg_bald);
 
         do{
 
-            printf("Digite a profundidade dos baldrames (em cent√≠metros): ");
+            printf("Digite a profundidade dos baldrames (em centÌmetros): ");
             scanf("%f", &g_prof_bald);
 
             if(g_prof_bald <= 0){
-                printf("Valor inv√°lido.\n");
+                printf("Valor inv·lido.\n");
             }
 
         }while(g_prof_bald <= 0);
 
-        g_prof_bald = metro_para_centimentro(g_prof_bald);//Fun√ß√£o metro_para_centimentro virifica e corrije se necessario, retornando um valor sempre em metros, para caso o usu√°rio cometa algum erro de unidade de medida;
+        g_prof_bald = metro_para_centimentro(g_prof_bald);//FunÁ„o metro_para_centimentro virifica e corrije se necessario, retornando um valor sempre em metros, para caso o usu·rio cometa algum erro de unidade de medida;
 
         //printf("g_profundidade_colunas = %.2f\n", g_prof_bald);
 
@@ -1581,7 +1581,7 @@ void novo_orcamento()
             scanf("%f", &g_perimetro_total);
 
             if(g_perimetro_total <= 0){
-                printf("Valor inv√°lido.\n");
+                printf("Valor inv·lido.\n");
             }
 
         }while(g_perimetro_total <= 0);
@@ -1592,7 +1592,7 @@ void novo_orcamento()
             scanf("%f", &g_alt_paredes);
 
             if(g_alt_paredes <= 0){
-                printf("Valor inv√°lido.\n");
+                printf("Valor inv·lido.\n");
             }
 
         }while(g_alt_paredes <= 0);
@@ -1600,28 +1600,28 @@ void novo_orcamento()
 
         g_qtde_colunas = g_perimetro_total/3;
 
-        g_qtde_cimento = calcula_cimento(g_profundidade_colunas, g_diametro_colunas, g_larg_bald, g_prof_bald, g_perimetro_total, g_alt_paredes, g_qtde_colunas);//calcula e armazena o valor retornado das √°reas de estruturas (CALCULO CIMENTO)
+        g_qtde_cimento = calcula_cimento(g_profundidade_colunas, g_diametro_colunas, g_larg_bald, g_prof_bald, g_perimetro_total, g_alt_paredes, g_qtde_colunas);//calcula e armazena o valor retornado das ·reas de estruturas (CALCULO CIMENTO)
 
         printf("\n------\n");
-        printf("Conclu√≠do.");
+        printf("ConcluÌdo.");
         printf("\n------\n");
 
-        printf("\nRecalcular este or√ßamento?\n 1 - Sim\n 2 - N√£o\n\nSua escolha: ");
+        printf("\nRecalcular este orÁamento?\n 1 - Sim\n 2 - N„o\n\nSua escolha: ");
         scanf("%d", &usr_opt);
 
   	} while (usr_opt == 1);
 
     do{
 
-        printf("\n--------------------\nOR√áAMENTO DAS FERRAGENS\n--------------------\n");
+        printf("\n--------------------\nOR«AMENTO DAS FERRAGENS\n--------------------\n");
 
-        calcula_ferro(g_perimetro_total, g_profundidade_colunas, g_alt_paredes, g_qtde_colunas, g_larg_bald, g_prof_bald);//fun√ß√£o calcula a quantidade necess√°ria de ferro 3/8 e 3/16, armazenando os dados num vetor global.
+        calcula_ferro(g_perimetro_total, g_profundidade_colunas, g_alt_paredes, g_qtde_colunas, g_larg_bald, g_prof_bald);//funÁ„o calcula a quantidade necess·ria de ferro 3/8 e 3/16, armazenando os dados num vetor global.
 
         printf("\n------\n");
-        printf("Conclu√≠do.");
+        printf("ConcluÌdo.");
         printf("\n------\n");
 
-        printf("\nRecalcular este or√ßamento?\n 1 - Sim\n 2 - N√£o\n\nSua escolha: ");
+        printf("\nRecalcular este orÁamento?\n 1 - Sim\n 2 - N„o\n\nSua escolha: ");
         scanf("%d", &usr_opt);
 
   	} while (usr_opt == 1);
@@ -1630,17 +1630,17 @@ void novo_orcamento()
 
         do{
 
-            printf("\nDigite a √°rea que deseja colocar pisos: ");
+            printf("\nDigite a ·rea que deseja colocar pisos: ");
             scanf("%f", &g_area_piso);
 
             if(g_area_piso >= g_area_total){
-                printf("A √°rea do piso n√£o pode ser maior do que a √°rea total!!\n");
+                printf("A ·rea do piso n„o pode ser maior do que a ·rea total!!\n");
             }
 
         }while(g_area_piso >= g_area_total);
 
-        // printf("Quantidade m√≠nima de colunas: %d\n", g_qtde_colunas);
-        // printf("total: %.2f m¬≥ de cimento",g_qtde_cimento);
+        // printf("Quantidade mÌnima de colunas: %d\n", g_qtde_colunas);
+        // printf("total: %.2f m≥ de cimento",g_qtde_cimento);
 
         g_piso = escolhe_piso();
 
@@ -1666,10 +1666,10 @@ void novo_orcamento()
         }
 
         printf("\n------\n");
-        printf("Conclu√≠do.");
+        printf("ConcluÌdo.");
         printf("\n------\n");
 
-        printf("\nRecalcular este or√ßamento?\n 1 - Sim\n 2 - N√£o\n\nSua escolha: ");
+        printf("\nRecalcular este orÁamento?\n 1 - Sim\n 2 - N„o\n\nSua escolha: ");
         scanf("%d", &usr_opt);
 
   	} while (usr_opt == 1);
@@ -1677,13 +1677,13 @@ void novo_orcamento()
     do
     {
 
-    	printf("\n--------------------\nOR√áAMENTO DO TELHADO\n--------------------\n");
+    	printf("\n--------------------\nOR«AMENTO DO TELHADO\n--------------------\n");
 
         printf("\nBASE DO TELHADO");
         do
         {
             printf("\n------\n\n");
-            //L√™ a largura e comprimento da base do telhado (laje)
+            //LÍ a largura e comprimento da base do telhado (laje)
             printf(" Digite a largura da base do telhado(m): ");
             scanf("%f", &g_largura_base);
 
@@ -1699,27 +1699,27 @@ void novo_orcamento()
 
         do
         {
-            //L√™ a inclina√ß√£o desejada para o telhado em porcentagem.
-            //Com essa inclina√ß√£o ser√° calculada a altura do centro do telhado (cumeerira, onde os "lados" do telhado se dividem (/|\)).
-            //Essa porcentagem √© calculada em cima da metade da largura da laje.
-            printf(" Informe a inclina√ß√£o desejada (deve ser maior que 30%%): ");
+            //LÍ a inclinaÁ„o desejada para o telhado em porcentagem.
+            //Com essa inclinaÁ„o ser· calculada a altura do centro do telhado (cumeerira, onde os "lados" do telhado se dividem (/|\)).
+            //Essa porcentagem È calculada em cima da metade da largura da laje.
+            printf(" Informe a inclinaÁ„o desejada (deve ser maior que 30%%): ");
             scanf("%d", &g_inclinacao);
 
-            //Inclina√ß√£o abaixo de 30% n√£o √© normatizada
+            //InclinaÁ„o abaixo de 30% n„o È normatizada
             if(g_inclinacao < 30)
             {
-                printf("\nInclina√ß√£o inv√°lida. Deve ser maior que 30%%.");
+                printf("\nInclinaÁ„o inv·lida. Deve ser maior que 30%%.");
             }
 
         }while(g_inclinacao < 30);
 
-        //Calcula a √°rea do telhado considerando a inclina√ß√£o
+        //Calcula a ·rea do telhado considerando a inclinaÁ„o
         g_area_telhado_corrigida = corrigir_area(g_inclinacao, g_largura_base, g_comprimento_base);
 
-        //Exibe a √°rea da laje e a inclina√ß√£o calculados
-        printf("\n√Årea calculada: %.2f", g_largura_base * g_comprimento_base);
-        printf("\nInclina√ß√£o: %d%%", g_inclinacao);
-        printf("\n√Årea do telhado corrigida, considerando a inclina√ß√£o: %.2f", g_area_telhado_corrigida);
+        //Exibe a ·rea da laje e a inclinaÁ„o calculados
+        printf("\n¡rea calculada: %.2f", g_largura_base * g_comprimento_base);
+        printf("\nInclinaÁ„o: %d%%", g_inclinacao);
+        printf("\n¡rea do telhado corrigida, considerando a inclinaÁ„o: %.2f", g_area_telhado_corrigida);
 
         setbuf(stdin, NULL);
 
@@ -1736,52 +1736,52 @@ void novo_orcamento()
         do
         {
 
-            printf("\nInforme o preco unit√°rio das telhas: ");
+            printf("\nInforme o preco unit·rio das telhas: ");
             scanf(" %f", &g_preco_unit);
 
             if(g_preco_unit <= 0.0)
             {
-                printf("\nO pre√ßo unit√°rio deve ser maior que zero.\n\n");
+                printf("\nO preÁo unit·rio deve ser maior que zero.\n\n");
             }
 
             setbuf(stdin, NULL);
 
         }while(g_preco_unit <= 0.0);
 
-        //Calcula o pre√ßo final das telhas
+        //Calcula o preÁo final das telhas
         g_custo_total = calcula_preco(g_qtde_telhas, g_preco_unit);
 
         printf("Custo total das telhas: R$ %.2f", g_custo_total);
 
-        //Reseta o buffer pois por algum motivo o pr√≥ximo scanf n√£o estava sendo executado
+        //Reseta o buffer pois por algum motivo o prÛximo scanf n„o estava sendo executado
         setbuf(stdin, NULL);
 
         printf("\n\nMADEIRAMENTO");
         printf("\n------\n\n");
 
-        //Calcula a quantidade de ter√ßas
-        printf("Ter√ßas:\n Digite o espa√ßamento das ter√ßas (m): ");
+        //Calcula a quantidade de terÁas
+        printf("TerÁas:\n Digite o espaÁamento das terÁas (m): ");
         scanf("%f", &g_tercas_espacamento);
 
         g_qtde_tercas = ceil(g_largura_base / g_tercas_espacamento);
         g_metragem_tercas = g_comprimento_base * g_qtde_tercas;
 
-        printf(" Quantidade de ter√ßas de %.2f metros: %d\n", g_comprimento_base, g_qtde_tercas);
-        printf(" Quantidade de metros de ter√ßas: %2.f", g_metragem_tercas);
+        printf(" Quantidade de terÁas de %.2f metros: %d\n", g_comprimento_base, g_qtde_tercas);
+        printf(" Quantidade de metros de terÁas: %2.f", g_metragem_tercas);
 
         //Calcula a quantidade de pontaletes
         printf("\n\nPontaletes:\n");
 
         g_metragem_pontaletes = (
 	        ( ( (g_largura_base / 2) * g_inclinacao ) / 100 ) * 2 +
-	        ( ( ( (g_largura_base / 2) / 2 ) * g_inclinacao ) / 100 ) * 6 // 3 pontaletes em cada √°gua
+	        ( ( ( (g_largura_base / 2) / 2 ) * g_inclinacao ) / 100 ) * 6 // 3 pontaletes em cada ·gua
 	    );
 
         printf(" Quantidade de metros de pontaletes: %.2f", g_metragem_pontaletes);
 
-        //Calcula a quantidade de ber√ßos
-        //Para cada pontalete h√° 1 ber√ßo de 0.5m
-        printf("\n\nBer√ßos:\n Quantidade de metros de ber√ßos: %.2f", 8 * 0.5);
+        //Calcula a quantidade de berÁos
+        //Para cada pontalete h· 1 berÁo de 0.5m
+        printf("\n\nBerÁos:\n Quantidade de metros de berÁos: %.2f", 8 * 0.5);
 
         //Calcula a quantidade de madeira para a trama, que inclui os caibros e as ripas
         printf("\n\nTrama:\n");
@@ -1812,22 +1812,22 @@ void novo_orcamento()
         printf("  Quantidade de metros de ripas: %.2f\n", g_metragem_ripas);
 
         printf("\n------\n");
-        printf("Conclu√≠do.");
+        printf("ConcluÌdo.");
         printf("\n------\n");
 
-        printf("\nRecalcular este or√ßamento?\n 1 - Sim\n 2 - N√£o\n\nSua escolha: ");
+        printf("\nRecalcular este orÁamento?\n 1 - Sim\n 2 - N„o\n\nSua escolha: ");
         scanf("%d", &usr_opt);
 
     }while(usr_opt == 1);
 
-    int tipo_tijolo = 0, //Armazena o tipo de tijolo selecionado pelo usu√°rio.
-        tipo_revesitmento = 0, //Armanzena o tipo de revestimento selecionado pelo usu√°rio.
-        qtde_paredes = 0, //Quantidade total de paredes presentes na constru√ß√£o.
-        qtde_oitoes = 0, //Quantidade total de oit≈ëes presentes na constru√ß√£o.
-        i = 0; //Contador utilizado para percorrer os vetores existentes na implementa√ß√£o.
+    int tipo_tijolo = 0, //Armazena o tipo de tijolo selecionado pelo usu·rio.
+        tipo_revesitmento = 0, //Armanzena o tipo de revestimento selecionado pelo usu·rio.
+        qtde_paredes = 0, //Quantidade total de paredes presentes na construÁ„o.
+        qtde_oitoes = 0, //Quantidade total de oitoes presentes na construÁ„o.
+        i = 0; //Contador utilizado para percorrer os vetores existentes na implementaÁ„o.
 
 	  	do {
-	    printf("--------------------\nOR√áAMENTO DOS TIJOLOS\n--------------------\n");
+	    printf("--------------------\nOR«AMENTO DOS TIJOLOS\n--------------------\n");
 
 	    do {
 	        printf("Digite a quantidade de paredes que deseja construir: ");
@@ -1835,24 +1835,24 @@ void novo_orcamento()
 	    } while(g_qtde_paredes <= 0);
 
 	    do {
-	        printf("\nDigite a quantidade de oit≈ëes presentes em sua casa: ");
+	        printf("\nDigite a quantidade de oitoes presentes em sua casa: ");
 	        scanf("%d", &qtde_oitoes);
 	    } while(qtde_oitoes <= 0);
 
-	    float areas_oitoes[qtde_oitoes], //Vetor que armazena a √°rea unit√°ria de cada oit√£o em cada posi√ß√£o.
-	          areas_aberturas[g_qtde_paredes]; //Vetor que armazena a √°rea das aberturas presentes por parede em cada posi√ß√£o.
+	    float areas_oitoes[qtde_oitoes], //Vetor que armazena a ·rea unit·ria de cada oit„o em cada posiÁ„o.
+	          areas_aberturas[g_qtde_paredes]; //Vetor que armazena a ·rea das aberturas presentes por parede em cada posiÁ„o.
 
-	    int qtde_tijolos_por_parede[g_qtde_paredes], //Vetor que armazena a quantidade de tijolos necess√°ria para construir cada parede em casa posi√ß√£o.
-	        qtde_tijolos_por_oitao[qtde_oitoes]; //Vetor que armazena a quantidade de tijolos necess√°ria para construir cada oit√£o em cada posi√ß√£o.
+	    int qtde_tijolos_por_parede[g_qtde_paredes], //Vetor que armazena a quantidade de tijolos necess·ria para construir cada parede em casa posiÁ„o.
+	        qtde_tijolos_por_oitao[qtde_oitoes]; //Vetor que armazena a quantidade de tijolos necess·ria para construir cada oit„o em cada posiÁ„o.
 
 	    g_areas_paredes = (float *)malloc(g_qtde_paredes);
 
 	    for (i=0; i<g_qtde_paredes; i++) {
-	        printf("\n----- %d¬™ parede -----\n", i+1);
+	        printf("\n----- %d™ parede -----\n", i+1);
 
 	        do {
-	            printf("\nA %d¬™ parede apresenta aberturas como portas e janelas?", i+1);
-	            printf("\n S - Sim\n N - N√£o\n");
+	            printf("\nA %d™ parede apresenta aberturas como portas e janelas?", i+1);
+	            printf("\n S - Sim\n N - N„o\n");
 	            printf("Sua escolha: ");
 	            scanf(" %c", &usr_rsp);
 	        } while (usr_rsp!='S' && usr_rsp!='s' && usr_rsp!='N' && usr_rsp!='n');
@@ -1865,15 +1865,15 @@ void novo_orcamento()
 
 	        g_areas_paredes[i] = calcula_area_parede(areas_aberturas[i]);
 
-	        printf("\n√Årea da %d¬™ parede, com as √°reas das aberturas descontadas √© de: %.2fm¬≤\n\n", i+1, g_areas_paredes[i]);
+	        printf("\n¡rea da %d™ parede, com as ·reas das aberturas descontadas È de: %.2fm≤\n\n", i+1, g_areas_paredes[i]);
 	    }
 
 	    for (i=0; i<qtde_oitoes; i++) {
-	        printf("\n----- %d¬∫ oit√£o -----\n", i+1);
+	        printf("\n----- %d∫ oit„o -----\n", i+1);
 
 	        areas_oitoes[i] = calcula_area_oitao();
 
-	        printf("\n√Årea do %d¬∫ oit√£o: %.2fm¬≤\n\n", i+1, areas_oitoes[i]);
+	        printf("\n¡rea do %d∫ oit„o: %.2fm≤\n\n", i+1, areas_oitoes[i]);
 	    }
 
 	    tipo_tijolo = escolhe_tipo_tijolo();
@@ -1881,14 +1881,14 @@ void novo_orcamento()
 	    switch (tipo_tijolo) {
 	        case 1:
 	            printf("\n--------------------\n");
-	            printf("Blocos Cer√¢micos\n");
-	            strcpy(g_tipo_tijolo, "Blocos Cer√¢micos");
+	            printf("Blocos Cer‚micos\n");
+	            strcpy(g_tipo_tijolo, "Blocos Cer‚micos");
 	            break;
 
 	        case 2:
 	            printf("\n--------------------\n");
-	            printf("Tijolos Maci√ßos\n");
-	            strcpy(g_tipo_tijolo, "Tijolos Maci√ßos");
+	            printf("Tijolos MaciÁos\n");
+	            strcpy(g_tipo_tijolo, "Tijolos MaciÁos");
 	            break;
 
 	        case 3:
@@ -1911,8 +1911,8 @@ void novo_orcamento()
 
 	        case 6:
 	            printf("\n--------------------\n");
-	            printf("Tijolos Ecol√≥gicos\n");
-	            strcpy(g_tipo_tijolo, "Tijolos Ecol√≥gicos");
+	            printf("Tijolos EcolÛgicos\n");
+	            strcpy(g_tipo_tijolo, "Tijolos EcolÛgicos");
 	            break;
 	    }
 
@@ -1921,7 +1921,7 @@ void novo_orcamento()
 	    printf("\nRendimento: %d tijolos por metro quadrado.\n", g_qtde_tijolo_metro_quadrado);
 
 	    do {
-	        printf("\nPre√ßo Unit√°rio do Tijolo: R$ ");
+	        printf("\nPreÁo Unit·rio do Tijolo: R$ ");
 	        scanf("%f", &g_preco_unit_tijolo);
 	    } while (g_preco_unit_tijolo <= 0);
 
@@ -1935,20 +1935,20 @@ void novo_orcamento()
 	    printf("\n %d tijolos", g_qtde_total_tijolos);
 
 	    g_custo_total_tijolos = g_preco_unit_tijolo * g_qtde_total_tijolos;
-	    printf("\n\n----- Pre√ßo total - Tijolos -----");
+	    printf("\n\n----- PreÁo total - Tijolos -----");
 	    printf("\n R$ %.2f", g_custo_total_tijolos);
 
         printf("\n------\n");
-        printf("Conclu√≠do.");
+        printf("ConcluÌdo.");
         printf("\n------\n");
 
-        printf("\nRecalcular or√ßamento?\n 1 - Sim\n 2 - N√£o\n\nSua escolha: ");
+        printf("\nRecalcular orÁamento?\n 1 - Sim\n 2 - N„o\n\nSua escolha: ");
         scanf("%d", &usr_opt);
 
   	} while (usr_opt == 1);
 
 	  	do {
-	    printf("\n--------------------\nOR√áAMENTO DO REVESTIMENTO DE PAREDE\n--------------------\n");
+	    printf("\n--------------------\nOR«AMENTO DO REVESTIMENTO DE PISO\n--------------------\n");
 
 	    tipo_revesitmento = escolhe_tipo_revestimento();
 
@@ -1963,7 +1963,7 @@ void novo_orcamento()
 	        case 2:
 	            printf("\n--------------------\n");
 	            printf("Madeira\n");
-	            strcpy(g_tipo_revestimento, "Madeira");
+				strcpy(g_tipo_revestimento, "Madeira");
 	            break;
 
 	        case 3:
@@ -1974,8 +1974,8 @@ void novo_orcamento()
 
 	        case 4:
 	            printf("\n--------------------\n");
-	            printf("Ladrilho hidr√°ulico\n");
-	            strcpy(g_tipo_revestimento, "Ladrilho Hidr√°ulico");
+	            printf("Ladrilho hidr·ulico\n");
+	            strcpy(g_tipo_revestimento, "Ladrilho Hidr·ulico");
 	            break;
 
 	        case 5:
@@ -1990,7 +1990,7 @@ void novo_orcamento()
 	    printf("\nRendimento: %d unidade(s) de revestimento por metro quadrado.\n", g_qtde_revestimento_metro_quadrado);
 
 	    do {
-	        printf("\nPre√ßo Unit√°rio do Revestimento: R$ ");
+	        printf("\nPreÁo Unit·rio do Revestimento: R$ ");
 	        scanf("%f", &g_preco_unit_revestimento);
 	    } while (g_preco_unit_revestimento <= 0);
 
@@ -2004,53 +2004,53 @@ void novo_orcamento()
 	    printf("\n %d unidades de revestimento", g_qtde_total_revestimento);
 
 	    g_custo_total_revestimento = g_preco_unit_revestimento * g_qtde_total_revestimento;
-	    printf("\n\n----- Pre√ßo total - Revestimento -----");
+	    printf("\n\n----- PreÁo total - Revestimento -----");
 	    printf("\n R$ %.2f\n", g_custo_total_revestimento);
 
         printf("\n------\n");
-        printf("Conclu√≠do.");
+        printf("ConcluÌdo.");
         printf("\n------\n");
 
-        printf("\nRecalcular or√ßamento?\n 1 - Sim\n 2 - N√£o\n\nSua escolha: ");
+        printf("\nRecalcular orÁamento?\n 1 - Sim\n 2 - N„o\n\nSua escolha: ");
         scanf("%d", &usr_opt);
 
   	} while (usr_opt == 1);
 
 	do {
-	    printf("\n--------------------\nOR√áAMENTO DA TINTA\n--------------------\n");
+	    printf("\n--------------------\nOR«AMENTO DA TINTA\n--------------------\n");
 
-	    float area_tetos = 0.0; //Armazena a √°rea total do teto da constru√ß√£o.
+	    float area_tetos = 0.0; //Armazena a ·rea total do teto da construÁ„o.
 
 	    do {
-	        printf("\n√Årea total do teto presente na constru√ß√£o: ");
+	        printf("\n¡rea total do teto presente na construÁ„o: ");
 	        scanf("%f", &area_tetos);
 	    } while (area_tetos <= 0);
 
 	    g_qtde_total_galoes_tinta = calcula_qtde_total_galoes_tinta(qtde_paredes, area_tetos);
 	    g_qtde_total_galoes_tinta += ceil(TAXA_DE_PERDA * g_qtde_total_galoes_tinta);
 
-	    printf("\n\n----- Quantidade total de gal≈ëes de tinta -----");
-	    printf("\n %d gal≈ëes de tinta", g_qtde_total_galoes_tinta);
+	    printf("\n\n----- Quantidade total de galoes de tinta -----");
+	    printf("\n %d galoes de tinta", g_qtde_total_galoes_tinta);
 
 	    do {
-	        printf("\nPre√ßo Unit√°rio do Gal√£o de Tinta: R$ ");
+	        printf("\nPreÁo Unit·rio do Gal„o de Tinta: R$ ");
 	        scanf("%f", &g_preco_unit_galao_tinta);
 	    } while (g_preco_unit_galao_tinta <= 0);
 
 	    g_custo_total_galao_tinta = g_preco_unit_galao_tinta * g_qtde_total_galoes_tinta;
-	    printf("\n\n----- Pre√ßo total - Tinta -----");
+	    printf("\n\n----- PreÁo total - Tinta -----");
 	    printf("\n R$ %.2f\n", g_custo_total_galao_tinta);
 
         printf("\n------\n");
-        printf("Conclu√≠do.");
+        printf("ConcluÌdo.");
         printf("\n------\n");
 
-        printf("\nRecalcular or√ßamento?\n 1 - Sim\n 2 - N√£o\n\nSua escolha: ");
+        printf("\nRecalcular orÁamento?\n 1 - Sim\n 2 - N„o\n\nSua escolha: ");
         scanf("%d", &usr_opt);
 
   	} while (usr_opt == 1);
 
-  	printf("\n\nDeseja salvar o or√ßamento?\n 1 - Sim\n 2 - N√£o\n\nSua escolha: ");
+  	printf("\n\nDeseja salvar o orÁamento?\n 1 - Sim\n 2 - N„o\n\nSua escolha: ");
   	scanf("%d", &usr_opt);
 
   	if(usr_opt == 1){
@@ -2061,17 +2061,17 @@ void novo_orcamento()
 
 }
 
-
 void carregar_orcamento()
 {
+
     char dir[310],
-        linha[101]; //vari√°vel usada para armazenar temporariamente o valor lido do arquivo, especificamente para os dados relativos ≈ïs paredes, que podem ser v√°rias em uma linha
+        linha[101]; //vari·vel usada para armazenar temporariamente o valor lido do arquivo, especificamente para os dados relativos rs paredes, que podem ser v·rias em uma linha
 
     int ctrl = 0, i;
 
-    int size; // Vari√°vel que armazena o tamanho dos vetores dos dados realtivos as paredes
-    float * areas_paredes; // Vetor que ir√° armazenar as √°reas de cada parede  lidas dos arquivos
-    int * qtd_revestimento_paredes; // Vetor que ir√° armazenar as quantidades de revestimento de cada parede lidas dos arquivos
+    int size; // Vari·vel que armazena o tamanho dos vetores dos dados realtivos as paredes
+    float * areas_paredes; // Vetor que ir· armazenar as ·reas de cada parede  lidas dos arquivos
+    int * qtd_revestimento_paredes; // Vetor que ir· armazenar as quantidades de revestimento de cada parede lidas dos arquivos
 
     system("cls");
 
@@ -2079,7 +2079,7 @@ void carregar_orcamento()
         ctrl = 0;
         strcpy(dir, "");
 
-        printf("Digite o diret√≥rio do arquivo, incluindo o nome do arquivo: ");
+        printf("Digite o diretÛrio do arquivo, incluindo o nome do arquivo: ");
         scanf(" %309[^\n]", dir);
 
         FILE * arq = fopen(dir, "r");
@@ -2089,18 +2089,18 @@ void carregar_orcamento()
 
             //Estruturas
                 printf("\n\nESTRUTURAS\n\n");
-                printf("Profundidade das colunas: %.2fm\n", atof(ler_registro(dir, C_ESTRUT_PROFUNDIDAE_COLUNAS)) );
-                printf("Di√¢metro das colunas: %.2fm\n", atof(ler_registro(dir, C_ESTRUT_DIAMETRO_COLUNAS)) );
-                printf("Perimetro total das paredes: %.2fm\n", atof(ler_registro(dir, C_ESTRUT_PERIMETRO_TOTAL)) );
-                printf("Largura dos baldrames: %.2fm\n", atof(ler_registro(dir, C_ESTRUT_LARGURA_BALDRAME)) );
-                printf("Profundidade dos baldrames: %.2fm\n", atof(ler_registro(dir, C_ESTRUT_PROFUNDIDADE_BALDRAME)) );
-                printf("√Årea total de constru√ß√£o: %.2fm¬≤\n", atof(ler_registro(dir, C_ESTRUT_AREA_TOTAL_CONSTRUCAO)) );
-                printf("Quantidade de cimento: %.2fm¬≥\n", atof(ler_registro(dir, C_ESTRUT_QUANTIDADE_CIMENTO)) );
-                printf("Altura das paredes: %.2f\nm", atof(ler_registro(dir, C_ESTRUT_ALTURA_PAREDES)) );
+                printf("Profundidade das colunas: %sm\n", ler_registro(dir, C_ESTRUT_PROFUNDIDAE_COLUNAS) );
+                printf("Di‚metro das colunas: %sm\n", ler_registro(dir, C_ESTRUT_DIAMETRO_COLUNAS) );
+                printf("Perimetro total das paredes: %sm\n", ler_registro(dir, C_ESTRUT_PERIMETRO_TOTAL) );
+                printf("Largura dos baldrames: %sm\n", ler_registro(dir, C_ESTRUT_LARGURA_BALDRAME) );
+                printf("Profundidade dos baldrames: %sm\n", ler_registro(dir, C_ESTRUT_PROFUNDIDADE_BALDRAME) );
+                printf("¡rea total de construÁ„o: %sm≤\n", ler_registro(dir, C_ESTRUT_AREA_TOTAL_CONSTRUCAO) );
+                printf("Quantidade de cimento: %sm≥\n", ler_registro(dir, C_ESTRUT_QUANTIDADE_CIMENTO) );
+                printf("Altura das paredes: %s\nm", ler_registro(dir, C_ESTRUT_ALTURA_PAREDES) );
                 printf("Quantidade de ferro 3/8: %s\n", ler_registro(dir, C_ESTRUT_QTDE_FERRO_3_8) );
                 printf("Quantidade de ferro 3/16: %s\n", ler_registro(dir, C_ESTRUT_QTDE_FERRO_3_16) );
                 printf("Quantidade de colunas: %s\n", ler_registro(dir, C_ESTRUT_QTDE_COLUNAS) );
-                printf("Quantidade de piso: %.2f\n", atof(ler_registro(dir, C_ESTRUT_AREA_PISO)) );
+                printf("Quantidade de piso: %s\n", ler_registro(dir, C_ESTRUT_AREA_PISO) );
                 printf("Piso: %s\n\n", ler_registro(dir, C_ESTRUT_PISO) );
             //Fim Estruturas
 
@@ -2108,7 +2108,7 @@ void carregar_orcamento()
                 printf("TIJOLOS\n\n");
                 printf("Quantidade de paredes: %s\n", ler_registro(dir, C_QTDE_PAREDES) );
 
-                printf("√Årea das paredes:\n");
+                printf("¡rea das paredes:\n");
 
                 strcpy(linha, ler_registro(dir, C_AREA_PAREDES) );
 
@@ -2116,21 +2116,21 @@ void carregar_orcamento()
                 areas_paredes = split_string_float( linha, strlen(linha), '#' );
 
                 for(i = 0; i < size; i++){
-                    printf("  Parede %d: %.2fm¬≤\n", i + 1, areas_paredes[i]);
+                    printf("  Parede %d: %.2fm≤\n", i + 1, areas_paredes[i]);
                 }
 
                 printf("Tipo de tijolo: %s\n", ler_registro(dir, C_TIJOLO_TIPO) );
                 printf("Quantidade total de tijolos: %s\n", ler_registro(dir, C_TIJOLO_QTDE) );
-                printf("Quantidade de tijolos por m¬≤: %s\n", ler_registro(dir, C_TIJOLO_QTDE_METRO) );
-                printf("Custo total de tijolos: R$ %.2f\n", atof(ler_registro(dir, C_TIJOLO_CUSTO_TOTAL)) );
-                printf("Pre√ßo unit√°rio do tijolo: R$ %.2f\n\n", atof(ler_registro(dir, C_TIJOLO_PRECO_UNIT)) );
+                printf("Quantidade de tijolos por m≤: %s\n", ler_registro(dir, C_TIJOLO_QTDE_METRO) );
+                printf("Custo total de tijolos: R$ %s\n", ler_registro(dir, C_TIJOLO_CUSTO_TOTAL) );
+                printf("PreÁo unit·rio do tijolo: R$ %s\n\n", ler_registro(dir, C_TIJOLO_PRECO_UNIT) );
             //Fim Tijolos
 
             //Revestimento
                 printf("REVESTIMENTO\n\n");
                 printf("Tipo de revestimento: %s\n", ler_registro(dir, C_REVESTIMENTO_TIPO) );
                 printf("Quantidade total de revestimento: %s\n", ler_registro(dir, C_REVESTIMENTO_QTDE) );
-                printf("Quantidade de revestimento por m¬≤: %s\n", ler_registro(dir, C_REVESTIMENTO_QTDE_METRO) );
+                printf("Quantidade de revestimento por m≤: %s\n", ler_registro(dir, C_REVESTIMENTO_QTDE_METRO) );
 
                 printf("Quantidade de revestimento por parede:\n");
 
@@ -2143,49 +2143,49 @@ void carregar_orcamento()
                     printf("  Parede %d: %d\n", i + 1, qtd_revestimento_paredes[i]);
                 }
 
-                printf("Custo total do revestimento: R$ %.2f\n", atof(ler_registro(dir, C_REVESTIMENTO_CUSTO_TOTAL)) );
-                printf("Pre√ßo unit√°rio do revestimento: R$ %.2f\n\n", atof(ler_registro(dir, C_REVESTIMENTO_PRECO_UNIT)) );
+                printf("Custo total do revestimento: R$ %s\n", ler_registro(dir, C_REVESTIMENTO_CUSTO_TOTAL) );
+                printf("PreÁo unit·rio do revestimento: R$ %s\n\n", ler_registro(dir, C_REVESTIMENTO_PRECO_UNIT) );
             //Fim Revestimento
 
             //Tinta
                 printf("TINTA\n\n");
-                printf("Quantidade de gal≈ëes de tinta: %s\n", ler_registro(dir, C_GALAO_TINTA_QTDE) );
-                printf("Custo total dos gal≈ëes de tinta: R$ %.2f\n", atof(ler_registro(dir, C_GALAO_TINTA_CUSTO_TOTAL)) );
-                printf("Pre√ßo unit√°rio do gal√£o de tinta: R$ %.2f\n\n", atof(ler_registro(dir, C_GALAO_TINTA_PRECO_UNIT)) );
+                printf("Quantidade de galoes de tinta: %s\n", ler_registro(dir, C_GALAO_TINTA_QTDE) );
+                printf("Custo total dos galoes de tinta: R$ %s\n", ler_registro(dir, C_GALAO_TINTA_CUSTO_TOTAL) );
+                printf("PreÁo unit·rio do gal„o de tinta: R$ %s\n\n", ler_registro(dir, C_GALAO_TINTA_PRECO_UNIT) );
             //Fim Tinta
 
             //Telhado
                 printf("TELHADO\n\n");
-                printf("Inclina√ß√£o: %s%%\n", ler_registro(dir, C_TELHADO_INCLINACAO) );
-                printf("Largura da laje: %.2fm\n", atof(ler_registro(dir, C_TELHADO_LARGURA_BASE)) );
-                printf("Comprimento da laje: %.2fm\n", atof(ler_registro(dir, C_TELHADO_COMPRIMENTO_BASE)) );
-                printf("√Årea do telhado corrigida pela inclina√ß√£o: %.2fm¬≤\n\n", atof(ler_registro(dir, C_TELHADO_AREA_CORRIGIDA)) );
+                printf("InclinaÁ„o: %s%%\n", ler_registro(dir, C_TELHADO_INCLINACAO) );
+                printf("Largura da laje: %sm\n", ler_registro(dir, C_TELHADO_LARGURA_BASE) );
+                printf("Comprimento da laje: %sm\n", ler_registro(dir, C_TELHADO_COMPRIMENTO_BASE) );
+                printf("¡rea do telhado corrigida pela inclinaÁ„o: %sm≤\n\n", ler_registro(dir, C_TELHADO_AREA_CORRIGIDA) );
             //Fim Telhado
 
             //Madeiramento
                 printf("MADEIRAMENTO DO TELHADO\n\n");
-                printf("Quantidade de ter√ßas: %s\n", ler_registro(dir, C_MADEIRA_QTDE_TERCA) );
+                printf("Quantidade de terÁas: %s\n", ler_registro(dir, C_MADEIRA_QTDE_TERCA) );
                 printf("Quantidade de caibros: %s\n", ler_registro(dir, C_MADEIRA_QTDE_CAIBRO) );
                 printf("Quantidade de ripas: %s\n", ler_registro(dir, C_MADEIRA_QTDE_RIPAS) );
-                printf("Metros de pontaletes: %.2f\n", atof(ler_registro(dir, C_MADEIRA_METROS_PONTALETES)) );
-                printf("Metros de caibros: %.2f\n", atof(ler_registro(dir, C_MADEIRA_METROS_CAIBROS)) );
-                printf("Metros de ripas: %.2f\n", atof(ler_registro(dir, C_MADEIRA_METROS_RIPAS)) );
-                printf("Metros de ter√ßas: %.2f\n", atof(ler_registro(dir, C_MADEIRA_METROS_TERCAS)) );
-                printf("Espa√ßamento entre as ter√ßas: %.2fm\n", atof(ler_registro(dir, C_ESPACAMENTO_TERCAS)) );
-                printf("Comprimento da garga: %.2fm\n\n", atof(ler_registro(dir, C_COMRPRIMENTO_GARGA)) );
+                printf("Metros de pontaletes: %s\n", ler_registro(dir, C_MADEIRA_METROS_PONTALETES) );
+                printf("Metros de caibros: %s\n", ler_registro(dir, C_MADEIRA_METROS_CAIBROS) );
+                printf("Metros de ripas: %s\n", ler_registro(dir, C_MADEIRA_METROS_RIPAS) );
+                printf("Metros de terÁas: %s\n", ler_registro(dir, C_MADEIRA_METROS_TERCAS) );
+                printf("EspaÁamento entre as terÁas: %sm\n", ler_registro(dir, C_ESPACAMENTO_TERCAS) );
+                printf("Comprimento da garga: %sm\n\n", ler_registro(dir, C_COMRPRIMENTO_GARGA) );
             //Fim madeiramento
 
             //Telhas
                 printf("TELHAS\n\n");
                 printf("Tipo de telha: %s\n", ler_registro(dir, C_TELHA_TIPO) );
                 printf("Quantidade de telhas: %s\n", ler_registro(dir, C_TELHA_QTDE) );
-                printf("Custo total das telhas: R$ %.2f\n", atof(ler_registro(dir, C_TELHA_CUSTO_TOTAL)) );
-                printf("Pre√ßo unit√°rio das telhas: R$ %.2f\n\n", atof(ler_registro(dir, C_TELHA_PRECO_UNIT)) );
+                printf("Custo total das telhas: R$ %s\n", ler_registro(dir, C_TELHA_CUSTO_TOTAL) );
+                printf("PreÁo unit·rio das telhas: R$ %s\n\n", ler_registro(dir, C_TELHA_PRECO_UNIT) );
             //Fim Telhas
 
         }
         else{
-            printf("\nO arquivo informado n√£o existe.\n\n");
+            printf("\nO arquivo informado n„o existe.\n\n");
             ctrl = 1;
         }
 
@@ -2202,7 +2202,7 @@ int main(void)
     do{
         system("cls");
 
-        printf("Selecione uma a√ß√£o:\n 1 - Criar um novo or√ßamento\n 2 - Visualizar um or√ßamento existente\n 3 - Ajuda\n\nSua escolha: ");
+        printf("Selecione uma aÁ„o:\n 1 - Criar um novo orÁamento\n 2 - Visualizar um orÁamento existente\n 3 - Ajuda\n\nSua escolha: ");
         scanf("%d", &usr_opt);
 
         switch(usr_opt){
@@ -2225,7 +2225,7 @@ int main(void)
                 break;
 
             default:
-                printf("\nOp√ß√£o inv√°lida\n\n");
+                printf("\nOpÁ„o inv·lida\n\n");
         }
 
         printf("\n\n");
@@ -2233,5 +2233,6 @@ int main(void)
 
     }while(1);
 
-    return 0;
+    return 1;
 }
+
