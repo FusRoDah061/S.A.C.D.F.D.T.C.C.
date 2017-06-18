@@ -2235,7 +2235,7 @@ programa
 	
 	    inteiro size // Variável que armazena o tamanho dos vetores dos dados realtivos as paredes
 	    real areas_paredes[QTDE_PAREDES] // Vetor que irá armazenar as áreas de cada parede  lidas dos arquivos
-	    inteiro qtd_revestimento_paredes[QTDE_PAREDES] // Vetor que irá armazenar as quantidades de revestimento de cada parede lidas dos arquivos
+	    real qtd_revestimento_paredes[QTDE_PAREDES] // Vetor que irá armazenar as quantidades de revestimento de cada parede lidas dos arquivos
 	
 	    faca{
 	        ctrl = 0
@@ -2295,7 +2295,7 @@ programa
 	                linha = ler_registro(dir, C_REVESTIMENTO_POR_PAREDE)
 	
 	                size = count_char(linha, Texto.numero_caracteres(linha), '#') + 1
-	                split_string_int( linha, qtd_revestimento_paredes, '#' )
+	                split_string_float( linha, qtd_revestimento_paredes, '#' )
 	
 	                para(i = 0; i < size; i++){
 	                    escreva("  Parede ", i + 1, ": ", qtd_revestimento_paredes[i], "\n")
@@ -2633,7 +2633,7 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 66078; 
+ * @POSICAO-CURSOR = 71141; 
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
