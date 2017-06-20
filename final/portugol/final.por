@@ -158,8 +158,8 @@ programa
 	funcao real converte(real num)
 	{
 	
-		inteiro aux
-		real verify
+		inteiro aux = 0
+		real verify = 0.0
 	
 		aux=num
 		se (aux == 0 e aux != num){
